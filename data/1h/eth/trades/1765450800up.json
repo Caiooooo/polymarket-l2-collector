@@ -1,0 +1,802 @@
+[
+    {
+        "price": "0.48",
+        "size": "50",
+        "side": "buy",
+        "local_timestamp": "1765450855676",
+        "timestamp": "1765450855557",
+        "asset_price": 3195.355
+    },
+    {
+        "price": "0.48",
+        "size": "59.72",
+        "side": "buy",
+        "local_timestamp": "1765450855682",
+        "timestamp": "1765450855561",
+        "asset_price": 3195.355
+    },
+    {
+        "price": "0.48",
+        "size": "10",
+        "side": "buy",
+        "local_timestamp": "1765450855768",
+        "timestamp": "1765450855649",
+        "asset_price": 3195.355
+    },
+    {
+        "price": "0.48",
+        "size": "40",
+        "side": "buy",
+        "local_timestamp": "1765450856259",
+        "timestamp": "1765450855875",
+        "asset_price": 3195.5150000000003
+    },
+    {
+        "price": "0.47",
+        "size": "28",
+        "side": "buy",
+        "local_timestamp": "1765450861875",
+        "timestamp": "1765450861755",
+        "asset_price": 3195.185
+    },
+    {
+        "price": "0.49",
+        "size": "10",
+        "side": "buy",
+        "local_timestamp": "1765450894579",
+        "timestamp": "1765450894459",
+        "asset_price": 3196.0150000000003
+    },
+    {
+        "price": "0.5",
+        "size": "10",
+        "side": "buy",
+        "local_timestamp": "1765450894922",
+        "timestamp": "1765450894802",
+        "asset_price": 3196.4449999999997
+    },
+    {
+        "price": "0.51",
+        "size": "65.5",
+        "side": "buy",
+        "local_timestamp": "1765450895674",
+        "timestamp": "1765450895554",
+        "asset_price": 3196.4449999999997
+    },
+    {
+        "price": "0.5",
+        "size": "5",
+        "side": "sell",
+        "local_timestamp": "1765450902564",
+        "timestamp": "1765450902445",
+        "asset_price": 3196.125
+    },
+    {
+        "price": "0.45",
+        "size": "8.81",
+        "side": "buy",
+        "local_timestamp": "1765450914761",
+        "timestamp": "1765450914641",
+        "asset_price": 3194.245
+    },
+    {
+        "price": "0.45",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765450932499",
+        "timestamp": "1765450932380",
+        "asset_price": 3193.995
+    },
+    {
+        "price": "0.43",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765450984960",
+        "timestamp": "1765450984837",
+        "asset_price": 3193.465
+    },
+    {
+        "price": "0.43",
+        "size": "8.186045",
+        "side": "buy",
+        "local_timestamp": "1765450989750",
+        "timestamp": "1765450989630",
+        "asset_price": 3193.465
+    },
+    {
+        "price": "0.43",
+        "size": "30",
+        "side": "buy",
+        "local_timestamp": "1765450994679",
+        "timestamp": "1765450994557",
+        "asset_price": 3193.605
+    },
+    {
+        "price": "0.43",
+        "size": "8",
+        "side": "buy",
+        "local_timestamp": "1765451009576",
+        "timestamp": "1765451009447",
+        "asset_price": 3193.605
+    },
+    {
+        "price": "0.45",
+        "size": "10",
+        "side": "buy",
+        "local_timestamp": "1765451032043",
+        "timestamp": "1765451031922",
+        "asset_price": 3194.4449999999997
+    },
+    {
+        "price": "0.46",
+        "size": "15",
+        "side": "buy",
+        "local_timestamp": "1765451040671",
+        "timestamp": "1765451040552",
+        "asset_price": 3194.715
+    },
+    {
+        "price": "0.46",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451042272",
+        "timestamp": "1765451042151",
+        "asset_price": 3195.2349999999997
+    },
+    {
+        "price": "0.48",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451043642",
+        "timestamp": "1765451043522",
+        "asset_price": 3195.2349999999997
+    },
+    {
+        "price": "0.48",
+        "size": "35",
+        "side": "buy",
+        "local_timestamp": "1765451044539",
+        "timestamp": "1765451044419",
+        "asset_price": 3195.4449999999997
+    },
+    {
+        "price": "0.5",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451085682",
+        "timestamp": "1765451085563",
+        "asset_price": 3196.325
+    },
+    {
+        "price": "0.52",
+        "size": "113.54",
+        "side": "buy",
+        "local_timestamp": "1765451097506",
+        "timestamp": "1765451097387",
+        "asset_price": 3196.885
+    },
+    {
+        "price": "0.53",
+        "size": "25",
+        "side": "buy",
+        "local_timestamp": "1765451100949",
+        "timestamp": "1765451100830",
+        "asset_price": 3197.505
+    },
+    {
+        "price": "0.55",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451105668",
+        "timestamp": "1765451105545",
+        "asset_price": 3197.9049999999997
+    },
+    {
+        "price": "0.56",
+        "size": "10",
+        "side": "buy",
+        "local_timestamp": "1765451107296",
+        "timestamp": "1765451107177",
+        "asset_price": 3198.315
+    },
+    {
+        "price": "0.58",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451109983",
+        "timestamp": "1765451109864",
+        "asset_price": 3199.085
+    },
+    {
+        "price": "0.59",
+        "size": "9",
+        "side": "buy",
+        "local_timestamp": "1765451110630",
+        "timestamp": "1765451110511",
+        "asset_price": 3199.085
+    },
+    {
+        "price": "0.59",
+        "size": "10",
+        "side": "buy",
+        "local_timestamp": "1765451111565",
+        "timestamp": "1765451111446",
+        "asset_price": 3199.495
+    },
+    {
+        "price": "0.59",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451111971",
+        "timestamp": "1765451111843",
+        "asset_price": 3199.495
+    },
+    {
+        "price": "0.61",
+        "size": "20.081966",
+        "side": "buy",
+        "local_timestamp": "1765451112304",
+        "timestamp": "1765451112178",
+        "asset_price": 3199.495
+    },
+    {
+        "price": "0.61",
+        "size": "4",
+        "side": "buy",
+        "local_timestamp": "1765451122496",
+        "timestamp": "1765451122376",
+        "asset_price": 3199.385
+    },
+    {
+        "price": "0.61",
+        "size": "271.19",
+        "side": "buy",
+        "local_timestamp": "1765451122682",
+        "timestamp": "1765451122562",
+        "asset_price": 3199.385
+    },
+    {
+        "price": "0.61",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451122838",
+        "timestamp": "1765451122717",
+        "asset_price": 3199.385
+    },
+    {
+        "price": "0.57",
+        "size": "2",
+        "side": "buy",
+        "local_timestamp": "1765451126524",
+        "timestamp": "1765451126403",
+        "asset_price": 3198.0950000000003
+    },
+    {
+        "price": "0.57",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451133207",
+        "timestamp": "1765451133087",
+        "asset_price": 3198.375
+    },
+    {
+        "price": "0.58",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451177217",
+        "timestamp": "1765451177097",
+        "asset_price": 3198.685
+    },
+    {
+        "price": "0.59",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451177816",
+        "timestamp": "1765451177697",
+        "asset_price": 3198.685
+    },
+    {
+        "price": "0.6",
+        "size": "3.95",
+        "side": "buy",
+        "local_timestamp": "1765451196749",
+        "timestamp": "1765451196630",
+        "asset_price": 3199.415
+    },
+    {
+        "price": "0.6",
+        "size": "58.05",
+        "side": "buy",
+        "local_timestamp": "1765451196782",
+        "timestamp": "1765451196658",
+        "asset_price": 3199.415
+    },
+    {
+        "price": "0.61",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451203513",
+        "timestamp": "1765451203357",
+        "asset_price": 3199.545
+    },
+    {
+        "price": "0.61",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451205384",
+        "timestamp": "1765451205263",
+        "asset_price": 3199.545
+    },
+    {
+        "price": "0.62",
+        "size": "335",
+        "side": "buy",
+        "local_timestamp": "1765451222432",
+        "timestamp": "1765451222313",
+        "asset_price": 3199.995
+    },
+    {
+        "price": "0.63",
+        "size": "148",
+        "side": "buy",
+        "local_timestamp": "1765451222713",
+        "timestamp": "1765451222591",
+        "asset_price": 3199.995
+    },
+    {
+        "price": "0.64",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451224196",
+        "timestamp": "1765451224077",
+        "asset_price": 3200.225
+    },
+    {
+        "price": "0.64",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451225894",
+        "timestamp": "1765451225774",
+        "asset_price": 3200.3050000000003
+    },
+    {
+        "price": "0.65",
+        "size": "20",
+        "side": "buy",
+        "local_timestamp": "1765451228632",
+        "timestamp": "1765451228512",
+        "asset_price": 3202.135
+    },
+    {
+        "price": "0.67",
+        "size": "40",
+        "side": "buy",
+        "local_timestamp": "1765451228675",
+        "timestamp": "1765451228555",
+        "asset_price": 3202.135
+    },
+    {
+        "price": "0.69",
+        "size": "123",
+        "side": "buy",
+        "local_timestamp": "1765451228967",
+        "timestamp": "1765451228846",
+        "asset_price": 3202.135
+    },
+    {
+        "price": "0.68",
+        "size": "2",
+        "side": "buy",
+        "local_timestamp": "1765451229834",
+        "timestamp": "1765451229715",
+        "asset_price": 3202.1949999999997
+    },
+    {
+        "price": "0.7",
+        "size": "10",
+        "side": "buy",
+        "local_timestamp": "1765451231690",
+        "timestamp": "1765451231571",
+        "asset_price": 3202.575
+    },
+    {
+        "price": "0.69",
+        "size": "2",
+        "side": "buy",
+        "local_timestamp": "1765451233318",
+        "timestamp": "1765451233132",
+        "asset_price": 3202.4449999999997
+    },
+    {
+        "price": "0.68",
+        "size": "10",
+        "side": "buy",
+        "local_timestamp": "1765451238396",
+        "timestamp": "1765451238277",
+        "asset_price": 3201.835
+    },
+    {
+        "price": "0.67",
+        "size": "50",
+        "side": "sell",
+        "local_timestamp": "1765451243614",
+        "timestamp": "1765451243495",
+        "asset_price": 3201.745
+    },
+    {
+        "price": "0.68",
+        "size": "10",
+        "side": "buy",
+        "local_timestamp": "1765451243743",
+        "timestamp": "1765451243622",
+        "asset_price": 3201.745
+    },
+    {
+        "price": "0.67",
+        "size": "6.57",
+        "side": "sell",
+        "local_timestamp": "1765451250105",
+        "timestamp": "1765451249985",
+        "asset_price": 3201.745
+    },
+    {
+        "price": "0.67",
+        "size": "2",
+        "side": "buy",
+        "local_timestamp": "1765451268694",
+        "timestamp": "1765451268574",
+        "asset_price": 3201.025
+    },
+    {
+        "price": "0.66",
+        "size": "14",
+        "side": "buy",
+        "local_timestamp": "1765451282300",
+        "timestamp": "1765451282181",
+        "asset_price": 3201.145
+    },
+    {
+        "price": "0.66",
+        "size": "10",
+        "side": "buy",
+        "local_timestamp": "1765451282354",
+        "timestamp": "1765451282235",
+        "asset_price": 3201.145
+    },
+    {
+        "price": "0.64",
+        "size": "2.03125",
+        "side": "buy",
+        "local_timestamp": "1765451287853",
+        "timestamp": "1765451287733",
+        "asset_price": 3200.225
+    },
+    {
+        "price": "0.62",
+        "size": "70",
+        "side": "sell",
+        "local_timestamp": "1765451291350",
+        "timestamp": "1765451291231",
+        "asset_price": 3199.495
+    },
+    {
+        "price": "0.62",
+        "size": "50",
+        "side": "sell",
+        "local_timestamp": "1765451291688",
+        "timestamp": "1765451291568",
+        "asset_price": 3199.495
+    },
+    {
+        "price": "0.63",
+        "size": "14.904759",
+        "side": "buy",
+        "local_timestamp": "1765451292729",
+        "timestamp": "1765451292610",
+        "asset_price": 3199.495
+    },
+    {
+        "price": "0.59",
+        "size": "11",
+        "side": "buy",
+        "local_timestamp": "1765451310574",
+        "timestamp": "1765451310455",
+        "asset_price": 3198.435
+    },
+    {
+        "price": "0.58",
+        "size": "11",
+        "side": "buy",
+        "local_timestamp": "1765451313861",
+        "timestamp": "1765451312925",
+        "asset_price": 3198.1549999999997
+    },
+    {
+        "price": "0.58",
+        "size": "9",
+        "side": "buy",
+        "local_timestamp": "1765451313861",
+        "timestamp": "1765451313357",
+        "asset_price": 3198.1549999999997
+    },
+    {
+        "price": "0.57",
+        "size": "1.44",
+        "side": "sell",
+        "local_timestamp": "1765451314473",
+        "timestamp": "1765451314351",
+        "asset_price": 3198.1549999999997
+    },
+    {
+        "price": "0.57",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451317654",
+        "timestamp": "1765451317534",
+        "asset_price": 3197.815
+    },
+    {
+        "price": "0.53",
+        "size": "15",
+        "side": "sell",
+        "local_timestamp": "1765451349518",
+        "timestamp": "1765451348610",
+        "asset_price": 3196.755
+    },
+    {
+        "price": "0.53",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451349518",
+        "timestamp": "1765451349326",
+        "asset_price": 3196.755
+    },
+    {
+        "price": "0.54",
+        "size": "14.974443",
+        "side": "buy",
+        "local_timestamp": "1765451349787",
+        "timestamp": "1765451349667",
+        "asset_price": 3196.755
+    },
+    {
+        "price": "0.49",
+        "size": "2.2",
+        "side": "sell",
+        "local_timestamp": "1765451362179",
+        "timestamp": "1765451362052",
+        "asset_price": 3195.835
+    },
+    {
+        "price": "0.49",
+        "size": "0.08",
+        "side": "sell",
+        "local_timestamp": "1765451362901",
+        "timestamp": "1765451362781",
+        "asset_price": 3195.835
+    },
+    {
+        "price": "0.49",
+        "size": "1.26",
+        "side": "sell",
+        "local_timestamp": "1765451364002",
+        "timestamp": "1765451363883",
+        "asset_price": 3195.565
+    },
+    {
+        "price": "0.5",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451364783",
+        "timestamp": "1765451364664",
+        "asset_price": 3195.245
+    },
+    {
+        "price": "0.5",
+        "size": "15",
+        "side": "buy",
+        "local_timestamp": "1765451364876",
+        "timestamp": "1765451364757",
+        "asset_price": 3195.245
+    },
+    {
+        "price": "0.49",
+        "size": "2.122447",
+        "side": "buy",
+        "local_timestamp": "1765451374889",
+        "timestamp": "1765451374769",
+        "asset_price": 3195.475
+    },
+    {
+        "price": "0.52",
+        "size": "14.557691",
+        "side": "buy",
+        "local_timestamp": "1765451399646",
+        "timestamp": "1765451399524",
+        "asset_price": 3196.385
+    },
+    {
+        "price": "0.49",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451412467",
+        "timestamp": "1765451412349",
+        "asset_price": 3195.395
+    },
+    {
+        "price": "0.49",
+        "size": "15.142856",
+        "side": "buy",
+        "local_timestamp": "1765451413455",
+        "timestamp": "1765451413331",
+        "asset_price": 3195.675
+    },
+    {
+        "price": "0.51",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451420959",
+        "timestamp": "1765451420835",
+        "asset_price": 3196.585
+    },
+    {
+        "price": "0.52",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451422662",
+        "timestamp": "1765451422541",
+        "asset_price": 3196.6949999999997
+    },
+    {
+        "price": "0.52",
+        "size": "14",
+        "side": "buy",
+        "local_timestamp": "1765451425783",
+        "timestamp": "1765451425664",
+        "asset_price": 3196.8450000000003
+    },
+    {
+        "price": "0.53",
+        "size": "14.849055",
+        "side": "buy",
+        "local_timestamp": "1765451438030",
+        "timestamp": "1765451437909",
+        "asset_price": 3196.705
+    },
+    {
+        "price": "0.55",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451458774",
+        "timestamp": "1765451458655",
+        "asset_price": 3197.615
+    },
+    {
+        "price": "0.56",
+        "size": "35",
+        "side": "buy",
+        "local_timestamp": "1765451460900",
+        "timestamp": "1765451460781",
+        "asset_price": 3198.0550000000003
+    },
+    {
+        "price": "0.56",
+        "size": "5",
+        "side": "sell",
+        "local_timestamp": "1765451461635",
+        "timestamp": "1765451461514",
+        "asset_price": 3198.0550000000003
+    },
+    {
+        "price": "0.5",
+        "size": "8.25",
+        "side": "buy",
+        "local_timestamp": "1765451529319",
+        "timestamp": "1765451529199",
+        "asset_price": 3196.0950000000003
+    },
+    {
+        "price": "0.5",
+        "size": "2.75",
+        "side": "sell",
+        "local_timestamp": "1765451541268",
+        "timestamp": "1765451541147",
+        "asset_price": 3196.0950000000003
+    },
+    {
+        "price": "0.53",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451546535",
+        "timestamp": "1765451546416",
+        "asset_price": 3196.795
+    },
+    {
+        "price": "0.54",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451576690",
+        "timestamp": "1765451576324",
+        "asset_price": 3196.935
+    },
+    {
+        "price": "0.55",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451578153",
+        "timestamp": "1765451578034",
+        "asset_price": 3197.3050000000003
+    },
+    {
+        "price": "0.52",
+        "size": "2.25",
+        "side": "buy",
+        "local_timestamp": "1765451584339",
+        "timestamp": "1765451584212",
+        "asset_price": 3196.675
+    },
+    {
+        "price": "0.54",
+        "size": "57",
+        "side": "buy",
+        "local_timestamp": "1765451625951",
+        "timestamp": "1765451625830",
+        "asset_price": 3196.895
+    },
+    {
+        "price": "0.51",
+        "size": "2.25",
+        "side": "sell",
+        "local_timestamp": "1765451656113",
+        "timestamp": "1765451655993",
+        "asset_price": 3196.175
+    },
+    {
+        "price": "0.51",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451663042",
+        "timestamp": "1765451662922",
+        "asset_price": 3196.175
+    },
+    {
+        "price": "0.51",
+        "size": "10",
+        "side": "buy",
+        "local_timestamp": "1765451668659",
+        "timestamp": "1765451666049",
+        "asset_price": 3196.1949999999997
+    },
+    {
+        "price": "0.51",
+        "size": "5",
+        "side": "buy",
+        "local_timestamp": "1765451705227",
+        "timestamp": "1765451704924",
+        "asset_price": 3196.1949999999997
+    },
+    {
+        "price": "0.53",
+        "size": "14",
+        "side": "buy",
+        "local_timestamp": "1765451738971",
+        "timestamp": "1765451738851",
+        "asset_price": 3196.435
+    },
+    {
+        "price": "0.53",
+        "size": "14",
+        "side": "buy",
+        "local_timestamp": "1765451738978",
+        "timestamp": "1765451738858",
+        "asset_price": 3196.435
+    },
+    {
+        "price": "0.53",
+        "size": "14",
+        "side": "buy",
+        "local_timestamp": "1765451738982",
+        "timestamp": "1765451738862",
+        "asset_price": 3196.435
+    }
+]
