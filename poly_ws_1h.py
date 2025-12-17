@@ -100,7 +100,7 @@ def save_book_data(data, asset_to_coin):
     now_opening_market = (now_timestamp // INTERVAL_SECONDS) * INTERVAL_SECONDS
     up_or_down = coin.split("_")[1]
     coin_name = coin.split("_")[0]
-    file_path = f"data/{INTERVAL}/{coin_name.lower()}/orderbooks/{now_opening_market}{up_or_down}.json"
+    file_path = f"data/{INTERVAL}/{coin_name.lower()}/orderbooks/{now_opening_market}{up_or_down}.parquet"
     save_book(formatted_data, file_path)
 
 
@@ -119,7 +119,7 @@ def save_trade_data(data, asset_to_coin):
     now_opening_market = (now_timestamp // INTERVAL_SECONDS) * INTERVAL_SECONDS
     up_or_down = coin.split("_")[1]
     coin_name = coin.split("_")[0]
-    file_path = f"data/{INTERVAL}/{coin_name.lower()}/trades/{now_opening_market}{up_or_down}.json"
+    file_path = f"data/{INTERVAL}/{coin_name.lower()}/trades/{now_opening_market}{up_or_down}.parquet"
     save_trades(formatted_data, file_path)
 
 
