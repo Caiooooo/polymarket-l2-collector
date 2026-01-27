@@ -121,6 +121,9 @@ class BacktestEngine:
         # 市场快照（用于验证失败时回滚）
         self.market_snapshot = None
 
+        # 跳过当前市场标志
+        self.skip_current_market = False
+
         print(f"[Engine] 回测引擎初始化完成")
         print(f"[Engine] 初始资金: ${initial_balance:.2f}")
 
@@ -385,8 +388,12 @@ class BacktestEngine:
             print(f"[Engine] 平仓失败: 无买单")
             return False
 
-        # 按最佳买价卖出
-        best_bid_price = float(orderbook['bids'][-1]['price'])
+        # 按最佳买价卖出（兼容 p/price）
+        best_bid = orderbook['bids'][-1]
+        if 'p' in best_bid:
+            best_bid_price = float(best_bid['p']) / 100.0
+        else:
+            best_bid_price = float(best_bid['price'])
         proceeds = close_size * best_bid_price
 
         # 更新资金
@@ -417,6 +424,30 @@ class BacktestEngine:
         """平掉所有持仓"""
         for side in list(self.positions.keys()):
             self.close_position(side)
+
+    def settle_and_skip_current_market(self):
+        """
+        跳过当前市场的剩余 ticks，在最后使用结果结算（基于 BTC 价格变化）
+
+        设置跳过标志，让引擎跳过剩余 ticks，然后在市场结束时使用 _settle_market
+        进行结果结算（基于 BTC 价格涨跌，UP/DOWN 结算为 $1.0 或 $0.0）
+        这个方法可以在策略中调用，用于提前退出当前市场但仍使用结果结算
+        """
+        if not self.current_market:
+            if self.verbose:
+                print("[Engine] 警告: 没有当前市场，无法跳过")
+            return
+
+        if self.verbose:
+            dt = self.current_market['datetime']
+            dt_trimmed = dt.replace(second=0, microsecond=0)
+            print(f"[Engine] 跳过当前市场的剩余 ticks，将在市场结束时使用结果结算")
+            print(f"[Engine] 市场时间: {dt_trimmed.strftime('%Y-%m-%d %H:%M')}")
+
+        # 设置标志，跳过当前市场的剩余 ticks
+        # 在 run() 方法中，当 skip_current_market 为 True 时，会跳过剩余 ticks
+        # 但仍会调用 _settle_market 进行结果结算
+        self.skip_current_market = True
 
     def _settle_market(self, market_data: Dict):
         """
@@ -592,6 +623,9 @@ class BacktestEngine:
             self.current_market = market
             # print(f"[Engine] 进入市场: {market['datetime']}")
 
+            # 重置跳过标志
+            self.skip_current_market = False
+
             # 保存市场开始前的状态快照（用于验证失败时回滚）
             self.market_snapshot = {
                 'balance': self.balance,
@@ -604,6 +638,12 @@ class BacktestEngine:
 
             # 遍历所有 ticks
             while self.dataloader.has_next_tick():
+                # 检查是否跳过当前市场
+                if self.skip_current_market:
+                    if self.verbose:
+                        print("[Engine] 跳过当前市场的剩余 ticks")
+                    break
+
                 tick = self.dataloader.next_tick()
                 if not tick:
                     break
@@ -627,6 +667,7 @@ class BacktestEngine:
                     self.strategy_callback(self, tick)
 
             # 市场结束，自动结算
+            # 即使跳过了 ticks，仍然使用结果结算（基于 BTC 价格变化）
             self._settle_market(market)
 
         # 回测结束

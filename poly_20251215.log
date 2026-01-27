@@ -12524,3 +12524,978 @@ new timestamp 1765944000
 2025-12-17 04:01:28 | file_cache | INFO | 💾 交易已保存: data/1h/eth/trades/1765940400down.parquet (255 条)
 new timestamp 1765944000
 2025-12-17 04:01:47 | file_cache | INFO | 💾 交易已保存: data/1h/xrp/trades/1765940400up.parquet (119 条)
+2025-12-17 04:15:00 | poly_15m | INFO | ⏰ 到达市场切换时间，断开连接准备重新连接...
+2025-12-17 04:15:47 | poly_15m | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2025-12-17 04:15:47 | poly_15m | INFO | 连接正常关闭，准备重连获取新市场...
+2025-12-17 04:15:48 | poly_15m | INFO | 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 04:15:49 | asset_utils | INFO | ================================================================================
+2025-12-17 04:15:49 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 16, 11:15PM-11:30PM ET 获取成功
+2025-12-17 04:15:49 | asset_utils | INFO | ================================================================================
+2025-12-17 04:15:49 | asset_utils | INFO | ================================================================================
+2025-12-17 04:15:49 | asset_utils | INFO | 市场: Ethereum Up or Down - December 16, 11:15PM-11:30PM ET 获取成功
+2025-12-17 04:15:49 | asset_utils | INFO | ================================================================================
+2025-12-17 04:15:49 | asset_utils | INFO | ================================================================================
+2025-12-17 04:15:49 | asset_utils | INFO | 市场: Solana Up or Down - December 16, 11:15PM-11:30PM ET 获取成功
+2025-12-17 04:15:49 | asset_utils | INFO | ================================================================================
+2025-12-17 04:15:50 | asset_utils | INFO | ================================================================================
+2025-12-17 04:15:50 | asset_utils | INFO | 市场: XRP Up or Down - December 16, 11:15PM-11:30PM ET 获取成功
+2025-12-17 04:15:50 | asset_utils | INFO | ================================================================================
+2025-12-17 04:15:50 | poly_15m | INFO | Asset 映射: 8 个资产
+2025-12-17 04:15:50 | poly_15m | INFO | 下一次市场切换时间: 1765945800 (剩余 850 秒)
+2025-12-17 04:15:50 | poly_15m | INFO | 订阅 8 个市场...
+2025-12-17 04:15:51 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765944000up.parquet (1545 条)
+2025-12-17 04:15:51 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765944000down.parquet (1545 条)
+2025-12-17 04:15:51 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765944000up.parquet (505 条)
+2025-12-17 04:15:51 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765944000down.parquet (505 条)
+2025-12-17 04:15:51 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765944000up.parquet (325 条)
+2025-12-17 04:15:52 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765944000down.parquet (325 条)
+2025-12-17 04:15:52 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765944000up.parquet (2220 条)
+2025-12-17 04:15:52 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765944000down.parquet (2220 条)
+new timestamp 1765944900
+2025-12-17 04:15:52 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765944000down.parquet (806 条)
+new timestamp 1765944900
+2025-12-17 04:15:52 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765944000up.parquet (1407 条)
+new timestamp 1765944900
+2025-12-17 04:15:56 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765944000down.parquet (274 条)
+new timestamp 1765944900
+2025-12-17 04:15:56 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765944000up.parquet (229 条)
+new timestamp 1765944900
+2025-12-17 04:15:59 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765944000up.parquet (814 条)
+new timestamp 1765944900
+2025-12-17 04:16:02 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765944000down.parquet (727 条)
+new timestamp 1765944900
+2025-12-17 04:16:16 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765944000up.parquet (226 条)
+new timestamp 1765944900
+2025-12-17 04:16:56 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765944000down.parquet (98 条)
+2025-12-17 04:30:00 | poly_15m | INFO | ⏰ 到达市场切换时间，断开连接准备重新连接...
+2025-12-17 04:30:40 | poly_15m | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2025-12-17 04:30:40 | poly_15m | INFO | 连接正常关闭，准备重连获取新市场...
+2025-12-17 04:30:41 | poly_15m | INFO | 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 04:30:42 | asset_utils | INFO | ================================================================================
+2025-12-17 04:30:42 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 16, 11:30PM-11:45PM ET 获取成功
+2025-12-17 04:30:42 | asset_utils | INFO | ================================================================================
+2025-12-17 04:30:42 | asset_utils | INFO | ================================================================================
+2025-12-17 04:30:42 | asset_utils | INFO | 市场: Ethereum Up or Down - December 16, 11:30PM-11:45PM ET 获取成功
+2025-12-17 04:30:42 | asset_utils | INFO | ================================================================================
+2025-12-17 04:30:42 | asset_utils | INFO | ================================================================================
+2025-12-17 04:30:42 | asset_utils | INFO | 市场: Solana Up or Down - December 16, 11:30PM-11:45PM ET 获取成功
+2025-12-17 04:30:42 | asset_utils | INFO | ================================================================================
+2025-12-17 04:30:43 | asset_utils | INFO | ================================================================================
+2025-12-17 04:30:43 | asset_utils | INFO | 市场: XRP Up or Down - December 16, 11:30PM-11:45PM ET 获取成功
+2025-12-17 04:30:43 | asset_utils | INFO | ================================================================================
+2025-12-17 04:30:43 | poly_15m | INFO | Asset 映射: 8 个资产
+2025-12-17 04:30:43 | poly_15m | INFO | 下一次市场切换时间: 1765946700 (剩余 857 秒)
+2025-12-17 04:30:43 | poly_15m | INFO | 订阅 8 个市场...
+2025-12-17 04:30:44 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765944900down.parquet (303 条)
+2025-12-17 04:30:44 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765944900up.parquet (235 条)
+2025-12-17 04:30:44 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765944900down.parquet (235 条)
+2025-12-17 04:30:44 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765944900up.parquet (1609 条)
+2025-12-17 04:30:44 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765944900down.parquet (1609 条)
+2025-12-17 04:30:44 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765944900up.parquet (650 条)
+2025-12-17 04:30:44 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765944900down.parquet (650 条)
+2025-12-17 04:30:45 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765944900up.parquet (303 条)
+new timestamp 1765945800
+2025-12-17 04:30:45 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765944900down.parquet (883 条)
+new timestamp 1765945800
+2025-12-17 04:30:45 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765944900up.parquet (723 条)
+new timestamp 1765945800
+2025-12-17 04:30:45 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765944900down.parquet (434 条)
+new timestamp 1765945800
+2025-12-17 04:30:45 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765944900up.parquet (102 条)
+new timestamp 1765945800
+2025-12-17 04:30:45 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765944900up.parquet (215 条)
+new timestamp 1765945800
+2025-12-17 04:30:48 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765944900up.parquet (75 条)
+new timestamp 1765945800
+new timestamp 1765945800
+2025-12-17 04:31:26 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765944900down.parquet (159 条)
+2025-12-17 04:45:00 | poly_15m | INFO | ⏰ 到达市场切换时间，断开连接准备重新连接...
+2025-12-17 04:45:34 | poly_15m | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2025-12-17 04:45:34 | poly_15m | INFO | 连接正常关闭，准备重连获取新市场...
+2025-12-17 04:45:35 | poly_15m | INFO | 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 04:45:35 | asset_utils | INFO | ================================================================================
+2025-12-17 04:45:35 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 16, 11:45PM-12:00AM ET 获取成功
+2025-12-17 04:45:35 | asset_utils | INFO | ================================================================================
+2025-12-17 04:45:36 | asset_utils | INFO | ================================================================================
+2025-12-17 04:45:36 | asset_utils | INFO | 市场: Ethereum Up or Down - December 16, 11:45PM-12:00AM ET 获取成功
+2025-12-17 04:45:36 | asset_utils | INFO | ================================================================================
+2025-12-17 04:45:36 | asset_utils | INFO | ================================================================================
+2025-12-17 04:45:36 | asset_utils | INFO | 市场: Solana Up or Down - December 16, 11:45PM-12:00AM ET 获取成功
+2025-12-17 04:45:36 | asset_utils | INFO | ================================================================================
+2025-12-17 04:45:36 | asset_utils | INFO | ================================================================================
+2025-12-17 04:45:36 | asset_utils | INFO | 市场: XRP Up or Down - December 16, 11:45PM-12:00AM ET 获取成功
+2025-12-17 04:45:36 | asset_utils | INFO | ================================================================================
+2025-12-17 04:45:36 | poly_15m | INFO | Asset 映射: 8 个资产
+2025-12-17 04:45:36 | poly_15m | INFO | 下一次市场切换时间: 1765947600 (剩余 864 秒)
+2025-12-17 04:45:37 | poly_15m | INFO | 订阅 8 个市场...
+2025-12-17 04:45:37 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765945800up.parquet (376 条)
+2025-12-17 04:45:37 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765945800down.parquet (376 条)
+2025-12-17 04:45:38 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765945800up.parquet (3188 条)
+2025-12-17 04:45:38 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765945800down.parquet (3188 条)
+2025-12-17 04:45:38 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765945800up.parquet (560 条)
+2025-12-17 04:45:38 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765945800down.parquet (560 条)
+2025-12-17 04:45:38 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765945800up.parquet (602 条)
+2025-12-17 04:45:38 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765945800down.parquet (602 条)
+new timestamp 1765946700
+2025-12-17 04:45:39 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765945800up.parquet (1398 条)
+new timestamp 1765946700
+2025-12-17 04:45:39 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765945800down.parquet (1782 条)
+new timestamp 1765946700
+2025-12-17 04:45:39 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765945800down.parquet (373 条)
+new timestamp 1765946700
+2025-12-17 04:45:39 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765945800down.parquet (331 条)
+new timestamp 1765946700
+2025-12-17 04:45:40 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765945800up.parquet (186 条)
+new timestamp 1765946700
+2025-12-17 04:45:51 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765945800down.parquet (212 条)
+new timestamp 1765946700
+2025-12-17 04:45:52 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765945800up.parquet (268 条)
+new timestamp 1765946700
+2025-12-17 04:45:52 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765945800up.parquet (163 条)
+
+[1h] ⏰ 到达市场切换时间，断开连接准备重新连接...
+2025-12-17 05:00:00 | poly_15m | INFO | ⏰ 到达市场切换时间，断开连接准备重新连接...
+2025-12-17 05:00:43 | poly_1h | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+[1h] 连接正常关闭，准备重连获取新市场...
+
+[1h] 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 05:00:45 | asset_utils | INFO | ================================================================================
+2025-12-17 05:00:45 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 17, 12AM ET 获取成功
+2025-12-17 05:00:45 | asset_utils | INFO | ================================================================================
+2025-12-17 05:00:45 | asset_utils | INFO | ================================================================================
+2025-12-17 05:00:45 | asset_utils | INFO | 市场: Ethereum Up or Down - December 17, 12AM ET 获取成功
+2025-12-17 05:00:45 | asset_utils | INFO | ================================================================================
+2025-12-17 05:00:45 | asset_utils | INFO | ================================================================================
+2025-12-17 05:00:45 | asset_utils | INFO | 市场: Solana Up or Down - December 17, 12AM ET 获取成功
+2025-12-17 05:00:45 | asset_utils | INFO | ================================================================================
+2025-12-17 05:00:46 | asset_utils | INFO | ================================================================================
+2025-12-17 05:00:46 | asset_utils | INFO | 市场: XRP Up or Down - December 17, 12AM ET 获取成功
+2025-12-17 05:00:46 | asset_utils | INFO | ================================================================================
+2025-12-17 05:00:46 | poly_1h | INFO | Asset 映射: 8 个资产
+[1h] 下一次市场切换时间: 1765951200 (剩余 3554 秒)
+2025-12-17 05:00:46 | poly_1h | INFO | 订阅 8 个市场...
+2025-12-17 05:00:47 | file_cache | INFO | 💾 订单簿已保存: data/1h/sol/orderbooks/1765944000up.parquet (247 条)
+2025-12-17 05:00:47 | file_cache | INFO | 💾 订单簿已保存: data/1h/sol/orderbooks/1765944000down.parquet (247 条)
+2025-12-17 05:00:47 | file_cache | INFO | 💾 订单簿已保存: data/1h/xrp/orderbooks/1765944000up.parquet (346 条)
+2025-12-17 05:00:47 | file_cache | INFO | 💾 订单簿已保存: data/1h/xrp/orderbooks/1765944000down.parquet (346 条)
+2025-12-17 05:00:47 | file_cache | INFO | 💾 订单簿已保存: data/1h/btc/orderbooks/1765944000up.parquet (1431 条)
+2025-12-17 05:00:47 | file_cache | INFO | 💾 订单簿已保存: data/1h/btc/orderbooks/1765944000down.parquet (1431 条)
+2025-12-17 05:00:47 | file_cache | INFO | 💾 订单簿已保存: data/1h/eth/orderbooks/1765944000up.parquet (639 条)
+2025-12-17 05:00:47 | file_cache | INFO | 💾 订单簿已保存: data/1h/eth/orderbooks/1765944000down.parquet (639 条)
+new timestamp 1765947600
+2025-12-17 05:00:48 | file_cache | INFO | 💾 交易已保存: data/1h/btc/trades/1765944000down.parquet (851 条)
+2025-12-17 05:00:48 | poly_15m | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2025-12-17 05:00:48 | poly_15m | INFO | 连接正常关闭，准备重连获取新市场...
+new timestamp 1765947600
+2025-12-17 05:00:48 | file_cache | INFO | 💾 交易已保存: data/1h/eth/trades/1765944000down.parquet (409 条)
+new timestamp 1765947600
+2025-12-17 05:00:48 | file_cache | INFO | 💾 交易已保存: data/1h/btc/trades/1765944000up.parquet (578 条)
+new timestamp 1765947600
+2025-12-17 05:00:48 | file_cache | INFO | 💾 交易已保存: data/1h/sol/trades/1765944000up.parquet (69 条)
+2025-12-17 05:00:49 | poly_15m | INFO | 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 05:00:49 | asset_utils | INFO | ================================================================================
+2025-12-17 05:00:49 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 17, 12:00AM-12:15AM ET 获取成功
+2025-12-17 05:00:49 | asset_utils | INFO | ================================================================================
+2025-12-17 05:00:49 | asset_utils | INFO | ================================================================================
+2025-12-17 05:00:49 | asset_utils | INFO | 市场: Ethereum Up or Down - December 17, 12:00AM-12:15AM ET 获取成功
+2025-12-17 05:00:49 | asset_utils | INFO | ================================================================================
+2025-12-17 05:00:50 | asset_utils | INFO | ================================================================================
+2025-12-17 05:00:50 | asset_utils | INFO | 市场: Solana Up or Down - December 17, 12:00AM-12:15AM ET 获取成功
+2025-12-17 05:00:50 | asset_utils | INFO | ================================================================================
+2025-12-17 05:00:50 | asset_utils | INFO | ================================================================================
+2025-12-17 05:00:50 | asset_utils | INFO | 市场: XRP Up or Down - December 17, 12:00AM-12:15AM ET 获取成功
+2025-12-17 05:00:50 | asset_utils | INFO | ================================================================================
+2025-12-17 05:00:50 | poly_15m | INFO | Asset 映射: 8 个资产
+2025-12-17 05:00:50 | poly_15m | INFO | 下一次市场切换时间: 1765948500 (剩余 850 秒)
+2025-12-17 05:00:50 | poly_15m | INFO | 订阅 8 个市场...
+2025-12-17 05:00:51 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765946700down.parquet (195 条)
+2025-12-17 05:00:51 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765946700up.parquet (3988 条)
+2025-12-17 05:00:52 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765946700down.parquet (3988 条)
+2025-12-17 05:00:52 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765946700up.parquet (1183 条)
+2025-12-17 05:00:52 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765946700down.parquet (1183 条)
+2025-12-17 05:00:52 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765946700up.parquet (246 条)
+2025-12-17 05:00:52 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765946700down.parquet (246 条)
+2025-12-17 05:00:52 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765946700up.parquet (195 条)
+new timestamp 1765947600
+2025-12-17 05:00:52 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765946700up.parquet (1801 条)
+new timestamp 1765947600
+2025-12-17 05:00:52 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765946700down.parquet (2180 条)
+new timestamp 1765947600
+2025-12-17 05:00:52 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765946700down.parquet (89 条)
+new timestamp 1765947600
+2025-12-17 05:00:52 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765946700up.parquet (156 条)
+new timestamp 1765947600
+2025-12-17 05:00:54 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765946700up.parquet (654 条)
+new timestamp 1765947600
+2025-12-17 05:00:54 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765946700down.parquet (527 条)
+new timestamp 1765947600
+2025-12-17 05:00:55 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765946700down.parquet (136 条)
+new timestamp 1765947600
+2025-12-17 05:00:56 | file_cache | INFO | 💾 交易已保存: data/1h/sol/trades/1765944000down.parquet (177 条)
+new timestamp 1765947600
+2025-12-17 05:01:00 | file_cache | INFO | 💾 交易已保存: data/1h/xrp/trades/1765944000down.parquet (226 条)
+new timestamp 1765947600
+2025-12-17 05:01:00 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765946700up.parquet (58 条)
+new timestamp 1765947600
+2025-12-17 05:01:02 | file_cache | INFO | 💾 交易已保存: data/1h/eth/trades/1765944000up.parquet (226 条)
+new timestamp 1765947600
+2025-12-17 05:01:02 | file_cache | INFO | 💾 交易已保存: data/1h/xrp/trades/1765944000up.parquet (119 条)
+2025-12-17 05:15:00 | poly_15m | INFO | ⏰ 到达市场切换时间，断开连接准备重新连接...
+2025-12-17 05:15:41 | poly_15m | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2025-12-17 05:15:41 | poly_15m | INFO | 连接正常关闭，准备重连获取新市场...
+2025-12-17 05:15:42 | poly_15m | INFO | 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 05:15:42 | asset_utils | INFO | ================================================================================
+2025-12-17 05:15:42 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 17, 12:15AM-12:30AM ET 获取成功
+2025-12-17 05:15:42 | asset_utils | INFO | ================================================================================
+2025-12-17 05:15:43 | asset_utils | INFO | ================================================================================
+2025-12-17 05:15:43 | asset_utils | INFO | 市场: Ethereum Up or Down - December 17, 12:15AM-12:30AM ET 获取成功
+2025-12-17 05:15:43 | asset_utils | INFO | ================================================================================
+2025-12-17 05:15:43 | asset_utils | INFO | ================================================================================
+2025-12-17 05:15:43 | asset_utils | INFO | 市场: Solana Up or Down - December 17, 12:15AM-12:30AM ET 获取成功
+2025-12-17 05:15:43 | asset_utils | INFO | ================================================================================
+2025-12-17 05:15:43 | asset_utils | INFO | ================================================================================
+2025-12-17 05:15:43 | asset_utils | INFO | 市场: XRP Up or Down - December 17, 12:15AM-12:30AM ET 获取成功
+2025-12-17 05:15:43 | asset_utils | INFO | ================================================================================
+2025-12-17 05:15:43 | poly_15m | INFO | Asset 映射: 8 个资产
+2025-12-17 05:15:43 | poly_15m | INFO | 下一次市场切换时间: 1765949400 (剩余 857 秒)
+2025-12-17 05:15:44 | poly_15m | INFO | 订阅 8 个市场...
+2025-12-17 05:15:45 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765947600down.parquet (1261 条)
+2025-12-17 05:15:45 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765947600up.parquet (531 条)
+2025-12-17 05:15:45 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765947600down.parquet (531 条)
+2025-12-17 05:15:45 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765947600up.parquet (296 条)
+2025-12-17 05:15:45 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765947600down.parquet (296 条)
+2025-12-17 05:15:45 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765947600up.parquet (3885 条)
+2025-12-17 05:15:46 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765947600down.parquet (3885 条)
+2025-12-17 05:15:46 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765947600up.parquet (1261 条)
+new timestamp 1765948500
+2025-12-17 05:15:46 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765947600up.parquet (1768 条)
+new timestamp 1765948500
+2025-12-17 05:15:46 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765947600down.parquet (2108 条)
+new timestamp 1765948500
+2025-12-17 05:15:46 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765947600down.parquet (517 条)
+new timestamp 1765948500
+2025-12-17 05:15:46 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765947600up.parquet (743 条)
+new timestamp 1765948500
+2025-12-17 05:15:46 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765947600up.parquet (294 条)
+new timestamp 1765948500
+2025-12-17 05:15:47 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765947600down.parquet (236 条)
+new timestamp 1765948500
+2025-12-17 05:15:50 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765947600down.parquet (218 条)
+new timestamp 1765948500
+2025-12-17 05:16:33 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765947600up.parquet (76 条)
+2025-12-17 05:30:00 | poly_15m | INFO | ⏰ 到达市场切换时间，断开连接准备重新连接...
+2025-12-17 05:30:34 | poly_15m | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2025-12-17 05:30:34 | poly_15m | INFO | 连接正常关闭，准备重连获取新市场...
+2025-12-17 05:30:35 | poly_15m | INFO | 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 05:30:35 | asset_utils | INFO | ================================================================================
+2025-12-17 05:30:35 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 17, 12:30AM-12:45AM ET 获取成功
+2025-12-17 05:30:35 | asset_utils | INFO | ================================================================================
+2025-12-17 05:30:36 | asset_utils | INFO | ================================================================================
+2025-12-17 05:30:36 | asset_utils | INFO | 市场: Ethereum Up or Down - December 17, 12:30AM-12:45AM ET 获取成功
+2025-12-17 05:30:36 | asset_utils | INFO | ================================================================================
+2025-12-17 05:30:36 | asset_utils | INFO | ================================================================================
+2025-12-17 05:30:36 | asset_utils | INFO | 市场: Solana Up or Down - December 17, 12:30AM-12:45AM ET 获取成功
+2025-12-17 05:30:36 | asset_utils | INFO | ================================================================================
+2025-12-17 05:30:36 | asset_utils | INFO | ================================================================================
+2025-12-17 05:30:36 | asset_utils | INFO | 市场: XRP Up or Down - December 17, 12:30AM-12:45AM ET 获取成功
+2025-12-17 05:30:36 | asset_utils | INFO | ================================================================================
+2025-12-17 05:30:36 | poly_15m | INFO | Asset 映射: 8 个资产
+2025-12-17 05:30:36 | poly_15m | INFO | 下一次市场切换时间: 1765950300 (剩余 864 秒)
+2025-12-17 05:30:37 | poly_15m | INFO | 订阅 8 个市场...
+2025-12-17 05:30:38 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765948500down.parquet (3367 条)
+2025-12-17 05:30:38 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765948500up.parquet (492 条)
+2025-12-17 05:30:38 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765948500down.parquet (492 条)
+2025-12-17 05:30:38 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765948500up.parquet (198 条)
+2025-12-17 05:30:38 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765948500down.parquet (198 条)
+2025-12-17 05:30:38 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765948500up.parquet (126 条)
+2025-12-17 05:30:38 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765948500down.parquet (126 条)
+2025-12-17 05:30:38 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765948500up.parquet (3367 条)
+new timestamp 1765949400
+2025-12-17 05:30:39 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765948500down.parquet (1777 条)
+new timestamp 1765949400
+2025-12-17 05:30:39 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765948500up.parquet (1586 条)
+new timestamp 1765949400
+2025-12-17 05:30:39 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765948500down.parquet (144 条)
+new timestamp 1765949400
+2025-12-17 05:30:45 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765948500up.parquet (235 条)
+new timestamp 1765949400
+2025-12-17 05:30:46 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765948500down.parquet (255 条)
+new timestamp 1765949400
+2025-12-17 05:30:49 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765948500down.parquet (106 条)
+new timestamp 1765949400
+2025-12-17 05:30:49 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765948500up.parquet (53 条)
+new timestamp 1765949400
+2025-12-17 05:31:02 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765948500up.parquet (19 条)
+2025-12-17 05:45:00 | poly_15m | INFO | ⏰ 到达市场切换时间，断开连接准备重新连接...
+2025-12-17 05:45:48 | poly_15m | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2025-12-17 05:45:48 | poly_15m | INFO | 连接正常关闭，准备重连获取新市场...
+2025-12-17 05:45:49 | poly_15m | INFO | 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 05:45:49 | asset_utils | INFO | ================================================================================
+2025-12-17 05:45:49 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 17, 12:45AM-1:00AM ET 获取成功
+2025-12-17 05:45:49 | asset_utils | INFO | ================================================================================
+2025-12-17 05:45:50 | asset_utils | INFO | ================================================================================
+2025-12-17 05:45:50 | asset_utils | INFO | 市场: Ethereum Up or Down - December 17, 12:45AM-1:00AM ET 获取成功
+2025-12-17 05:45:50 | asset_utils | INFO | ================================================================================
+2025-12-17 05:45:50 | asset_utils | INFO | ================================================================================
+2025-12-17 05:45:50 | asset_utils | INFO | 市场: Solana Up or Down - December 17, 12:45AM-1:00AM ET 获取成功
+2025-12-17 05:45:50 | asset_utils | INFO | ================================================================================
+2025-12-17 05:45:50 | asset_utils | INFO | ================================================================================
+2025-12-17 05:45:50 | asset_utils | INFO | 市场: XRP Up or Down - December 17, 12:45AM-1:00AM ET 获取成功
+2025-12-17 05:45:50 | asset_utils | INFO | ================================================================================
+2025-12-17 05:45:50 | poly_15m | INFO | Asset 映射: 8 个资产
+2025-12-17 05:45:50 | poly_15m | INFO | 下一次市场切换时间: 1765951200 (剩余 850 秒)
+2025-12-17 05:45:51 | poly_15m | INFO | 订阅 8 个市场...
+2025-12-17 05:45:51 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765949400down.parquet (474 条)
+2025-12-17 05:45:51 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765949400up.parquet (280 条)
+2025-12-17 05:45:52 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765949400down.parquet (280 条)
+2025-12-17 05:45:52 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765949400up.parquet (5508 条)
+2025-12-17 05:45:53 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765949400down.parquet (5508 条)
+2025-12-17 05:45:53 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765949400up.parquet (1188 条)
+2025-12-17 05:45:53 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765949400down.parquet (1188 条)
+2025-12-17 05:45:53 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765949400up.parquet (474 条)
+new timestamp 1765950300
+2025-12-17 05:45:53 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765949400up.parquet (2785 条)
+new timestamp 1765950300
+2025-12-17 05:45:53 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765949400down.parquet (2719 条)
+new timestamp 1765950300
+2025-12-17 05:45:53 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765949400down.parquet (633 条)
+new timestamp 1765950300
+2025-12-17 05:46:02 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765949400up.parquet (554 条)
+new timestamp 1765950300
+2025-12-17 05:46:03 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765949400up.parquet (285 条)
+new timestamp 1765950300
+2025-12-17 05:46:10 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765949400down.parquet (187 条)
+new timestamp 1765950300
+2025-12-17 05:46:12 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765949400up.parquet (171 条)
+new timestamp 1765950300
+2025-12-17 05:46:44 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765949400down.parquet (108 条)
+
+[1h] ⏰ 到达市场切换时间，断开连接准备重新连接...
+2025-12-17 06:00:00 | poly_15m | INFO | ⏰ 到达市场切换时间，断开连接准备重新连接...
+2025-12-17 06:00:37 | poly_1h | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+[1h] 连接正常关闭，准备重连获取新市场...
+
+[1h] 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 06:00:39 | asset_utils | INFO | ================================================================================
+2025-12-17 06:00:39 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 17, 1AM ET 获取成功
+2025-12-17 06:00:39 | asset_utils | INFO | ================================================================================
+2025-12-17 06:00:39 | asset_utils | INFO | ================================================================================
+2025-12-17 06:00:39 | asset_utils | INFO | 市场: Ethereum Up or Down - December 17, 1AM ET 获取成功
+2025-12-17 06:00:39 | asset_utils | INFO | ================================================================================
+2025-12-17 06:00:39 | asset_utils | INFO | ================================================================================
+2025-12-17 06:00:39 | asset_utils | INFO | 市场: Solana Up or Down - December 17, 1AM ET 获取成功
+2025-12-17 06:00:39 | asset_utils | INFO | ================================================================================
+2025-12-17 06:00:40 | asset_utils | INFO | ================================================================================
+2025-12-17 06:00:40 | asset_utils | INFO | 市场: XRP Up or Down - December 17, 1AM ET 获取成功
+2025-12-17 06:00:40 | asset_utils | INFO | ================================================================================
+2025-12-17 06:00:40 | poly_1h | INFO | Asset 映射: 8 个资产
+[1h] 下一次市场切换时间: 1765954800 (剩余 3560 秒)
+2025-12-17 06:00:40 | poly_1h | INFO | 订阅 8 个市场...
+2025-12-17 06:00:41 | file_cache | INFO | 💾 订单簿已保存: data/1h/sol/orderbooks/1765947600up.parquet (228 条)
+2025-12-17 06:00:41 | file_cache | INFO | 💾 订单簿已保存: data/1h/sol/orderbooks/1765947600down.parquet (228 条)
+2025-12-17 06:00:41 | file_cache | INFO | 💾 订单簿已保存: data/1h/xrp/orderbooks/1765947600up.parquet (364 条)
+2025-12-17 06:00:41 | file_cache | INFO | 💾 订单簿已保存: data/1h/xrp/orderbooks/1765947600down.parquet (364 条)
+2025-12-17 06:00:41 | file_cache | INFO | 💾 订单簿已保存: data/1h/btc/orderbooks/1765947600up.parquet (2055 条)
+2025-12-17 06:00:42 | file_cache | INFO | 💾 订单簿已保存: data/1h/btc/orderbooks/1765947600down.parquet (2055 条)
+2025-12-17 06:00:42 | file_cache | INFO | 💾 订单簿已保存: data/1h/eth/orderbooks/1765947600up.parquet (1377 条)
+2025-12-17 06:00:42 | file_cache | INFO | 💾 订单簿已保存: data/1h/eth/orderbooks/1765947600down.parquet (1377 条)
+new timestamp 1765951200
+2025-12-17 06:00:42 | file_cache | INFO | 💾 交易已保存: data/1h/btc/trades/1765947600down.parquet (1338 条)
+new timestamp 1765951200
+2025-12-17 06:00:42 | file_cache | INFO | 💾 交易已保存: data/1h/btc/trades/1765947600up.parquet (716 条)
+new timestamp 1765951200
+2025-12-17 06:00:42 | file_cache | INFO | 💾 交易已保存: data/1h/eth/trades/1765947600up.parquet (489 条)
+new timestamp 1765951200
+2025-12-17 06:00:42 | file_cache | INFO | 💾 交易已保存: data/1h/sol/trades/1765947600down.parquet (161 条)
+2025-12-17 06:00:42 | poly_15m | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2025-12-17 06:00:42 | poly_15m | INFO | 连接正常关闭，准备重连获取新市场...
+2025-12-17 06:00:43 | poly_15m | INFO | 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 06:00:43 | asset_utils | INFO | ================================================================================
+2025-12-17 06:00:43 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 17, 1:00AM-1:15AM ET 获取成功
+2025-12-17 06:00:43 | asset_utils | INFO | ================================================================================
+2025-12-17 06:00:44 | asset_utils | INFO | ================================================================================
+2025-12-17 06:00:44 | asset_utils | INFO | 市场: Ethereum Up or Down - December 17, 1:00AM-1:15AM ET 获取成功
+2025-12-17 06:00:44 | asset_utils | INFO | ================================================================================
+2025-12-17 06:00:44 | asset_utils | INFO | ================================================================================
+2025-12-17 06:00:44 | asset_utils | INFO | 市场: Solana Up or Down - December 17, 1:00AM-1:15AM ET 获取成功
+2025-12-17 06:00:44 | asset_utils | INFO | ================================================================================
+2025-12-17 06:00:44 | asset_utils | INFO | ================================================================================
+2025-12-17 06:00:44 | asset_utils | INFO | 市场: XRP Up or Down - December 17, 1:00AM-1:15AM ET 获取成功
+2025-12-17 06:00:44 | asset_utils | INFO | ================================================================================
+2025-12-17 06:00:44 | poly_15m | INFO | Asset 映射: 8 个资产
+2025-12-17 06:00:44 | poly_15m | INFO | 下一次市场切换时间: 1765952100 (剩余 856 秒)
+2025-12-17 06:00:45 | poly_15m | INFO | 订阅 8 个市场...
+2025-12-17 06:00:45 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765950300down.parquet (873 条)
+2025-12-17 06:00:46 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765950300up.parquet (241 条)
+2025-12-17 06:00:46 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765950300down.parquet (241 条)
+2025-12-17 06:00:46 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765950300up.parquet (139 条)
+2025-12-17 06:00:46 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765950300down.parquet (139 条)
+2025-12-17 06:00:46 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765950300up.parquet (3691 条)
+2025-12-17 06:00:47 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765950300down.parquet (3691 条)
+2025-12-17 06:00:47 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765950300up.parquet (873 条)
+new timestamp 1765951200
+2025-12-17 06:00:47 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765950300down.parquet (1564 条)
+new timestamp 1765951200
+2025-12-17 06:00:47 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765950300up.parquet (522 条)
+new timestamp 1765951200
+2025-12-17 06:00:47 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765950300up.parquet (2119 条)
+new timestamp 1765951200
+2025-12-17 06:00:47 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765950300up.parquet (111 条)
+new timestamp 1765951200
+2025-12-17 06:00:52 | file_cache | INFO | 💾 交易已保存: data/1h/eth/trades/1765947600down.parquet (886 条)
+new timestamp 1765951200
+2025-12-17 06:00:54 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765950300down.parquet (71 条)
+new timestamp 1765951200
+2025-12-17 06:00:59 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765950300down.parquet (350 条)
+new timestamp 1765951200
+2025-12-17 06:01:04 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765950300up.parquet (169 条)
+new timestamp 1765951200
+2025-12-17 06:01:05 | file_cache | INFO | 💾 交易已保存: data/1h/sol/trades/1765947600up.parquet (65 条)
+new timestamp 1765951200
+new timestamp 1765951200
+2025-12-17 06:01:50 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765950300down.parquet (27 条)
+new timestamp 1765951200
+2025-12-17 06:01:58 | file_cache | INFO | 💾 交易已保存: data/1h/xrp/trades/1765947600up.parquet (162 条)
+2025-12-17 06:15:00 | poly_15m | INFO | ⏰ 到达市场切换时间，断开连接准备重新连接...
+2025-12-17 06:15:35 | poly_15m | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2025-12-17 06:15:35 | poly_15m | INFO | 连接正常关闭，准备重连获取新市场...
+2025-12-17 06:15:36 | poly_15m | INFO | 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 06:15:36 | asset_utils | INFO | ================================================================================
+2025-12-17 06:15:36 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 17, 1:15AM-1:30AM ET 获取成功
+2025-12-17 06:15:36 | asset_utils | INFO | ================================================================================
+2025-12-17 06:15:37 | asset_utils | INFO | ================================================================================
+2025-12-17 06:15:37 | asset_utils | INFO | 市场: Ethereum Up or Down - December 17, 1:15AM-1:30AM ET 获取成功
+2025-12-17 06:15:37 | asset_utils | INFO | ================================================================================
+2025-12-17 06:15:37 | asset_utils | INFO | ================================================================================
+2025-12-17 06:15:37 | asset_utils | INFO | 市场: Solana Up or Down - December 17, 1:15AM-1:30AM ET 获取成功
+2025-12-17 06:15:37 | asset_utils | INFO | ================================================================================
+2025-12-17 06:15:37 | asset_utils | INFO | ================================================================================
+2025-12-17 06:15:37 | asset_utils | INFO | 市场: XRP Up or Down - December 17, 1:15AM-1:30AM ET 获取成功
+2025-12-17 06:15:37 | asset_utils | INFO | ================================================================================
+2025-12-17 06:15:37 | poly_15m | INFO | Asset 映射: 8 个资产
+2025-12-17 06:15:37 | poly_15m | INFO | 下一次市场切换时间: 1765953000 (剩余 863 秒)
+2025-12-17 06:15:38 | poly_15m | INFO | 订阅 8 个市场...
+2025-12-17 06:15:38 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765951200down.parquet (557 条)
+2025-12-17 06:15:38 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765951200up.parquet (369 条)
+2025-12-17 06:15:39 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765951200down.parquet (369 条)
+2025-12-17 06:15:39 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765951200up.parquet (167 条)
+2025-12-17 06:15:39 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765951200down.parquet (167 条)
+2025-12-17 06:15:39 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765951200up.parquet (2955 条)
+2025-12-17 06:15:39 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765951200down.parquet (2955 条)
+2025-12-17 06:15:39 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765951200up.parquet (557 条)
+new timestamp 1765952100
+2025-12-17 06:15:40 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765951200up.parquet (1871 条)
+new timestamp 1765952100
+2025-12-17 06:15:40 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765951200up.parquet (325 条)
+new timestamp 1765952100
+2025-12-17 06:15:40 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765951200up.parquet (113 条)
+new timestamp 1765952100
+2025-12-17 06:15:40 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765951200up.parquet (214 条)
+new timestamp 1765952100
+2025-12-17 06:15:40 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765951200down.parquet (1076 条)
+new timestamp 1765952100
+2025-12-17 06:15:41 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765951200down.parquet (231 条)
+new timestamp 1765952100
+2025-12-17 06:15:44 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765951200down.parquet (154 条)
+new timestamp 1765952100
+2025-12-17 06:16:20 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765951200down.parquet (53 条)
+2025-12-17 06:30:00 | poly_15m | INFO | ⏰ 到达市场切换时间，断开连接准备重新连接...
+2025-12-17 06:30:49 | poly_15m | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2025-12-17 06:30:49 | poly_15m | INFO | 连接正常关闭，准备重连获取新市场...
+2025-12-17 06:30:50 | poly_15m | INFO | 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 06:30:50 | asset_utils | INFO | ================================================================================
+2025-12-17 06:30:50 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 17, 1:30AM-1:45AM ET 获取成功
+2025-12-17 06:30:50 | asset_utils | INFO | ================================================================================
+2025-12-17 06:30:51 | asset_utils | INFO | ================================================================================
+2025-12-17 06:30:51 | asset_utils | INFO | 市场: Ethereum Up or Down - December 17, 1:30AM-1:45AM ET 获取成功
+2025-12-17 06:30:51 | asset_utils | INFO | ================================================================================
+2025-12-17 06:30:51 | asset_utils | INFO | ================================================================================
+2025-12-17 06:30:51 | asset_utils | INFO | 市场: Solana Up or Down - December 17, 1:30AM-1:45AM ET 获取成功
+2025-12-17 06:30:51 | asset_utils | INFO | ================================================================================
+2025-12-17 06:30:51 | asset_utils | INFO | ================================================================================
+2025-12-17 06:30:51 | asset_utils | INFO | 市场: XRP Up or Down - December 17, 1:30AM-1:45AM ET 获取成功
+2025-12-17 06:30:51 | asset_utils | INFO | ================================================================================
+2025-12-17 06:30:51 | poly_15m | INFO | Asset 映射: 8 个资产
+2025-12-17 06:30:51 | poly_15m | INFO | 下一次市场切换时间: 1765953900 (剩余 849 秒)
+2025-12-17 06:30:52 | poly_15m | INFO | 订阅 8 个市场...
+2025-12-17 06:30:52 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765952100down.parquet (1382 条)
+2025-12-17 06:30:52 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765952100up.parquet (538 条)
+2025-12-17 06:30:53 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765952100down.parquet (538 条)
+2025-12-17 06:30:53 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765952100up.parquet (295 条)
+2025-12-17 06:30:53 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765952100down.parquet (295 条)
+2025-12-17 06:30:53 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765952100up.parquet (4911 条)
+2025-12-17 06:30:54 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765952100down.parquet (4911 条)
+2025-12-17 06:30:54 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765952100up.parquet (1382 条)
+new timestamp 1765953000
+2025-12-17 06:30:54 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765952100down.parquet (2040 条)
+new timestamp 1765953000
+2025-12-17 06:30:54 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765952100up.parquet (2860 条)
+new timestamp 1765953000
+2025-12-17 06:30:54 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765952100down.parquet (61 条)
+new timestamp 1765953000
+2025-12-17 06:30:55 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765952100up.parquet (294 条)
+new timestamp 1765953000
+2025-12-17 06:30:56 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765952100up.parquet (679 条)
+new timestamp 1765953000
+2025-12-17 06:31:04 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765952100down.parquet (699 条)
+new timestamp 1765953000
+2025-12-17 06:31:24 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765952100up.parquet (233 条)
+new timestamp 1765953000
+2025-12-17 06:31:31 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765952100down.parquet (243 条)
+2025-12-17 06:45:00 | poly_15m | INFO | ⏰ 到达市场切换时间，断开连接准备重新连接...
+2025-12-17 06:45:43 | poly_15m | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2025-12-17 06:45:43 | poly_15m | INFO | 连接正常关闭，准备重连获取新市场...
+2025-12-17 06:45:44 | poly_15m | INFO | 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 06:45:44 | asset_utils | INFO | ================================================================================
+2025-12-17 06:45:44 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 17, 1:45AM-2:00AM ET 获取成功
+2025-12-17 06:45:44 | asset_utils | INFO | ================================================================================
+2025-12-17 06:45:44 | asset_utils | INFO | ================================================================================
+2025-12-17 06:45:44 | asset_utils | INFO | 市场: Ethereum Up or Down - December 17, 1:45AM-2:00AM ET 获取成功
+2025-12-17 06:45:44 | asset_utils | INFO | ================================================================================
+2025-12-17 06:45:45 | asset_utils | INFO | ================================================================================
+2025-12-17 06:45:45 | asset_utils | INFO | 市场: Solana Up or Down - December 17, 1:45AM-2:00AM ET 获取成功
+2025-12-17 06:45:45 | asset_utils | INFO | ================================================================================
+2025-12-17 06:45:45 | asset_utils | INFO | ================================================================================
+2025-12-17 06:45:45 | asset_utils | INFO | 市场: XRP Up or Down - December 17, 1:45AM-2:00AM ET 获取成功
+2025-12-17 06:45:45 | asset_utils | INFO | ================================================================================
+2025-12-17 06:45:45 | poly_15m | INFO | Asset 映射: 8 个资产
+2025-12-17 06:45:45 | poly_15m | INFO | 下一次市场切换时间: 1765954800 (剩余 855 秒)
+2025-12-17 06:45:46 | poly_15m | INFO | 订阅 8 个市场...
+2025-12-17 06:45:47 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765953000down.parquet (4569 条)
+2025-12-17 06:45:47 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765953000up.parquet (1263 条)
+2025-12-17 06:45:47 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765953000down.parquet (1263 条)
+2025-12-17 06:45:47 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765953000up.parquet (377 条)
+2025-12-17 06:45:47 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765953000down.parquet (377 条)
+2025-12-17 06:45:47 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765953000up.parquet (224 条)
+2025-12-17 06:45:47 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765953000down.parquet (224 条)
+2025-12-17 06:45:48 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765953000up.parquet (4569 条)
+new timestamp 1765953900
+2025-12-17 06:45:48 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765953000up.parquet (2024 条)
+new timestamp 1765953900
+2025-12-17 06:45:48 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765953000down.parquet (685 条)
+new timestamp 1765953900
+2025-12-17 06:45:48 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765953000down.parquet (2540 条)
+new timestamp 1765953900
+2025-12-17 06:45:48 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765953000up.parquet (576 条)
+new timestamp 1765953900
+2025-12-17 06:45:51 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765953000down.parquet (232 条)
+new timestamp 1765953900
+2025-12-17 06:45:59 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765953000up.parquet (144 条)
+new timestamp 1765953900
+2025-12-17 06:46:25 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765953000up.parquet (95 条)
+new timestamp 1765953900
+2025-12-17 06:46:31 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765953000down.parquet (128 条)
+2025-12-17 07:00:00 | poly_15m | INFO | ⏰ 到达市场切换时间，断开连接准备重新连接...
+
+[1h] ⏰ 到达市场切换时间，断开连接准备重新连接...
+2025-12-17 07:00:32 | poly_1h | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+[1h] 连接正常关闭，准备重连获取新市场...
+
+[1h] 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 07:00:33 | asset_utils | INFO | ================================================================================
+2025-12-17 07:00:33 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 17, 2AM ET 获取成功
+2025-12-17 07:00:33 | asset_utils | INFO | ================================================================================
+2025-12-17 07:00:33 | asset_utils | INFO | ================================================================================
+2025-12-17 07:00:33 | asset_utils | INFO | 市场: Ethereum Up or Down - December 17, 2AM ET 获取成功
+2025-12-17 07:00:33 | asset_utils | INFO | ================================================================================
+2025-12-17 07:00:34 | asset_utils | INFO | ================================================================================
+2025-12-17 07:00:34 | asset_utils | INFO | 市场: Solana Up or Down - December 17, 2AM ET 获取成功
+2025-12-17 07:00:34 | asset_utils | INFO | ================================================================================
+2025-12-17 07:00:34 | asset_utils | INFO | ================================================================================
+2025-12-17 07:00:34 | asset_utils | INFO | 市场: XRP Up or Down - December 17, 2AM ET 获取成功
+2025-12-17 07:00:34 | asset_utils | INFO | ================================================================================
+2025-12-17 07:00:34 | poly_1h | INFO | Asset 映射: 8 个资产
+[1h] 下一次市场切换时间: 1765958400 (剩余 3566 秒)
+2025-12-17 07:00:35 | poly_1h | INFO | 订阅 8 个市场...
+2025-12-17 07:00:35 | file_cache | INFO | 💾 订单簿已保存: data/1h/sol/orderbooks/1765951200up.parquet (446 条)
+2025-12-17 07:00:35 | file_cache | INFO | 💾 订单簿已保存: data/1h/sol/orderbooks/1765951200down.parquet (446 条)
+2025-12-17 07:00:35 | file_cache | INFO | 💾 订单簿已保存: data/1h/xrp/orderbooks/1765951200up.parquet (347 条)
+2025-12-17 07:00:35 | file_cache | INFO | 💾 订单簿已保存: data/1h/xrp/orderbooks/1765951200down.parquet (347 条)
+2025-12-17 07:00:35 | file_cache | INFO | 💾 订单簿已保存: data/1h/btc/orderbooks/1765951200up.parquet (1556 条)
+2025-12-17 07:00:36 | file_cache | INFO | 💾 订单簿已保存: data/1h/btc/orderbooks/1765951200down.parquet (1556 条)
+2025-12-17 07:00:36 | file_cache | INFO | 💾 订单簿已保存: data/1h/eth/orderbooks/1765951200up.parquet (687 条)
+2025-12-17 07:00:36 | file_cache | INFO | 💾 订单簿已保存: data/1h/eth/orderbooks/1765951200down.parquet (687 条)
+new timestamp 1765954800
+2025-12-17 07:00:36 | file_cache | INFO | 💾 交易已保存: data/1h/eth/trades/1765951200up.parquet (423 条)
+2025-12-17 07:00:36 | poly_15m | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2025-12-17 07:00:36 | poly_15m | INFO | 连接正常关闭，准备重连获取新市场...
+new timestamp 1765954800
+2025-12-17 07:00:36 | file_cache | INFO | 💾 交易已保存: data/1h/btc/trades/1765951200down.parquet (675 条)
+new timestamp 1765954800
+2025-12-17 07:00:37 | file_cache | INFO | 💾 交易已保存: data/1h/btc/trades/1765951200up.parquet (880 条)
+2025-12-17 07:00:37 | poly_15m | INFO | 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 07:00:37 | asset_utils | INFO | ================================================================================
+2025-12-17 07:00:37 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 17, 2:00AM-2:15AM ET 获取成功
+2025-12-17 07:00:37 | asset_utils | INFO | ================================================================================
+2025-12-17 07:00:38 | asset_utils | INFO | ================================================================================
+2025-12-17 07:00:38 | asset_utils | INFO | 市场: Ethereum Up or Down - December 17, 2:00AM-2:15AM ET 获取成功
+2025-12-17 07:00:38 | asset_utils | INFO | ================================================================================
+2025-12-17 07:00:38 | asset_utils | INFO | ================================================================================
+2025-12-17 07:00:38 | asset_utils | INFO | 市场: Solana Up or Down - December 17, 2:00AM-2:15AM ET 获取成功
+2025-12-17 07:00:38 | asset_utils | INFO | ================================================================================
+2025-12-17 07:00:38 | asset_utils | INFO | ================================================================================
+2025-12-17 07:00:38 | asset_utils | INFO | 市场: XRP Up or Down - December 17, 2:00AM-2:15AM ET 获取成功
+2025-12-17 07:00:38 | asset_utils | INFO | ================================================================================
+2025-12-17 07:00:38 | poly_15m | INFO | Asset 映射: 8 个资产
+2025-12-17 07:00:38 | poly_15m | INFO | 下一次市场切换时间: 1765955700 (剩余 862 秒)
+new timestamp 1765954800
+2025-12-17 07:00:39 | file_cache | INFO | 💾 交易已保存: data/1h/eth/trades/1765951200down.parquet (263 条)
+2025-12-17 07:00:39 | poly_15m | INFO | 订阅 8 个市场...
+2025-12-17 07:00:39 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765953900down.parquet (435 条)
+2025-12-17 07:00:39 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765953900up.parquet (316 条)
+2025-12-17 07:00:40 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765953900down.parquet (316 条)
+2025-12-17 07:00:40 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765953900up.parquet (3674 条)
+2025-12-17 07:00:40 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765953900down.parquet (3674 条)
+2025-12-17 07:00:40 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765953900up.parquet (435 条)
+new timestamp 1765954800
+2025-12-17 07:00:41 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765953900up.parquet (622 条)
+new timestamp 1765954800
+2025-12-17 07:00:41 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765953900up.parquet (1616 条)
+new timestamp 1765954800
+2025-12-17 07:00:41 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765953900down.parquet (2050 条)
+new timestamp 1765954800
+2025-12-17 07:00:41 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765953900down.parquet (671 条)
+new timestamp 1765954800
+2025-12-17 07:00:41 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765953900up.parquet (257 条)
+new timestamp 1765954800
+2025-12-17 07:00:41 | file_cache | INFO | 💾 交易已保存: data/1h/sol/trades/1765951200up.parquet (271 条)
+new timestamp 1765954800
+2025-12-17 07:00:41 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765953900up.parquet (80 条)
+new timestamp 1765954800
+2025-12-17 07:00:43 | file_cache | INFO | 💾 交易已保存: data/1h/xrp/trades/1765951200up.parquet (212 条)
+new timestamp 1765954800
+2025-12-17 07:00:43 | file_cache | INFO | 💾 交易已保存: data/1h/sol/trades/1765951200down.parquet (174 条)
+new timestamp 1765954800
+2025-12-17 07:00:46 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765953900down.parquet (235 条)
+new timestamp 1765954800
+2025-12-17 07:00:47 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765953900down.parquet (177 条)
+new timestamp 1765954800
+2025-12-17 07:00:48 | file_cache | INFO | 💾 交易已保存: data/1h/xrp/trades/1765951200down.parquet (134 条)
+2025-12-17 07:15:00 | poly_15m | INFO | ⏰ 到达市场切换时间，断开连接准备重新连接...
+2025-12-17 07:15:49 | poly_15m | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2025-12-17 07:15:49 | poly_15m | INFO | 连接正常关闭，准备重连获取新市场...
+2025-12-17 07:15:50 | poly_15m | INFO | 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 07:15:51 | asset_utils | INFO | ================================================================================
+2025-12-17 07:15:51 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 17, 2:15AM-2:30AM ET 获取成功
+2025-12-17 07:15:51 | asset_utils | INFO | ================================================================================
+2025-12-17 07:15:51 | asset_utils | INFO | ================================================================================
+2025-12-17 07:15:51 | asset_utils | INFO | 市场: Ethereum Up or Down - December 17, 2:15AM-2:30AM ET 获取成功
+2025-12-17 07:15:51 | asset_utils | INFO | ================================================================================
+2025-12-17 07:15:51 | asset_utils | INFO | ================================================================================
+2025-12-17 07:15:51 | asset_utils | INFO | 市场: Solana Up or Down - December 17, 2:15AM-2:30AM ET 获取成功
+2025-12-17 07:15:51 | asset_utils | INFO | ================================================================================
+2025-12-17 07:15:52 | asset_utils | INFO | ================================================================================
+2025-12-17 07:15:52 | asset_utils | INFO | 市场: XRP Up or Down - December 17, 2:15AM-2:30AM ET 获取成功
+2025-12-17 07:15:52 | asset_utils | INFO | ================================================================================
+2025-12-17 07:15:52 | poly_15m | INFO | Asset 映射: 8 个资产
+2025-12-17 07:15:52 | poly_15m | INFO | 下一次市场切换时间: 1765956600 (剩余 848 秒)
+2025-12-17 07:15:52 | poly_15m | INFO | 订阅 8 个市场...
+2025-12-17 07:15:53 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765954800up.parquet (361 条)
+2025-12-17 07:15:53 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765954800down.parquet (361 条)
+2025-12-17 07:15:53 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765954800up.parquet (5105 条)
+2025-12-17 07:15:54 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765954800down.parquet (5105 条)
+2025-12-17 07:15:54 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765954800down.parquet (1399 条)
+2025-12-17 07:15:54 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765954800up.parquet (361 条)
+2025-12-17 07:15:54 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765954800down.parquet (361 条)
+new timestamp 1765955700
+2025-12-17 07:15:54 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765954800down.parquet (2713 条)
+new timestamp 1765955700
+2025-12-17 07:15:54 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765954800up.parquet (632 条)
+new timestamp 1765955700
+2025-12-17 07:15:54 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765954800down.parquet (765 条)
+new timestamp 1765955700
+2025-12-17 07:15:54 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765954800up.parquet (2382 条)
+new timestamp 1765955700
+2025-12-17 07:16:03 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765954800up.parquet (232 条)
+new timestamp 1765955700
+2025-12-17 07:16:03 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765954800down.parquet (205 条)
+new timestamp 1765955700
+2025-12-17 07:16:16 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765954800up.parquet (154 条)
+new timestamp 1765955700
+2025-12-17 07:16:41 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765954800down.parquet (127 条)
+2025-12-17 07:30:00 | poly_15m | INFO | ⏰ 到达市场切换时间，断开连接准备重新连接...
+2025-12-17 07:30:42 | poly_15m | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2025-12-17 07:30:42 | poly_15m | INFO | 连接正常关闭，准备重连获取新市场...
+2025-12-17 07:30:43 | poly_15m | INFO | 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 07:30:44 | asset_utils | INFO | ================================================================================
+2025-12-17 07:30:44 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 17, 2:30AM-2:45AM ET 获取成功
+2025-12-17 07:30:44 | asset_utils | INFO | ================================================================================
+2025-12-17 07:30:44 | asset_utils | INFO | ================================================================================
+2025-12-17 07:30:44 | asset_utils | INFO | 市场: Ethereum Up or Down - December 17, 2:30AM-2:45AM ET 获取成功
+2025-12-17 07:30:44 | asset_utils | INFO | ================================================================================
+2025-12-17 07:30:44 | asset_utils | INFO | ================================================================================
+2025-12-17 07:30:44 | asset_utils | INFO | 市场: Solana Up or Down - December 17, 2:30AM-2:45AM ET 获取成功
+2025-12-17 07:30:44 | asset_utils | INFO | ================================================================================
+2025-12-17 07:30:45 | asset_utils | INFO | ================================================================================
+2025-12-17 07:30:45 | asset_utils | INFO | 市场: XRP Up or Down - December 17, 2:30AM-2:45AM ET 获取成功
+2025-12-17 07:30:45 | asset_utils | INFO | ================================================================================
+2025-12-17 07:30:45 | poly_15m | INFO | Asset 映射: 8 个资产
+2025-12-17 07:30:45 | poly_15m | INFO | 下一次市场切换时间: 1765957500 (剩余 855 秒)
+2025-12-17 07:30:45 | poly_15m | INFO | 订阅 8 个市场...
+2025-12-17 07:30:46 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765955700up.parquet (389 条)
+2025-12-17 07:30:46 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765955700down.parquet (389 条)
+2025-12-17 07:30:46 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765955700up.parquet (171 条)
+2025-12-17 07:30:46 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765955700down.parquet (171 条)
+2025-12-17 07:30:46 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765955700up.parquet (4541 条)
+2025-12-17 07:30:47 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765955700down.parquet (4541 条)
+2025-12-17 07:30:47 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765955700up.parquet (1283 条)
+2025-12-17 07:30:47 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765955700down.parquet (1283 条)
+new timestamp 1765956600
+2025-12-17 07:30:47 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765955700up.parquet (2314 条)
+new timestamp 1765956600
+2025-12-17 07:30:47 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765955700down.parquet (2216 条)
+new timestamp 1765956600
+2025-12-17 07:30:47 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765955700up.parquet (747 条)
+new timestamp 1765956600
+2025-12-17 07:30:48 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765955700up.parquet (254 条)
+new timestamp 1765956600
+2025-12-17 07:30:49 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765955700up.parquet (112 条)
+new timestamp 1765956600
+2025-12-17 07:30:53 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765955700down.parquet (532 条)
+new timestamp 1765956600
+2025-12-17 07:30:59 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765955700down.parquet (134 条)
+new timestamp 1765956600
+2025-12-17 07:31:12 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765955700down.parquet (58 条)
+2025-12-17 07:45:00 | poly_15m | INFO | ⏰ 到达市场切换时间，断开连接准备重新连接...
+2025-12-17 07:45:35 | poly_15m | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2025-12-17 07:45:35 | poly_15m | INFO | 连接正常关闭，准备重连获取新市场...
+2025-12-17 07:45:36 | poly_15m | INFO | 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 07:45:37 | asset_utils | INFO | ================================================================================
+2025-12-17 07:45:37 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 17, 2:45AM-3:00AM ET 获取成功
+2025-12-17 07:45:37 | asset_utils | INFO | ================================================================================
+2025-12-17 07:45:37 | asset_utils | INFO | ================================================================================
+2025-12-17 07:45:37 | asset_utils | INFO | 市场: Ethereum Up or Down - December 17, 2:45AM-3:00AM ET 获取成功
+2025-12-17 07:45:37 | asset_utils | INFO | ================================================================================
+2025-12-17 07:45:37 | asset_utils | INFO | ================================================================================
+2025-12-17 07:45:37 | asset_utils | INFO | 市场: Solana Up or Down - December 17, 2:45AM-3:00AM ET 获取成功
+2025-12-17 07:45:37 | asset_utils | INFO | ================================================================================
+2025-12-17 07:45:38 | asset_utils | INFO | ================================================================================
+2025-12-17 07:45:38 | asset_utils | INFO | 市场: XRP Up or Down - December 17, 2:45AM-3:00AM ET 获取成功
+2025-12-17 07:45:38 | asset_utils | INFO | ================================================================================
+2025-12-17 07:45:38 | poly_15m | INFO | Asset 映射: 8 个资产
+2025-12-17 07:45:38 | poly_15m | INFO | 下一次市场切换时间: 1765958400 (剩余 862 秒)
+2025-12-17 07:45:38 | poly_15m | INFO | 订阅 8 个市场...
+2025-12-17 07:45:39 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765956600down.parquet (178 条)
+2025-12-17 07:45:39 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765956600up.parquet (2251 条)
+2025-12-17 07:45:39 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765956600down.parquet (2251 条)
+2025-12-17 07:45:39 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765956600up.parquet (435 条)
+2025-12-17 07:45:39 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765956600down.parquet (435 条)
+2025-12-17 07:45:40 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765956600up.parquet (124 条)
+2025-12-17 07:45:40 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765956600down.parquet (124 条)
+2025-12-17 07:45:40 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765956600up.parquet (178 条)
+new timestamp 1765957500
+2025-12-17 07:45:40 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765956600up.parquet (1467 条)
+new timestamp 1765957500
+2025-12-17 07:45:40 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765956600down.parquet (175 条)
+new timestamp 1765957500
+2025-12-17 07:45:40 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765956600down.parquet (780 条)
+new timestamp 1765957500
+2025-12-17 07:45:40 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765956600down.parquet (56 条)
+new timestamp 1765957500
+2025-12-17 07:45:47 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765956600down.parquet (45 条)
+new timestamp 1765957500
+2025-12-17 07:45:47 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765956600up.parquet (259 条)
+new timestamp 1765957500
+2025-12-17 07:45:47 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765956600up.parquet (121 条)
+new timestamp 1765957500
+2025-12-17 07:45:53 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765956600up.parquet (78 条)
+
+[1h] ⏰ 到达市场切换时间，断开连接准备重新连接...
+2025-12-17 08:00:00 | poly_15m | INFO | ⏰ 到达市场切换时间，断开连接准备重新连接...
+2025-12-17 08:00:49 | poly_1h | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2025-12-17 08:00:49 | poly_15m | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+[1h] 连接正常关闭，准备重连获取新市场...
+2025-12-17 08:00:49 | poly_15m | INFO | 连接正常关闭，准备重连获取新市场...
+
+[1h] 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 08:00:50 | asset_utils | INFO | ================================================================================
+2025-12-17 08:00:50 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 17, 3AM ET 获取成功
+2025-12-17 08:00:50 | asset_utils | INFO | ================================================================================
+2025-12-17 08:00:51 | asset_utils | INFO | ================================================================================
+2025-12-17 08:00:51 | asset_utils | INFO | 市场: Ethereum Up or Down - December 17, 3AM ET 获取成功
+2025-12-17 08:00:51 | asset_utils | INFO | ================================================================================
+2025-12-17 08:00:51 | asset_utils | INFO | ================================================================================
+2025-12-17 08:00:51 | asset_utils | INFO | 市场: Solana Up or Down - December 17, 3AM ET 获取成功
+2025-12-17 08:00:51 | asset_utils | INFO | ================================================================================
+2025-12-17 08:00:51 | asset_utils | INFO | ================================================================================
+2025-12-17 08:00:51 | asset_utils | INFO | 市场: XRP Up or Down - December 17, 3AM ET 获取成功
+2025-12-17 08:00:51 | asset_utils | INFO | ================================================================================
+2025-12-17 08:00:51 | poly_1h | INFO | Asset 映射: 8 个资产
+[1h] 下一次市场切换时间: 1765962000 (剩余 3549 秒)
+2025-12-17 08:00:51 | poly_15m | INFO | 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 08:00:52 | asset_utils | INFO | ================================================================================
+2025-12-17 08:00:52 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 17, 3:00AM-3:15AM ET 获取成功
+2025-12-17 08:00:52 | asset_utils | INFO | ================================================================================
+2025-12-17 08:00:52 | asset_utils | INFO | ================================================================================
+2025-12-17 08:00:52 | asset_utils | INFO | 市场: Ethereum Up or Down - December 17, 3:00AM-3:15AM ET 获取成功
+2025-12-17 08:00:52 | asset_utils | INFO | ================================================================================
+2025-12-17 08:00:52 | asset_utils | INFO | ================================================================================
+2025-12-17 08:00:52 | asset_utils | INFO | 市场: Solana Up or Down - December 17, 3:00AM-3:15AM ET 获取成功
+2025-12-17 08:00:52 | asset_utils | INFO | ================================================================================
+2025-12-17 08:00:53 | asset_utils | INFO | ================================================================================
+2025-12-17 08:00:53 | asset_utils | INFO | 市场: XRP Up or Down - December 17, 3:00AM-3:15AM ET 获取成功
+2025-12-17 08:00:53 | asset_utils | INFO | ================================================================================
+2025-12-17 08:00:53 | poly_15m | INFO | Asset 映射: 8 个资产
+2025-12-17 08:00:53 | poly_15m | INFO | 下一次市场切换时间: 1765959300 (剩余 847 秒)
+2025-12-17 08:00:53 | poly_1h | INFO | 订阅 8 个市场...
+2025-12-17 08:00:53 | poly_15m | INFO | 订阅 8 个市场...
+2025-12-17 08:00:54 | file_cache | INFO | 💾 订单簿已保存: data/1h/sol/orderbooks/1765954800up.parquet (231 条)
+2025-12-17 08:00:54 | file_cache | INFO | 💾 订单簿已保存: data/1h/sol/orderbooks/1765954800down.parquet (231 条)
+2025-12-17 08:00:54 | file_cache | INFO | 💾 订单簿已保存: data/1h/xrp/orderbooks/1765954800up.parquet (389 条)
+2025-12-17 08:00:54 | file_cache | INFO | 💾 订单簿已保存: data/1h/xrp/orderbooks/1765954800down.parquet (389 条)
+2025-12-17 08:00:54 | file_cache | INFO | 💾 订单簿已保存: data/1h/btc/orderbooks/1765954800up.parquet (1526 条)
+2025-12-17 08:00:54 | file_cache | INFO | 💾 订单簿已保存: data/1h/btc/orderbooks/1765954800down.parquet (1526 条)
+2025-12-17 08:00:54 | file_cache | INFO | 💾 订单簿已保存: data/1h/eth/orderbooks/1765954800up.parquet (628 条)
+2025-12-17 08:00:54 | file_cache | INFO | 💾 订单簿已保存: data/1h/eth/orderbooks/1765954800down.parquet (628 条)
+2025-12-17 08:00:54 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765957500up.parquet (376 条)
+2025-12-17 08:00:54 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765957500down.parquet (376 条)
+2025-12-17 08:00:54 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765957500up.parquet (303 条)
+2025-12-17 08:00:54 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765957500down.parquet (303 条)
+2025-12-17 08:00:55 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765957500up.parquet (4382 条)
+2025-12-17 08:00:56 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765957500down.parquet (4382 条)
+2025-12-17 08:00:56 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765957500up.parquet (815 条)
+2025-12-17 08:00:56 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765957500down.parquet (815 条)
+new timestamp 1765958400
+2025-12-17 08:00:56 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765957500up.parquet (128 条)
+new timestamp 1765958400
+2025-12-17 08:00:56 | file_cache | INFO | 💾 交易已保存: data/1h/eth/trades/1765954800up.parquet (326 条)
+new timestamp 1765958400
+2025-12-17 08:00:56 | file_cache | INFO | 💾 交易已保存: data/1h/sol/trades/1765954800up.parquet (137 条)
+new timestamp 1765958400
+2025-12-17 08:00:56 | file_cache | INFO | 💾 交易已保存: data/1h/btc/trades/1765954800up.parquet (750 条)
+new timestamp 1765958400
+2025-12-17 08:00:56 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765957500up.parquet (2384 条)
+new timestamp 1765958400
+2025-12-17 08:00:56 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765957500up.parquet (333 条)
+new timestamp 1765958400
+2025-12-17 08:00:56 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765957500down.parquet (480 条)
+new timestamp 1765958400
+2025-12-17 08:00:56 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765957500down.parquet (1992 条)
+new timestamp 1765958400
+2025-12-17 08:00:56 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765957500down.parquet (174 条)
+new timestamp 1765958400
+2025-12-17 08:00:56 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765957500up.parquet (239 条)
+new timestamp 1765958400
+2025-12-17 08:00:59 | file_cache | INFO | 💾 交易已保存: data/1h/eth/trades/1765954800down.parquet (301 条)
+new timestamp 1765958400
+2025-12-17 08:01:02 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765957500down.parquet (136 条)
+new timestamp 1765958400
+2025-12-17 08:01:03 | file_cache | INFO | 💾 交易已保存: data/1h/sol/trades/1765954800down.parquet (93 条)
+new timestamp 1765958400
+2025-12-17 08:01:04 | file_cache | INFO | 💾 交易已保存: data/1h/xrp/trades/1765954800up.parquet (209 条)
+new timestamp 1765958400
+2025-12-17 08:01:08 | file_cache | INFO | 💾 交易已保存: data/1h/btc/trades/1765954800down.parquet (773 条)
+new timestamp 1765958400
+2025-12-17 08:02:00 | file_cache | INFO | 💾 交易已保存: data/1h/xrp/trades/1765954800down.parquet (179 条)
+2025-12-17 08:15:04 | poly_15m | INFO | ⏰ 到达市场切换时间，断开连接准备重新连接...
+2025-12-17 08:18:43 | poly_15m | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2025-12-17 08:18:43 | poly_15m | INFO | 连接正常关闭，准备重连获取新市场...
+2025-12-17 08:18:44 | poly_15m | INFO | 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 08:18:45 | asset_utils | INFO | ================================================================================
+2025-12-17 08:18:45 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 17, 3:15AM-3:30AM ET 获取成功
+2025-12-17 08:18:45 | asset_utils | INFO | ================================================================================
+2025-12-17 08:18:45 | asset_utils | INFO | ================================================================================
+2025-12-17 08:18:45 | asset_utils | INFO | 市场: Ethereum Up or Down - December 17, 3:15AM-3:30AM ET 获取成功
+2025-12-17 08:18:45 | asset_utils | INFO | ================================================================================
+2025-12-17 08:18:45 | asset_utils | INFO | ================================================================================
+2025-12-17 08:18:45 | asset_utils | INFO | 市场: Solana Up or Down - December 17, 3:15AM-3:30AM ET 获取成功
+2025-12-17 08:18:45 | asset_utils | INFO | ================================================================================
+2025-12-17 08:18:46 | asset_utils | INFO | ================================================================================
+2025-12-17 08:18:46 | asset_utils | INFO | 市场: XRP Up or Down - December 17, 3:15AM-3:30AM ET 获取成功
+2025-12-17 08:18:46 | asset_utils | INFO | ================================================================================
+2025-12-17 08:18:46 | poly_15m | INFO | Asset 映射: 8 个资产
+2025-12-17 08:18:46 | poly_15m | INFO | 下一次市场切换时间: 1765960200 (剩余 674 秒)
+2025-12-17 08:18:46 | poly_15m | INFO | 订阅 8 个市场...
+2025-12-17 08:18:47 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765958400down.parquet (90 条)
+2025-12-17 08:18:47 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765958400up.parquet (67 条)
+2025-12-17 08:18:47 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765958400down.parquet (67 条)
+2025-12-17 08:18:47 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765958400up.parquet (1319 条)
+2025-12-17 08:18:47 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765958400down.parquet (1319 条)
+2025-12-17 08:18:47 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765958400up.parquet (277 条)
+2025-12-17 08:18:47 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765958400down.parquet (277 条)
+2025-12-17 08:18:47 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765958400up.parquet (90 条)
+2025-12-17 08:30:07 | poly_15m | INFO | ⏰ 到达市场切换时间，断开连接准备重新连接...
+2025-12-17 08:33:36 | poly_15m | ERROR | PING 发送错误: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2025-12-17 08:33:36 | poly_15m | INFO | 连接正常关闭，准备重连获取新市场...
+2025-12-17 08:33:37 | poly_15m | INFO | 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 08:33:38 | asset_utils | INFO | ================================================================================
+2025-12-17 08:33:38 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 17, 3:30AM-3:45AM ET 获取成功
+2025-12-17 08:33:38 | asset_utils | INFO | ================================================================================
+2025-12-17 08:33:38 | asset_utils | INFO | ================================================================================
+2025-12-17 08:33:38 | asset_utils | INFO | 市场: Ethereum Up or Down - December 17, 3:30AM-3:45AM ET 获取成功
+2025-12-17 08:33:38 | asset_utils | INFO | ================================================================================
+2025-12-17 08:33:38 | asset_utils | INFO | ================================================================================
+2025-12-17 08:33:38 | asset_utils | INFO | 市场: Solana Up or Down - December 17, 3:30AM-3:45AM ET 获取成功
+2025-12-17 08:33:38 | asset_utils | INFO | ================================================================================
+2025-12-17 08:33:39 | asset_utils | INFO | ================================================================================
+2025-12-17 08:33:39 | asset_utils | INFO | 市场: XRP Up or Down - December 17, 3:30AM-3:45AM ET 获取成功
+2025-12-17 08:33:39 | asset_utils | INFO | ================================================================================
+2025-12-17 08:33:39 | poly_15m | INFO | Asset 映射: 8 个资产
+2025-12-17 08:33:39 | poly_15m | INFO | 下一次市场切换时间: 1765961100 (剩余 681 秒)
+2025-12-17 08:33:39 | poly_15m | INFO | 订阅 8 个市场...
+2025-12-17 08:33:40 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765959300up.parquet (1 条)
+2025-12-17 08:33:40 | file_cache | INFO | 💾 订单簿已保存: data/15m/eth/orderbooks/1765959300down.parquet (1 条)
+2025-12-17 08:33:40 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765959300up.parquet (1 条)
+2025-12-17 08:33:40 | file_cache | INFO | 💾 订单簿已保存: data/15m/sol/orderbooks/1765959300down.parquet (1 条)
+2025-12-17 08:33:40 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765959300up.parquet (1 条)
+2025-12-17 08:33:40 | file_cache | INFO | 💾 订单簿已保存: data/15m/xrp/orderbooks/1765959300down.parquet (1 条)
+2025-12-17 08:33:40 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765959300up.parquet (1 条)
+2025-12-17 08:33:40 | file_cache | INFO | 💾 订单簿已保存: data/15m/btc/orderbooks/1765959300down.parquet (1 条)
+2025-12-17 08:38:09 | binance | WARNING | WebSocket 连接已关闭，准备重连...
+[1h] WebSocket 连接已关闭
+new timestamp 1765960200
+2025-12-17 08:38:39 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765958400down.parquet (50 条)
+new timestamp 1765960200
+2025-12-17 08:38:40 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765958400down.parquet (170 条)
+new timestamp 1765960200
+2025-12-17 08:38:40 | file_cache | INFO | 💾 交易已保存: data/15m/eth/trades/1765958400up.parquet (106 条)
+new timestamp 1765960200
+2025-12-17 08:38:40 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765958400down.parquet (51 条)
+new timestamp 1765960200
+2025-12-17 08:38:40 | file_cache | INFO | 💾 交易已保存: data/15m/sol/trades/1765958400up.parquet (39 条)
+2025-12-17 08:38:43 | poly_1h | ERROR | PING 发送错误: no close frame received or sent
+[1h] 连接正常关闭，准备重连获取新市场...
+new timestamp 1765960200
+2025-12-17 08:38:44 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765958400up.parquet (563 条)
+
+[1h] 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 08:38:45 | asset_utils | INFO | ================================================================================
+2025-12-17 08:38:45 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 17, 3AM ET 获取成功
+2025-12-17 08:38:45 | asset_utils | INFO | ================================================================================
+2025-12-17 08:38:45 | asset_utils | INFO | ================================================================================
+2025-12-17 08:38:45 | asset_utils | INFO | 市场: Ethereum Up or Down - December 17, 3AM ET 获取成功
+2025-12-17 08:38:45 | asset_utils | INFO | ================================================================================
+2025-12-17 08:38:45 | asset_utils | INFO | ================================================================================
+2025-12-17 08:38:45 | asset_utils | INFO | 市场: Solana Up or Down - December 17, 3AM ET 获取成功
+2025-12-17 08:38:45 | asset_utils | INFO | ================================================================================
+2025-12-17 08:38:46 | asset_utils | INFO | ================================================================================
+2025-12-17 08:38:46 | asset_utils | INFO | 市场: XRP Up or Down - December 17, 3AM ET 获取成功
+2025-12-17 08:38:46 | asset_utils | INFO | ================================================================================
+2025-12-17 08:38:46 | poly_1h | INFO | Asset 映射: 8 个资产
+[1h] 下一次市场切换时间: 1765962000 (剩余 1274 秒)
+new timestamp 1765960200
+2025-12-17 08:38:46 | file_cache | INFO | 💾 交易已保存: data/15m/btc/trades/1765958400down.parquet (754 条)
+2025-12-17 08:38:46 | poly_1h | INFO | 订阅 8 个市场...
+new timestamp 1765960200
+2025-12-17 08:38:51 | file_cache | INFO | 💾 交易已保存: data/15m/xrp/trades/1765958400up.parquet (15 条)
+[1h] WebSocket 连接已关闭
+2025-12-17 08:44:27 | poly_1h | ERROR | PING 发送错误: no close frame received or sent
+[1h] 连接正常关闭，准备重连获取新市场...
+
+[1h] 连接到 Polymarket WebSocket: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2025-12-17 08:44:28 | asset_utils | INFO | ================================================================================
+2025-12-17 08:44:28 | asset_utils | INFO | 市场: Bitcoin Up or Down - December 17, 3AM ET 获取成功
+2025-12-17 08:44:28 | asset_utils | INFO | ================================================================================
+2025-12-17 08:44:28 | asset_utils | INFO | ================================================================================
+2025-12-17 08:44:28 | asset_utils | INFO | 市场: Ethereum Up or Down - December 17, 3AM ET 获取成功
+2025-12-17 08:44:28 | asset_utils | INFO | ================================================================================
+2025-12-17 08:44:29 | asset_utils | INFO | ================================================================================
+2025-12-17 08:44:29 | asset_utils | INFO | 市场: Solana Up or Down - December 17, 3AM ET 获取成功
+2025-12-17 08:44:29 | asset_utils | INFO | ================================================================================
+2025-12-17 08:44:29 | asset_utils | INFO | ================================================================================
+2025-12-17 08:44:29 | asset_utils | INFO | 市场: XRP Up or Down - December 17, 3AM ET 获取成功
+2025-12-17 08:44:29 | asset_utils | INFO | ================================================================================
+2025-12-17 08:44:29 | poly_1h | INFO | Asset 映射: 8 个资产
+[1h] 下一次市场切换时间: 1765962000 (剩余 931 秒)
+2025-12-17 08:44:29 | poly_1h | INFO | 订阅 8 个市场...
+2025-12-17 08:45:00 | poly_15m | INFO | ⏰ 到达市场切换时间，断开连接准备重新连接...

@@ -143,10 +143,15 @@ async def subscribe_markets(websocket, assets):
     await websocket.send(json.dumps(subscribe_msg))
 
 
-async def send_ping(websocket):
-    """每10秒发送一次 PING 保持连接"""
+async def send_ping(websocket, next_switch_timestamp):
+    """每10秒发送一次 PING 保持连接，达到切换时间后退出"""
     try:
         while True:
+            now_timestamp = int(time.time())
+            # 到达市场切换时间时退出，让外层重新建立连接
+            if now_timestamp >= next_switch_timestamp:
+                print("[1h] ⏰ 到达市场切换时间，停止 PING 协程...")
+                return
             await asyncio.sleep(10)
             await websocket.send("PING")
     except Exception as e:
@@ -234,7 +239,7 @@ async def run_poly_ws_1h(max_retries=999999):
 
                 # 并行运行 PING 和消息接收
                 await asyncio.gather(
-                    send_ping(websocket),
+                    send_ping(websocket, next_switch_timestamp),
                     receive_messages(websocket, asset_to_coin,
                                      next_switch_timestamp),
                     return_exceptions=True

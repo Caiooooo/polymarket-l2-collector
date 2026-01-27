@@ -21,6 +21,36 @@ except ModuleNotFoundError:
     from backtest.engine import BacktestEngine, Side, OrderType
 
 
+def check_long_short(engine: BacktestEngine, new_side: Side, new_size: float) -> bool:
+    """
+    Long/Short 风险控制
+
+    市场偏向于共振，当单边（UP 或 DOWN）仓位过大时，回撤会很大。
+    这里引入简单的 long/short 机制：确保 UP 和 DOWN 总仓位差值不超过 1 个单位仓位。
+
+    实现方式：
+    - 统计当前 UP / DOWN 总仓位（单位：size）
+    - 假设加上本次下单的新仓位，检查 |UP - DOWN| 是否 <= new_size
+      即最多允许单边多 1 手（1 个 new_size）
+    """
+    up_size = engine.get_total_position_size(Side.UP)
+    down_size = engine.get_total_position_size(Side.DOWN)
+
+    if new_side == Side.UP:
+        up_size += new_size
+    else:
+        down_size += new_size
+
+
+    # 约束：UP / DOWN 总仓位差值不超过一手（new_size）
+    if abs(up_size - down_size) > new_size:
+        print(f"[Strategy] Long/Short 风险控制: UP {up_size:.2f}, DOWN {down_size:.2f}, 差值 {abs(up_size - down_size):.2f}")
+        # 不满足 long/short 约束，拒绝加仓
+        return False
+
+    return True
+
+
 def take4753_strategy(engine: BacktestEngine, tick: dict):
     """
     47/53 Taker策略
@@ -36,6 +66,7 @@ def take4753_strategy(engine: BacktestEngine, tick: dict):
 
     # 只在开盘前10个tick内观察
     if tick_idx >= 1:
+        engine.settle_and_skip_current_market()
         return
     # print(f"[Strategy] Tick#{tick_idx}")
 
@@ -87,12 +118,15 @@ def take4753_strategy(engine: BacktestEngine, tick: dict):
 
     # 阈值
     LOW_THRESHOLD = 0.47   # 低于此价格认为被低估，买入
-    GROUND_THRESHOLD = 0.45  # 低于此价格认为价格有异常，观望
+    GROUND_THRESHOLD = 0.47  # 低于此价格认为价格有异常，观望
 
     size = 10.0  # 每次交易数量
 
     # 检查UP的价格
     if up_ask <= LOW_THRESHOLD and up_ask >= GROUND_THRESHOLD and up_sz > size:
+        # Long/Short 风险控制：检查加仓后是否仍然平衡
+        if not check_long_short(engine, Side.UP, size):
+            return
         # UP价格很低，买入UP
         order = engine.place_order(
             Side.UP, size=size, order_type=OrderType.MARKET)
@@ -103,6 +137,9 @@ def take4753_strategy(engine: BacktestEngine, tick: dict):
 
     # 检查DOWN的价格
     if down_ask <= LOW_THRESHOLD and down_ask >= GROUND_THRESHOLD and down_sz > size:
+        # Long/Short 风险控制：检查加仓后是否仍然平衡
+        if not check_long_short(engine, Side.DOWN, size):
+            return
         # DOWN价格很低，买入DOWN
         order = engine.place_order(
             Side.DOWN, size=size, order_type=OrderType.MARKET)
