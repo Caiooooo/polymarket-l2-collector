@@ -48,12 +48,14 @@ def get_1h_url(coin, now_opening_market):
     return url
 
 
-def get_assets(coin, interval):
+def get_assets(coin, interval, target_timestamp=None):
     """获取指定币种和时间间隔的市场资产 ID"""
     # 获取当前时间戳
-    timestamp = int(time.time())
-    gap_time = 15*60
-    if interval == "15m":
+    timestamp = int(target_timestamp) if target_timestamp is not None else int(time.time())
+    gap_time = 15 * 60
+    if interval == "5m":
+        gap_time = 5 * 60
+    elif interval == "15m":
         gap_time = 15 * 60
     elif interval == "1h":
         gap_time = 60 * 60
@@ -61,10 +63,13 @@ def get_assets(coin, interval):
     m_close_time = now_opening_market + gap_time
 
     # 根据间隔构建 URL
-    if interval == "15m":
+    if interval in ["5m", "15m"]:
         url = f"https://polymarket.com/event/{coin}-updown-{interval}-{now_opening_market}"
     elif interval == "1h":
         url = get_1h_url(coin, now_opening_market)
+    else:
+        logger.error(f"不支持的 interval: {interval}")
+        return {}
 
     # 获取市场数据
     data = get_asset_id(url)

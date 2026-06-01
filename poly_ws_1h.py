@@ -85,6 +85,22 @@ def format_trade_data(poly_data, asset_to_coin):
     return formatted_data
 
 
+def get_market_window_timestamp(data):
+    """根据消息自带时间戳计算所属 1h 窗口的起始时间戳。"""
+    if not data:
+        return int(time.time() // INTERVAL_SECONDS) * INTERVAL_SECONDS
+
+    raw_timestamp = data[0].get("timestamp") or data[0].get("local_timestamp")
+    if raw_timestamp is None:
+        return int(time.time() // INTERVAL_SECONDS) * INTERVAL_SECONDS
+
+    timestamp = int(raw_timestamp)
+    if timestamp > 1_000_000_000_000:
+        timestamp //= 1000
+
+    return (timestamp // INTERVAL_SECONDS) * INTERVAL_SECONDS
+
+
 def save_book_data(data, asset_to_coin):
     """保存格式化的订单簿数据"""
     if not data:
@@ -96,8 +112,7 @@ def save_book_data(data, asset_to_coin):
     coin = asset_to_coin.get(asset_id, "")
     if not coin or "_" not in coin:
         return
-    now_timestamp = int(time.time())
-    now_opening_market = (now_timestamp // INTERVAL_SECONDS) * INTERVAL_SECONDS
+    now_opening_market = get_market_window_timestamp(data)
     up_or_down = coin.split("_")[1]
     coin_name = coin.split("_")[0]
     file_path = f"data/{INTERVAL}/{coin_name.lower()}/orderbooks/{now_opening_market}{up_or_down}.parquet"
@@ -115,8 +130,7 @@ def save_trade_data(data, asset_to_coin):
     coin = asset_to_coin.get(asset_id, "")
     if not coin or "_" not in coin:
         return
-    now_timestamp = int(time.time())
-    now_opening_market = (now_timestamp // INTERVAL_SECONDS) * INTERVAL_SECONDS
+    now_opening_market = get_market_window_timestamp(data)
     up_or_down = coin.split("_")[1]
     coin_name = coin.split("_")[0]
     file_path = f"data/{INTERVAL}/{coin_name.lower()}/trades/{now_opening_market}{up_or_down}.parquet"

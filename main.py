@@ -3,6 +3,7 @@ import asyncio
 import binance_price
 import poly_ws_15min
 import poly_ws_1h
+import poly_ws_5min
 
 
 async def start_new_gathering():
@@ -10,16 +11,16 @@ async def start_new_gathering():
     await asyncio.gather(
         binance_price.subscribe_book_ticker(),
         poly_ws_15min.run_poly_ws_15min(),
-        poly_ws_1h.run_poly_ws_1h(),
+        poly_ws_5min.run_poly_ws_5m(),
         return_exceptions=True
     )
 
 
 async def main():
     # every 15 minutes/1h restart the websocket
-    now_timestamp = int(time.time())
-    now_opening_market = (now_timestamp // (15 * 60)) * 15 * 60
-    m_close_time = now_opening_market + 15 * 60
+    # now_timestamp = int(time.time())
+    # now_opening_market = (now_timestamp // (15 * 60)) * 15 * 60
+    # m_close_time = now_opening_market + 15 * 60
     # if now_timestamp >= m_close_time:
     await start_new_gathering()
 

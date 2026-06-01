@@ -4,6 +4,7 @@
 Midprice = (最佳买价 + 最佳卖价) / 2
 """
 import asyncio
+import contextlib
 import json
 import websockets
 from datetime import datetime
@@ -35,58 +36,77 @@ async def subscribe_book_ticker():
     while retry_count < max_retries:
         try:
 
-            async with websockets.connect(ws_url) as websocket:
+            async with websockets.connect(ws_url, ping_interval=None) as websocket:
                 retry_count = 0  # 连接成功，重置重试计数
+                keepalive_task = asyncio.create_task(send_keepalive_pong(websocket))
 
-                while True:
-                    try:
-                        message = await websocket.recv()
-                        data = json.loads(message)
+                try:
+                    while True:
+                        try:
+                            message = await websocket.recv()
+                            data = json.loads(message)
 
-                        # 解析数据
-                        if 'data' in data:
-                            stream_data = data['data']
-                            symbol = stream_data['s']  # 交易对 如 BTCUSDT
-                            best_bid = float(stream_data['b'])  # 最佳买价
-                            best_ask = float(stream_data['a'])  # 最佳卖价
+                            # 解析数据
+                            if 'data' in data:
+                                stream_data = data['data']
+                                symbol = stream_data['s']  # 交易对 如 BTCUSDT
+                                best_bid = float(stream_data['b'])  # 最佳买价
+                                best_ask = float(stream_data['a'])  # 最佳卖价
 
-                            # 计算 midprice
-                            midprice = (best_bid + best_ask) / 2
+                                # 计算 midprice
+                                midprice = (best_bid + best_ask) / 2
 
-                            # 保存当前价格
-                            current_prices[symbol] = {
-                                'bid': best_bid,
-                                'ask': best_ask,
-                                'mid': midprice,
-                                'spread': best_ask - best_bid,
-                                # 基点
-                                'spread_bps': ((best_ask - best_bid) / midprice) * 10000,
-                                'time': datetime.now().strftime('%H:%M:%S.%f')[:-3]
-                            }
+                                # 保存当前价格
+                                current_prices[symbol] = {
+                                    'bid': best_bid,
+                                    'ask': best_ask,
+                                    'mid': midprice,
+                                    'spread': best_ask - best_bid,
+                                    'time': datetime.now().strftime('%H:%M:%S.%f')[:-3]
+                                }
 
-                            # 打印当前所有价格
-                            # print(
-                            #     f"\r{datetime.now().strftime('%H:%M:%S.%f')[:-3]}", end=" | ")
+                                # 打印当前所有价格
+                                # print(
+                                #     f"\r{datetime.now().strftime('%H:%M:%S.%f')[:-3]}", end=" | ")
 
-                            for sym in ['BTCUSDT', 'ETHUSDT', 'SOLUSDT', 'XRPUSDT']:
-                                if sym in current_prices:
-                                    p = current_prices[sym]
-                                    # print(
-                                    #     f"{sym[:3]}: ${p['mid']:>10,.2f}", end=" | ")
+                                for sym in ['BTCUSDT', 'ETHUSDT', 'SOLUSDT', 'XRPUSDT']:
+                                    if sym in current_prices:
+                                        p = current_prices[sym]
+                                        # print(
+                                        #     f"{sym[:3]}: ${p['mid']:>10,.2f}", end=" | ")
 
-                            # print("", end="\r", flush=True)
+                                # print("", end="\r", flush=True)
 
-                    except websockets.exceptions.ConnectionClosed:
-                        logger.warning("WebSocket 连接已关闭，准备重连...")
-                        break
-                    except Exception as e:
-                        logger.error(f"接收数据错误: {e}")
-                        break
+                        except websockets.exceptions.ConnectionClosed:
+                            logger.warning("WebSocket 连接已关闭，准备重连...")
+                            break
+                        except Exception as e:
+                            logger.error(f"接收数据错误: {e}")
+                            break
+                finally:
+                    keepalive_task.cancel()
+                    with contextlib.suppress(asyncio.CancelledError):
+                        await keepalive_task
 
         except Exception as e:
             retry_count += 1
             wait_time = min(5 * retry_count, 600)  # 最多等待600秒
             await asyncio.sleep(wait_time)
+
+
+async def send_keepalive_pong(websocket):
+    """定期发送空 pong 帧，作为 Binance 连接保活。"""
+    while True:
+        try:
+            await asyncio.sleep(30)
+            await websocket.pong()
+        except asyncio.CancelledError:
+            raise
+        except websockets.exceptions.ConnectionClosed:
+            break
+        except Exception as e:
+            logger.warning(f"PONG 保活发送失败: {e}")
+            break
 
 
 async def print_detailed_prices():
