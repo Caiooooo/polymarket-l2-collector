@@ -1,6 +1,7 @@
 import time
 import asyncio
 import binance_price
+import chainlink_price
 import poly_ws_15min
 import poly_ws_1h
 import poly_ws_5min
@@ -10,6 +11,7 @@ async def start_new_gathering():
     """同时运行币安价格订阅和两个 Polymarket 市场订阅"""
     await asyncio.gather(
         binance_price.subscribe_book_ticker(),
+        # chainlink_price.subscribe_chainlink(),
         poly_ws_15min.run_poly_ws_15min(),
         poly_ws_5min.run_poly_ws_5m(),
         return_exceptions=True

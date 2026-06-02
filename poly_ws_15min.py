@@ -7,6 +7,7 @@ import json
 import websockets
 import time
 from binance_price import current_prices
+from chainlink_price import get_chainlink_price_usd
 from file_cache import save_trades, save_book
 from asset_utils import get_assets
 from logger_config import setup_logger
@@ -17,7 +18,7 @@ logger = setup_logger('poly_15m')
 WS_URL = "wss://ws-subscriptions-clob.polymarket.com/ws/market"
 INTERVAL = "15m"
 INTERVAL_SECONDS = 15 * 60
-SWITCH_AHEAD_SECONDS = 10
+# 不提前预连接，保持单个活动 websocket
 
 
 def create_asset_mapping(assets):
@@ -26,15 +27,18 @@ def create_asset_mapping(assets):
     for coin, interval_data in assets.items():
         for interval, asset_data in interval_data.items():
             if isinstance(asset_data, dict):
-                asset_to_coin[asset_data.get(
-                    "up", "")] = coin.upper()+"_up_"+interval
-                asset_to_coin[asset_data.get(
-                    "down", "")] = coin.upper()+"_down_"+interval
+                # 仅映射 up 方向的 asset_id（只保存 up）
+                asset_to_coin[asset_data.get("up", "")] = coin.upper() + "_up_" + interval
     return asset_to_coin
 
 
 def get_asset_price(coin):
     """从 current_prices 获取对应币种的价格"""
+    # 对于 BTC 使用 Chainlink（通过 chainlink_price 模块）；其余使用 Binance mid price
+    if coin.lower() == "btc":
+        price = get_chainlink_price_usd(coin)
+        return price or 0.0
+
     symbol = f"{coin}USDT"
     if symbol in current_prices:
         return current_prices[symbol].get("mid", 0.0)
@@ -155,12 +159,10 @@ def extract_asset_ids(assets):
         for interval, asset_data in interval_data.items():
             if not isinstance(asset_data, dict):
                 continue
+            # 仅订阅 up 方向的 asset_id
             up_id = asset_data.get("up", "")
-            down_id = asset_data.get("down", "")
             if up_id:
                 asset_ids.append(up_id)
-            if down_id:
-                asset_ids.append(down_id)
     return asset_ids
 
 
@@ -290,16 +292,12 @@ async def run_poly_ws_15min(max_retries=999999):
                 assets, current_window_start, lambda: saving_enabled)
 
             next_ws = None
-            next_asset_to_coin = None
             next_tasks = []
             next_window_start = current_window_start + INTERVAL_SECONDS
             next_switch_timestamp = next_window_start
-            preconnected = False
+            logger.info(f"[15m] 下一次市场切换时间: {next_switch_timestamp} (剩余 {next_switch_timestamp - int(time.time())} 秒)")
 
-            logger.info(
-                f"[15m] 下一次市场切换时间: {next_switch_timestamp} (剩余 {next_switch_timestamp - int(time.time())} 秒)")
-
-            # 主循环负责切换与双 WS 管理
+            # 主循环负责按窗口切换，保持单个活动 websocket（不提前预连）
             while True:
                 now_timestamp = int(time.time())
 
@@ -307,49 +305,36 @@ async def run_poly_ws_15min(max_retries=999999):
                     saving_enabled = True
                     logger.info("[15m] 已进入完整窗口，开始保存 15m 数据")
 
-                # 提前建立下一窗口 WS（不在旧 WS 内订阅）
-                if (not preconnected) and (now_timestamp >= next_switch_timestamp - SWITCH_AHEAD_SECONDS):
-                    next_assets = await get_current_assets(target_timestamp=next_window_start)
-                    logger.info(f"[15m] 连接下一窗口 WS: {next_window_start}")
-                    next_ws, next_asset_to_coin, next_tasks = await start_ws(
-                        next_assets, next_window_start, lambda: saving_enabled)
-                    preconnected = True
-
-                # 切换窗口：关闭旧 WS，提升新 WS
+                # 切换窗口：关闭旧 WS，提升新 WS（如果没有 next_ws 则在切换时建立）
                 if now_timestamp >= next_switch_timestamp:
                     if next_ws is None:
                         next_assets = await get_current_assets(target_timestamp=next_window_start)
-                        logger.info(f"[15m] 切换时补连下一窗口 WS: {next_window_start}")
+                        logger.info(f"[15m] 切换时连接下一窗口 WS: {next_window_start}")
                         next_ws, next_asset_to_coin, next_tasks = await start_ws(
                             next_assets, next_window_start, lambda: saving_enabled)
 
                     await close_ws(current_ws, current_tasks)
                     current_ws = next_ws
-                    current_asset_to_coin = next_asset_to_coin
                     current_tasks = next_tasks
 
                     next_ws = None
-                    next_asset_to_coin = None
                     next_tasks = []
-                    preconnected = False
 
                     current_window_start = next_window_start
                     next_window_start = current_window_start + INTERVAL_SECONDS
                     next_switch_timestamp = next_window_start
                     logger.info(f"[15m] 已进入新一期窗口，下一次切换时间: {next_switch_timestamp}")
+                    retry_count = 0
 
                 if current_ws is not None:
                     closed = getattr(current_ws, "closed", None)
                     close_code = getattr(current_ws, "close_code", None)
+                    retry_count = 0
                     if closed is True or close_code is not None:
                         raise RuntimeError("[15m] 当前 WS 已断开")
 
                 await asyncio.sleep(0.5)
 
-            # 正常退出（时间到达），重置重试计数
-            retry_count = 0
-            logger.info("连接正常关闭，准备重连获取新市场...")
-            await asyncio.sleep(1)
 
         except Exception as e:
             logger.error(f"连接错误: {e}")
