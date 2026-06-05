@@ -61,24 +61,14 @@ async def _wrap_binance(killer: GracefulKiller):
     """包装币安订阅，catch 异常并更新健康时间戳"""
     global _last_binance_update
     try:
-        # 注入健康心跳：周期性检查 current_prices 是否有实质更新
-        # 使用 json.dumps 做值深比较，避免浅拷贝导致内层 dict 共享引用永远相等
+        # 注入健康心跳：直接检查币安 last_message_time（每条消息都刷新）
         async def health_monitor():
-            prev_snapshot = ""
             while not killer.kill_now:
                 await asyncio.sleep(HEALTH_CHECK_INTERVAL)
-                prices = binance_price.current_prices
-                if not prices:
-                    continue
-                # 只比较价格数值，忽略 time 字符串（每次 tick 都变但无意义）
-                snapshot = json.dumps(
-                    {s: {'b': p['bid'], 'a': p['ask'], 'm': p['mid']}
-                     for s, p in sorted(prices.items())},
-                    sort_keys=True)
-                if snapshot != prev_snapshot:
-                    _last_binance_update = time.time()
+                last_msg = binance_price.last_message_time
+                if last_msg > 0 and last_msg > _last_binance_update:
+                    _last_binance_update = last_msg
                     touch_activity()
-                    prev_snapshot = snapshot
 
         monitor_task = asyncio.create_task(health_monitor())
         try:

@@ -6,6 +6,7 @@ Midprice = (最佳买价 + 最佳卖价) / 2
 import asyncio
 import json
 import random
+import time
 import websockets
 from datetime import datetime
 from logger_config import setup_logger
@@ -21,6 +22,8 @@ SYMBOLS = ["btcusdt", "ethusdt"]
 
 # 存储当前价格
 current_prices = {}
+# 最后收到消息的时间戳（供 main.py 健康检查用）
+last_message_time = 0.0
 
 
 async def subscribe_book_ticker():
@@ -55,6 +58,7 @@ async def subscribe_book_ticker():
                     while True:
                         try:
                             message = await websocket.recv()
+                            last_message_time = time.time()
                             data = json.loads(message)
 
                             if 'data' in data:
