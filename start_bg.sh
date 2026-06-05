@@ -1,11 +1,17 @@
 #!/bin/bash
 # 后台运行，日志输出到文件
+# 程序内置每日凌晨 3:00 自动重启 + 健康监控异常自动恢复
 
 LOG_FILE="poly_$(date +%Y%m%d).log"
 
 echo "========================================="
 echo "后台启动 Polymarket 数据收集系统"
 echo "========================================="
+echo ""
+echo "特性："
+echo "  🔄 每日 03:00 自动重启"
+echo "  💓 健康监控：币安价格 120s / WS 300s 无数据自动重启"
+echo "  🛡️ 任一组件崩溃 → 自动重启全部"
 echo ""
 
 # 检查并停止已有的进程
@@ -14,7 +20,7 @@ if [ -n "$PIDS" ]; then
     echo "🔄 发现已有程序在运行 (PID: $PIDS)"
     echo "   正在停止旧进程..."
     pkill -f "python3 main.py"
-    sleep 2
+    sleep 3
     echo "✅ 旧进程已停止"
     echo ""
 fi
@@ -23,6 +29,7 @@ echo "日志文件: $LOG_FILE"
 echo ""
 echo "查看日志: tail -f $LOG_FILE"
 echo "停止程序: bash stop.sh"
+echo "查看状态: bash see.sh"
 echo "========================================="
 echo ""
 

@@ -9,23 +9,69 @@
 """
 
 import sys
-import requests
 import json
+import asyncio
+import aiohttp
+import requests  # 仅 CLI 模式使用
 
 
-def get_market_info_by_slug(slug):
-    """通过 slug 获取市场信息"""
-    # 从 URL 中提取 slug（如果是完整 URL）
+# ---- 异步版本（供 WebSocket 采集器调用，不阻塞事件循环） ----
+
+async def get_market_info_by_slug_async(slug, session=None):
+    """通过 slug 异步获取市场信息"""
     if slug.startswith('http'):
         slug = slug.split('/')[-1]
 
-    # print(f"正在查询市场: {slug}")
+    url = f"https://gamma-api.polymarket.com/events?slug={slug}"
 
-    # Polymarket API 端点
+    close_session = session is None
+    if close_session:
+        session = aiohttp.ClientSession(
+            timeout=aiohttp.ClientTimeout(total=15))
+
+    try:
+        async with session.get(url) as response:
+            if response.status != 200:
+                return None
+            data = await response.json()
+
+            if not data:
+                return None
+
+            markets = data[0].get('markets', [])
+            # 预处理 JSON 字符串字段
+            for market in markets:
+                for field in ('outcomes', 'outcomePrices', 'clobTokenIds'):
+                    val = market.get(field)
+                    if isinstance(val, str):
+                        try:
+                            market[field] = json.loads(val)
+                        except (json.JSONDecodeError, TypeError):
+                            pass
+            return markets
+    except Exception:
+        return None
+    finally:
+        if close_session:
+            await session.close()
+
+
+async def get_asset_id_async(url, session=None):
+    """通过 url 异步获取 asset id"""
+    return await get_market_info_by_slug_async(url, session)
+
+
+# ---- 同步版本（向后兼容 CLI 调用） ----
+
+def get_market_info_by_slug(slug):
+    """通过 slug 获取市场信息（同步版本，仅供 CLI 使用）"""
+    if slug.startswith('http'):
+        slug = slug.split('/')[-1]
+
     url = f"https://gamma-api.polymarket.com/events?slug={slug}"
 
     try:
-        response = requests.get(url)
+        response = requests.get(url, timeout=15)
         response.raise_for_status()
         data = response.json()
 
@@ -34,56 +80,19 @@ def get_market_info_by_slug(slug):
             return None
 
         event = data[0]
-        # print("\n" + "="*80)
-        # print(f"市场名称: {event.get('title', 'N/A')}")
-        # print(f"描述: {event.get('description', 'N/A')}")
-        # print(f"Condition ID: {event.get('conditionId', 'N/A')}")
-        # print("="*80)
-
-        # 获取市场结果
         markets = event.get('markets', [])
         if not markets:
             print("该事件没有市场数据")
             return None
 
-        # print(f"\n找到 {len(markets)} 个市场:\n")
-
-        for idx, market in enumerate(markets, 1):
-            # print(f"【市场 {idx}】")
-            # print(f"  问题: {market.get('question', 'N/A')}")
-            # print(f"  Condition ID: {market.get('conditionId', 'N/A')}")
-
-            # 获取结果选项 - 处理可能是JSON字符串的情况
-            outcomes = market.get('outcomes', [])
-            if isinstance(outcomes, str):
-                try:
-                    outcomes = json.loads(outcomes)
-                except:
-                    outcomes = []
-
-            outcomePrices = market.get('outcomePrices', [])
-            if isinstance(outcomePrices, str):
-                try:
-                    outcomePrices = json.loads(outcomePrices)
-                except:
-                    outcomePrices = []
-
-            clobTokenIds = market.get('clobTokenIds', [])
-            if isinstance(clobTokenIds, str):
-                try:
-                    clobTokenIds = json.loads(clobTokenIds)
-                except:
-                    clobTokenIds = []
-
-            if outcomes and clobTokenIds:
-                # print(f"  选项:")
-                for i, outcome in enumerate(outcomes):
-                    price = outcomePrices[i] if i < len(
-                        outcomePrices) else 'N/A'
-                    token_id = clobTokenIds[i] if i < len(
-                        clobTokenIds) else 'N/A'
-            #         print(f"    - {outcome}: {price} (Token ID: {token_id})")
-            # print()
+        for market in markets:
+            for field in ('outcomes', 'outcomePrices', 'clobTokenIds'):
+                val = market.get(field)
+                if isinstance(val, str):
+                    try:
+                        market[field] = json.loads(val)
+                    except (json.JSONDecodeError, TypeError):
+                        pass
 
         return markets
 
@@ -93,7 +102,7 @@ def get_market_info_by_slug(slug):
 
 
 def get_asset_id(url):
-    """通过 url 获取 asset id"""
+    """通过 url 获取 asset id（同步，CLI 用）"""
     return get_market_info_by_slug(url)
 
 
@@ -104,11 +113,10 @@ def search_markets(keyword):
     url = f"https://gamma-api.polymarket.com/events?limit=10"
 
     try:
-        response = requests.get(url)
+        response = requests.get(url, timeout=15)
         response.raise_for_status()
         events = response.json()
 
-        # 过滤包含关键词的市场
         matching = []
         for event in events:
             if keyword.lower() in event.get('title', '').lower():
@@ -128,7 +136,7 @@ def search_markets(keyword):
 
             markets = event.get('markets', [])
             if markets:
-                for market in markets[:2]:  # 只显示前2个
+                for market in markets[:2]:
                     token_ids = market.get('clobTokenIds', [])
                     if token_ids:
                         print(f"    Token ID: {token_ids[0]}")

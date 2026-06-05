@@ -4,8 +4,8 @@
 Midprice = (最佳买价 + 最佳卖价) / 2
 """
 import asyncio
-import contextlib
 import json
+import random
 import websockets
 from datetime import datetime
 from logger_config import setup_logger
@@ -31,14 +31,20 @@ async def subscribe_book_ticker():
     ws_url = f"{BINANCE_WS_URL}?streams={streams}"
 
     retry_count = 0
-    max_retries = 999999  # 无限重试
 
-    while retry_count < max_retries:
+    while True:
         try:
-
-            async with websockets.connect(ws_url, ping_interval=None) as websocket:
+            # ping_interval=20 让库自动发送 WebSocket ping 帧保持连接
+            # ping_timeout=10 等待 pong 回复的超时
+            async with websockets.connect(
+                ws_url,
+                ping_interval=20,
+                ping_timeout=10,
+                close_timeout=5,
+                max_size=2**20,
+            ) as websocket:
                 retry_count = 0  # 连接成功，重置重试计数
-                keepalive_task = asyncio.create_task(send_keepalive_pong(websocket))
+                logger.info("✅ 币安 WebSocket 已连接")
 
                 try:
                     while True:
@@ -65,74 +71,30 @@ async def subscribe_book_ticker():
                                     'time': datetime.now().strftime('%H:%M:%S.%f')[:-3]
                                 }
 
-                                # 打印当前所有价格
-                                # print(
-                                #     f"\r{datetime.now().strftime('%H:%M:%S.%f')[:-3]}", end=" | ")
-
-                                for sym in ['BTCUSDT', 'ETHUSDT', 'SOLUSDT', 'XRPUSDT']:
-                                    if sym in current_prices:
-                                        p = current_prices[sym]
-                                        # print(
-                                        #     f"{sym[:3]}: ${p['mid']:>10,.2f}", end=" | ")
-
-                                # print("", end="\r", flush=True)
-
                         except websockets.exceptions.ConnectionClosed:
-                            logger.warning("WebSocket 连接已关闭，准备重连...")
+                            logger.warning("币安 WebSocket 连接已关闭，准备重连...")
                             break
                         except Exception as e:
                             logger.error(f"接收数据错误: {e}")
                             break
-                finally:
-                    keepalive_task.cancel()
-                    with contextlib.suppress(asyncio.CancelledError):
-                        await keepalive_task
+                except Exception:
+                    pass  # 内层异常由外层 while True 处理重连
 
+        except asyncio.CancelledError:
+            logger.info("币安订阅任务被取消")
+            raise
         except Exception as e:
             retry_count += 1
-            wait_time = min(5 * retry_count, 600)  # 最多等待600秒
+            # 指数退避 + 随机抖动，最大 120s
+            wait_time = min(5 * (2 ** min(retry_count - 1, 4)), 120)
+            wait_time += random.uniform(0, wait_time * 0.3)
+            logger.warning(f"币安连接失败，{wait_time:.1f}s 后重试 (第 {retry_count} 次): {e}")
             await asyncio.sleep(wait_time)
-
-
-async def send_keepalive_pong(websocket):
-    """定期发送空 pong 帧，作为 Binance 连接保活。"""
-    while True:
-        try:
-            await asyncio.sleep(30)
-            await websocket.pong()
-        except asyncio.CancelledError:
-            raise
-        except websockets.exceptions.ConnectionClosed:
-            break
-        except Exception as e:
-            logger.warning(f"PONG 保活发送失败: {e}")
-            break
-
-
-async def print_detailed_prices():
-    """定期打印详细价格信息"""
-    await asyncio.sleep(2)  # 等待连接建立
-
-    while True:
-        await asyncio.sleep(5)  # 每5秒打印一次详细信息
-
-        if current_prices:
-
-            for symbol in ['BTCUSDT', 'ETHUSDT', 'SOLUSDT', 'XRPUSDT']:
-                if symbol in current_prices:
-                    p = current_prices[symbol]
-
-
-async def main():
-    """同时运行价格订阅和详细打印"""
-    await asyncio.gather(
-        subscribe_book_ticker(),
-        print_detailed_prices()
-    )
 
 
 if __name__ == "__main__":
     try:
-        asyncio.run(main())
+        logger.info("启动币安价格订阅（独立模式）")
+        asyncio.run(subscribe_book_ticker())
     except KeyboardInterrupt:
         logger.info("程序已停止")

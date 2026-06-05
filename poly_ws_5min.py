@@ -7,7 +7,6 @@ import json
 import websockets
 import time
 from binance_price import current_prices
-from chainlink_price import get_chainlink_price_usd
 from file_cache import save_trades, save_book
 from asset_utils import get_assets
 from logger_config import setup_logger
@@ -31,19 +30,12 @@ def create_asset_mapping(assets):
                 asset_to_coin[asset_data.get("up", "")] = coin.upper() + "_up_" + interval
     return asset_to_coin
 
-
 def get_asset_price(coin):
     """从 current_prices 获取对应币种的价格"""
-    # 对于 BTC 使用 Chainlink（通过 chainlink_price 模块）；其余使用 Binance mid price
-    if coin.lower() == "btc":
-        price = get_chainlink_price_usd(coin)
-        return price or 0.0
-
     symbol = f"{coin}USDT"
     if symbol in current_prices:
         return current_prices[symbol].get("mid", 0.0)
     return 0.0
-
 
 def format_orderbook_data(poly_data, asset_to_coin, window_open_ts=None):
     """将 poly_ws 数据格式化为示例格式"""
@@ -209,6 +201,13 @@ async def get_current_assets(target_timestamp=None):
 
 async def receive_messages(websocket, asset_to_coin, window_open_ts, should_save):
     """接收并处理 WebSocket 消息"""
+    # 延迟导入，避免循环依赖；独立运行时优雅降级
+    try:
+        from main import touch_activity
+    except ImportError:
+        def touch_activity():
+            pass
+
     while True:
         try:
             try:
@@ -228,6 +227,8 @@ async def receive_messages(websocket, asset_to_coin, window_open_ts, should_save
             if not isinstance(data, (list, dict)):
                 logger.debug(f"[5m] 忽略非市场数据消息类型: {type(data)}")
                 continue
+
+            touch_activity()  # 通知主进程有数据活动
 
             if not should_save():
                 continue
@@ -276,7 +277,7 @@ async def start_ws(assets, window_open_ts, should_save):
     return websocket, asset_to_coin, [recv_task, ping_task]
 
 
-async def run_poly_ws_5m(max_retries=999999):
+async def run_poly_ws_5m():
     """运行 5 分钟市场的 WebSocket 连接"""
     retry_count = 0
     # 启动后首个 5m 窗口数据不保存，等到下一个完整窗口开始再保存
@@ -286,7 +287,7 @@ async def run_poly_ws_5m(max_retries=999999):
     saving_enabled = False
     logger.info(f"[5m] 启动保护：{save_start_timestamp} 之前仅接收不落盘")
 
-    while retry_count < max_retries:
+    while True:
         try:
             logger.info(f"连接到 Polymarket WebSocket: {WS_URL}")
 
@@ -297,7 +298,6 @@ async def run_poly_ws_5m(max_retries=999999):
                 assets, current_window_start, lambda: saving_enabled)
 
             next_ws = None
-            next_asset_to_coin = None
             next_tasks = []
             next_window_start = current_window_start + INTERVAL_SECONDS
             next_switch_timestamp = next_window_start
@@ -348,7 +348,6 @@ async def run_poly_ws_5m(max_retries=999999):
             wait_time = min(5 * retry_count, 60)
             logger.info(f"等待 {wait_time} 秒后重连...")
             await asyncio.sleep(wait_time)
-    logger.error("达到最大重试次数，停止尝试连接 Polymarket WebSocket")
 
 if __name__ == "__main__":
     try:

@@ -1,5 +1,6 @@
 # cache the data until size limit or event ends
 import os
+import time
 import pandas as pd
 from logger_config import setup_logger
 
@@ -11,10 +12,26 @@ book_limit = 100
 # save book to data/1h/btc/orderbooks/1765436400down.parquet
 # save trades to data/1h/btc/trades/1765436400down.parquet
 
-# 使用字典存储每个市场的缓存，key 格式: "interval/coin/type/direction"
-# 例如: "15m/btc/trades/up" 或 "1h/eth/orderbooks/down"
+# 使用字典存储每个市场的缓存，key 格式: "interval/coin/type/direction/timestamp"
+# 例如: "15m/btc/trades/up/1765436400" 或 "1h/eth/orderbooks/down/1765436400"
 trades_cache_dict = {}
 orderbook_cache_dict = {}
+
+# 缓存的窗口数量上限（超出后清理最旧的窗口）
+MAX_CACHED_WINDOWS = 200
+
+
+def cleanup_old_cache(cache_dict, max_windows=MAX_CACHED_WINDOWS):
+    """清理超出上限的旧窗口缓存，防止内存无限增长"""
+    if len(cache_dict) <= max_windows:
+        return
+    # 按时间戳排序，删除最旧的
+    sorted_keys = sorted(cache_dict.keys(), key=lambda k: int(k.split('/')[-1]) if k.split('/')[-1].isdigit() else 0)
+    keys_to_remove = sorted_keys[:len(sorted_keys) - max_windows]
+    for key in keys_to_remove:
+        del cache_dict[key]
+    if keys_to_remove:
+        logger.debug(f"清理了 {len(keys_to_remove)} 个旧缓存窗口 (剩余 {len(cache_dict)})")
 
 
 def optimize_data_for_parquet(data):
@@ -160,6 +177,8 @@ def save_trades(data, file_path):
         trades_cache_dict[cache_key] = {
             'data': []
         }
+        # 新窗口加入时清理一次旧缓存
+        cleanup_old_cache(trades_cache_dict)
 
     cache_info = trades_cache_dict[cache_key]
 
@@ -203,6 +222,8 @@ def save_book(data, file_path):
         orderbook_cache_dict[cache_key] = {
             'data': []
         }
+        # 新窗口加入时清理一次旧缓存
+        cleanup_old_cache(orderbook_cache_dict)
 
     cache_info = orderbook_cache_dict[cache_key]
 
