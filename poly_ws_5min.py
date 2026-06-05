@@ -181,6 +181,8 @@ async def send_ping(websocket):
         while True:
             await asyncio.sleep(10)
             await websocket.send("PING")
+    except websockets.exceptions.ConnectionClosed:
+        pass  # 连接已关闭，静默退出
     except Exception as e:
         logger.error(f"PING 发送错误: {e}")
 

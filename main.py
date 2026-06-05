@@ -9,6 +9,7 @@ import asyncio
 import time
 import signal
 import sys
+import json
 from datetime import datetime
 from logger_config import setup_logger
 
@@ -22,8 +23,8 @@ logger = setup_logger('main')
 RESTART_HOUR = 3       # 每日重启时间（24h）
 RESTART_MINUTE = 0
 HEALTH_CHECK_INTERVAL = 30      # 健康检查间隔（秒）
-BINANCE_STALE_SECONDS = 120     # 币安价格超过此时间未更新 → 重启
-POLY_WS_STALE_SECONDS = 300     # Poly WS 超过此时间无数据 → 重启
+BINANCE_STALE_SECONDS = 300     # 币安价格超过此时间未更新 → 重启
+POLY_WS_STALE_SECONDS = 600     # Poly WS 超过此时间无数据 → 重启
 
 # ===================== 全局健康状态 =====================
 _last_binance_update = time.time()
@@ -60,18 +61,24 @@ async def _wrap_binance(killer: GracefulKiller):
     """包装币安订阅，catch 异常并更新健康时间戳"""
     global _last_binance_update
     try:
-        # 注入健康心跳：每收到一个价格就更新 _last_binance_update
-        # 原 binance_price.subscribe_book_ticker 没有暴露回调，
-        # 这里用并行任务周期性检查 current_prices 是否有更新
+        # 注入健康心跳：周期性检查 current_prices 是否有实质更新
+        # 使用 json.dumps 做值深比较，避免浅拷贝导致内层 dict 共享引用永远相等
         async def health_monitor():
-            prev = None
+            prev_snapshot = ""
             while not killer.kill_now:
-                await asyncio.sleep(10)
-                current = binance_price.current_prices.copy() if binance_price.current_prices else None
-                if current != prev:
+                await asyncio.sleep(HEALTH_CHECK_INTERVAL)
+                prices = binance_price.current_prices
+                if not prices:
+                    continue
+                # 只比较价格数值，忽略 time 字符串（每次 tick 都变但无意义）
+                snapshot = json.dumps(
+                    {s: {'b': p['bid'], 'a': p['ask'], 'm': p['mid']}
+                     for s, p in sorted(prices.items())},
+                    sort_keys=True)
+                if snapshot != prev_snapshot:
                     _last_binance_update = time.time()
                     touch_activity()
-                    prev = current
+                    prev_snapshot = snapshot
 
         monitor_task = asyncio.create_task(health_monitor())
         try:
