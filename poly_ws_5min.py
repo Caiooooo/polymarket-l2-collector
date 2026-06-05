@@ -191,7 +191,7 @@ async def get_current_assets(target_timestamp=None):
     assets = {}
     for coin in coins:
         assets[coin] = {}
-        coin_data = get_assets(coin, INTERVAL, target_timestamp=target_timestamp)
+        coin_data = await get_assets(coin, INTERVAL, target_timestamp=target_timestamp)
         if coin_data and coin in coin_data:
             assets[coin][INTERVAL] = coin_data[coin]
         else:
