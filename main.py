@@ -64,7 +64,7 @@ async def _wrap_binance(killer: GracefulKiller):
     try:
         # 注入健康心跳：直接检查币安 last_message_time（每条消息都刷新）
         async def health_monitor():
-            nonlocal _last_binance_update
+            global _last_binance_update
             while not killer.kill_now:
                 await asyncio.sleep(HEALTH_CHECK_INTERVAL)
                 last_msg = binance_price.last_message_time
