@@ -58,6 +58,7 @@ async def subscribe_book_ticker():
                     while True:
                         try:
                             message = await websocket.recv()
+                            global last_message_time
                             last_message_time = time.time()
                             data = json.loads(message)
 

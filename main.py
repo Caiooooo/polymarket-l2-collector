@@ -222,8 +222,12 @@ async def main():
     killer = GracefulKiller()
 
     session = 0
+    consecutive_quick_restarts = 0  # 连续快速重启计数
+    MIN_SESSION_DURATION = 120       # 低于此时间视为"快速重启"
+
     while not killer.kill_now:
         session += 1
+        session_start = time.time()
         logger.info("=" * 60)
         logger.info(f"🚀 启动第 {session} 次会话")
         logger.info("=" * 60)
@@ -237,8 +241,19 @@ async def main():
         if killer.kill_now:
             break
 
-        # 短暂等待后重启
+        # 检测快速重启，避免 API 限流 / 连接风暴
+        session_duration = time.time() - session_start
+        if session_duration < MIN_SESSION_DURATION:
+            consecutive_quick_restarts += 1
+        else:
+            consecutive_quick_restarts = 0
+
+        # 基础等待 3s，快速重启时指数退避（最多 120s）
         restart_delay = 3
+        if consecutive_quick_restarts > 3:
+            restart_delay = min(30 * (2 ** min(consecutive_quick_restarts - 3, 3)), 120)
+            logger.warning(f"检测到连续 {consecutive_quick_restarts} 次快速重启，退避 {restart_delay}s")
+
         logger.info(f"{restart_delay}s 后重启...")
         await asyncio.sleep(restart_delay)
 
