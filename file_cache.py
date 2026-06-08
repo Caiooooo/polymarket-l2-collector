@@ -1,13 +1,14 @@
 # cache the data until size limit or event ends
 import os
+import gc
 import time
 import pandas as pd
 from logger_config import setup_logger
 
 logger = setup_logger('file_cache')
 
-trade_limit = 100
-book_limit = 100
+trade_limit = 50     # 降低缓存阈值减少内存占用
+book_limit = 30      # orderbook 含 bids/asks 数组，内存占用大
 
 # save book to data/1h/btc/orderbooks/1765436400down.parquet
 # save trades to data/1h/btc/trades/1765436400down.parquet
@@ -18,7 +19,7 @@ trades_cache_dict = {}
 orderbook_cache_dict = {}
 
 # 缓存的窗口数量上限（超出后清理最旧的窗口）
-MAX_CACHED_WINDOWS = 200
+MAX_CACHED_WINDOWS = 30      # 低内存机器降低窗口缓存数
 
 
 def cleanup_old_cache(cache_dict, max_windows=MAX_CACHED_WINDOWS):
@@ -207,7 +208,11 @@ def save_trades(data, file_path):
         df = pd.DataFrame(optimized_data)
         df.to_parquet(file_path, index=False,
                       engine='pyarrow', compression='zstd')
-        # logger.info(f"💾 交易已保存(达到限制): {file_path} ({len(existing_data)} 条)")
+        # 显式释放 DataFrame 内存
+        del df
+        del optimized_data
+        del existing_data
+        gc.collect()
         # 清空缓存
         cache_info['data'] = []
 
@@ -252,6 +257,10 @@ def save_book(data, file_path):
         df = pd.DataFrame(optimized_data)
         df.to_parquet(file_path, index=False,
                       engine='pyarrow', compression='zstd')
-        # logger.info(f"💾 订单簿已保存(达到限制): {file_path} ({len(existing_data)} 条)")
+        # 显式释放 DataFrame 内存
+        del df
+        del optimized_data
+        del existing_data
+        gc.collect()
         # 清空缓存
         cache_info['data'] = []

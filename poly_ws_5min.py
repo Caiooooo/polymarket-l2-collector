@@ -271,7 +271,12 @@ async def close_ws(websocket, tasks):
 async def start_ws(assets, window_open_ts, should_save):
     """建立 WS 连接并启动收包/心跳任务"""
     asset_to_coin = create_asset_mapping(assets)
-    websocket = await websockets.connect(WS_URL)
+    websocket = await websockets.connect(
+        WS_URL,
+        max_size=2**19,         # 512KB 接收缓冲区，限制内存
+        # 注意：Polymarket WS 不支持 WebSocket 协议层 PING/PONG
+        # 仅响应文本 "PING"/"PONG"，由 send_ping() 处理保活
+    )
     await subscribe_markets(websocket, assets)
     recv_task = asyncio.create_task(
         receive_messages(websocket, asset_to_coin, window_open_ts, should_save))

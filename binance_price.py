@@ -45,7 +45,7 @@ async def subscribe_book_ticker():
                 ping_interval=20,
                 ping_timeout=10,
                 close_timeout=5,
-                max_size=2**20,
+                max_size=2**19,         # 512KB，低内存优化
             ) as websocket:
                 retry_count = 0
                 logger.info("✅ 币安 WebSocket 已连接")

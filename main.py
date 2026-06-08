@@ -6,6 +6,7 @@ Polymarket L2 数据收集器 - 主入口
 - 健康监控：任一组件卡死或崩溃后自动重启全部
 """
 import asyncio
+import gc
 import time
 import signal
 import sys
@@ -213,6 +214,7 @@ async def _run_session(killer: GracefulKiller):
         t.cancel()
     # 等待取消完成
     await asyncio.gather(*pending, return_exceptions=True)
+    gc.collect()  # 会话清理后强制回收内存
 
     logger.info("当前会话已完全清理")
 
