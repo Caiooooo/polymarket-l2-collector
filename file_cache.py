@@ -22,6 +22,70 @@ orderbook_cache_dict = {}
 MAX_CACHED_WINDOWS = 30      # 低内存机器降低窗口缓存数
 
 
+def _flush_cache_entry(cache_dict, cache_key, file_path):
+    """将单个缓存窗口强制写入磁盘并清空内存。"""
+    cache_info = cache_dict.get(cache_key)
+    if not cache_info or not cache_info.get('data'):
+        return 0
+
+    pending_data = cache_info['data']
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
+    existing_data = []
+    if os.path.exists(file_path):
+        try:
+            df = pd.read_parquet(file_path)
+            existing_data = restore_data_from_parquet(df.to_dict('records'))
+            del df
+        except (FileNotFoundError, Exception):
+            existing_data = []
+
+    rows = len(pending_data)
+    existing_data.extend(pending_data)
+
+    optimized_data = optimize_data_for_parquet(existing_data)
+    df = pd.DataFrame(optimized_data)
+    df.to_parquet(file_path, index=False, engine='pyarrow', compression='zstd')
+
+    cache_info['data'] = []
+    del df
+    del optimized_data
+    del existing_data
+    gc.collect()
+    return rows
+
+
+def flush_all_caches():
+    """强制落盘所有缓存数据，降低内存占用。"""
+    flushed_rows = 0
+    for cache_dict in (trades_cache_dict, orderbook_cache_dict):
+        for cache_key in list(cache_dict.keys()):
+            file_path = cache_dict[cache_key].get('file_path')
+            if not file_path:
+                continue
+            flushed_rows += _flush_cache_entry(cache_dict, cache_key, file_path)
+    if flushed_rows:
+        logger.warning(f"内存保护：已强制落盘 {flushed_rows} 条缓存数据")
+    return flushed_rows
+
+
+def drop_empty_cache_windows(max_windows=MAX_CACHED_WINDOWS):
+    """删除已无待写数据的旧窗口，释放字典引用。"""
+    removed = 0
+    for cache_dict in (trades_cache_dict, orderbook_cache_dict):
+        keys = list(cache_dict.keys())
+        if len(keys) <= max_windows:
+            continue
+        sorted_keys = sorted(keys, key=lambda k: int(k.split('/')[-1]) if k.split('/')[-1].isdigit() else 0)
+        for key in sorted_keys[:len(sorted_keys) - max_windows]:
+            if not cache_dict[key].get('data'):
+                del cache_dict[key]
+                removed += 1
+    if removed:
+        logger.debug(f"内存保护：移除了 {removed} 个空缓存窗口")
+    return removed
+
+
 def cleanup_old_cache(cache_dict, max_windows=MAX_CACHED_WINDOWS):
     """清理超出上限的旧窗口缓存，防止内存无限增长"""
     if len(cache_dict) <= max_windows:
@@ -30,6 +94,9 @@ def cleanup_old_cache(cache_dict, max_windows=MAX_CACHED_WINDOWS):
     sorted_keys = sorted(cache_dict.keys(), key=lambda k: int(k.split('/')[-1]) if k.split('/')[-1].isdigit() else 0)
     keys_to_remove = sorted_keys[:len(sorted_keys) - max_windows]
     for key in keys_to_remove:
+        file_path = cache_dict[key].get('file_path')
+        if file_path:
+            _flush_cache_entry(cache_dict, key, file_path)
         del cache_dict[key]
     if keys_to_remove:
         logger.debug(f"清理了 {len(keys_to_remove)} 个旧缓存窗口 (剩余 {len(cache_dict)})")
@@ -176,10 +243,13 @@ def save_trades(data, file_path):
     # 初始化该市场的缓存（如果不存在）
     if cache_key not in trades_cache_dict:
         trades_cache_dict[cache_key] = {
-            'data': []
+            'data': [],
+            'file_path': file_path
         }
         # 新窗口加入时清理一次旧缓存
         cleanup_old_cache(trades_cache_dict)
+    else:
+        trades_cache_dict[cache_key]['file_path'] = file_path
 
     cache_info = trades_cache_dict[cache_key]
 
@@ -188,33 +258,7 @@ def save_trades(data, file_path):
 
     # 如果达到缓存限制，立即保存
     if len(cache_info['data']) >= trade_limit:
-        os.makedirs(os.path.dirname(file_path), exist_ok=True)
-
-        # 读取现有数据
-        existing_data = []
-        if os.path.exists(file_path):
-            try:
-                df = pd.read_parquet(file_path)
-                existing_data = restore_data_from_parquet(
-                    df.to_dict('records'))
-            except (FileNotFoundError, Exception):
-                existing_data = []
-
-        # 合并现有数据和缓存数据
-        existing_data.extend(cache_info['data'])
-
-        # 优化并保存合并后的数据
-        optimized_data = optimize_data_for_parquet(existing_data)
-        df = pd.DataFrame(optimized_data)
-        df.to_parquet(file_path, index=False,
-                      engine='pyarrow', compression='zstd')
-        # 显式释放 DataFrame 内存
-        del df
-        del optimized_data
-        del existing_data
-        gc.collect()
-        # 清空缓存
-        cache_info['data'] = []
+        _flush_cache_entry(trades_cache_dict, cache_key, file_path)
 
 
 def save_book(data, file_path):
@@ -225,10 +269,13 @@ def save_book(data, file_path):
     # 初始化该市场的缓存（如果不存在）
     if cache_key not in orderbook_cache_dict:
         orderbook_cache_dict[cache_key] = {
-            'data': []
+            'data': [],
+            'file_path': file_path
         }
         # 新窗口加入时清理一次旧缓存
         cleanup_old_cache(orderbook_cache_dict)
+    else:
+        orderbook_cache_dict[cache_key]['file_path'] = file_path
 
     cache_info = orderbook_cache_dict[cache_key]
 
@@ -237,30 +284,4 @@ def save_book(data, file_path):
 
     # 如果达到缓存限制，立即保存
     if len(cache_info['data']) >= book_limit:
-        os.makedirs(os.path.dirname(file_path), exist_ok=True)
-
-        # 读取现有数据
-        existing_data = []
-        if os.path.exists(file_path):
-            try:
-                df = pd.read_parquet(file_path)
-                existing_data = restore_data_from_parquet(
-                    df.to_dict('records'))
-            except (FileNotFoundError, Exception):
-                existing_data = []
-
-        # 合并现有数据和缓存数据
-        existing_data.extend(cache_info['data'])
-
-        # 优化并保存合并后的数据
-        optimized_data = optimize_data_for_parquet(existing_data)
-        df = pd.DataFrame(optimized_data)
-        df.to_parquet(file_path, index=False,
-                      engine='pyarrow', compression='zstd')
-        # 显式释放 DataFrame 内存
-        del df
-        del optimized_data
-        del existing_data
-        gc.collect()
-        # 清空缓存
-        cache_info['data'] = []
+        _flush_cache_entry(orderbook_cache_dict, cache_key, file_path)

@@ -244,7 +244,7 @@ async def receive_messages(websocket, asset_to_coin, window_open_ts, should_save
                     save_trade_data([data], asset_to_coin, window_open_ts=window_open_ts)
 
         except websockets.ConnectionClosed:
-            logger.warning("WebSocket 连接已关闭")
+            logger.info("WebSocket 连接已关闭")
             break
         except Exception as e:
             logger.error(f"接收数据错误: {e}")
@@ -283,6 +283,10 @@ async def start_ws(assets, window_open_ts, should_save):
 async def run_poly_ws_15min():
     """运行 15 分钟市场的 WebSocket 连接"""
     retry_count = 0
+    current_ws = None
+    current_tasks = []
+    next_ws = None
+    next_tasks = []
     # 启动后首个 15m 窗口数据不保存，等到下一个完整窗口开始再保存
     startup_ts = int(time.time())
     current_window_start = (startup_ts // INTERVAL_SECONDS) * INTERVAL_SECONDS
@@ -347,6 +351,12 @@ async def run_poly_ws_15min():
 
         except Exception as e:
             logger.error(f"连接错误: {e}")
+            await close_ws(current_ws, current_tasks)
+            await close_ws(next_ws, next_tasks)
+            current_ws = None
+            current_tasks = []
+            next_ws = None
+            next_tasks = []
             retry_count += 1
             wait_time = min(5 * retry_count, 60)
             logger.info(f"等待 {wait_time} 秒后重连...")

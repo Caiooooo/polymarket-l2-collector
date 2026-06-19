@@ -11,6 +11,8 @@ import time
 import signal
 import sys
 import json
+import os
+import resource
 from datetime import datetime
 from logger_config import setup_logger
 
@@ -26,6 +28,9 @@ RESTART_MINUTE = 0
 HEALTH_CHECK_INTERVAL = 30      # 健康检查间隔（秒）
 BINANCE_STALE_SECONDS = 300     # 币安价格超过此时间未更新 → 重启
 POLY_WS_STALE_SECONDS = 600     # Poly WS 超过此时间无数据 → 重启
+MEMORY_CHECK_INTERVAL = 30      # 内存检查间隔（秒）
+MEMORY_SOFT_LIMIT_MB = int(os.getenv("MEMORY_SOFT_LIMIT_MB", "300"))
+MEMORY_HARD_LIMIT_MB = int(os.getenv("MEMORY_HARD_LIMIT_MB", "400"))
 
 # ===================== 全局健康状态 =====================
 _last_binance_update = time.time()
@@ -114,6 +119,45 @@ async def _wrap_poly_5m(killer: GracefulKiller):
 
 # ===================== 健康监督器 =====================
 
+def _get_rss_mb():
+    """获取当前进程 RSS 内存（MB），Linux 优先读取 /proc。"""
+    try:
+        with open('/proc/self/status', 'r', encoding='utf-8') as f:
+            for line in f:
+                if line.startswith('VmRSS:'):
+                    return int(line.split()[1]) / 1024
+    except Exception:
+        pass
+    usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    return usage / 1024
+
+
+async def _memory_supervisor(killer: GracefulKiller):
+    """内存保护：软阈值清理缓存，硬阈值触发整会话重启。"""
+    while not killer.kill_now:
+        await asyncio.sleep(MEMORY_CHECK_INTERVAL)
+        rss_mb = _get_rss_mb()
+        if rss_mb < MEMORY_SOFT_LIMIT_MB:
+            continue
+
+        logger.warning(f"内存使用 {rss_mb:.1f}MB 超过软限制 {MEMORY_SOFT_LIMIT_MB}MB，开始清理缓存")
+        try:
+            from file_cache import flush_all_caches, drop_empty_cache_windows
+            flush_all_caches()
+            drop_empty_cache_windows(max_windows=6)
+        except Exception as e:
+            logger.error(f"内存缓存清理失败: {e}")
+
+        gc.collect()
+        rss_after_mb = _get_rss_mb()
+        logger.warning(f"内存清理后 RSS: {rss_after_mb:.1f}MB")
+
+        if rss_after_mb >= MEMORY_HARD_LIMIT_MB:
+            logger.error(f"内存使用 {rss_after_mb:.1f}MB 超过硬限制 {MEMORY_HARD_LIMIT_MB}MB，触发重启防止 OOM")
+            return
+
+    logger.info("内存监督器退出")
+
 async def _health_supervisor(killer: GracefulKiller, tasks: list):
     """定期检查所有子任务健康状况，触发重启"""
     while not killer.kill_now:
@@ -197,9 +241,10 @@ async def _run_session(killer: GracefulKiller):
 
     # 启动健康监督器和定时重启调度器
     supervisor = asyncio.create_task(_health_supervisor(killer, tasks), name='supervisor')
+    memory_supervisor = asyncio.create_task(_memory_supervisor(killer), name='memory_supervisor')
     daily = asyncio.create_task(_daily_restart_scheduler(killer), name='daily_restart')
 
-    all_tasks = tasks + [supervisor, daily]
+    all_tasks = tasks + [supervisor, memory_supervisor, daily]
 
     # 等待任意一个管理任务完成（意味着需要重启）
     done, pending = await asyncio.wait(
@@ -215,6 +260,12 @@ async def _run_session(killer: GracefulKiller):
         t.cancel()
     # 等待取消完成
     await asyncio.gather(*pending, return_exceptions=True)
+    try:
+        from file_cache import flush_all_caches, drop_empty_cache_windows
+        flush_all_caches()
+        drop_empty_cache_windows(max_windows=2)
+    except Exception as e:
+        logger.error(f"会话结束缓存清理失败: {e}")
     gc.collect()  # 会话清理后强制回收内存
 
     logger.info("当前会话已完全清理")
