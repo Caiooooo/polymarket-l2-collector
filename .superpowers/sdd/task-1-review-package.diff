@@ -1,0 +1,65 @@
+diff --git a/polymarket_l2_collector/config.py b/polymarket_l2_collector/config.py
+index ca68e36..72894df 100644
+--- a/polymarket_l2_collector/config.py
++++ b/polymarket_l2_collector/config.py
+@@ -46,20 +46,29 @@ class Settings:
+ 
+     # ── Health check ───────────────────────────────────────────────
+     binance_stale_seconds: int = int(os.getenv("BINANCE_STALE_SECONDS", "300"))
+     poly_ws_stale_seconds: int = int(os.getenv("POLY_WS_STALE_SECONDS", "600"))
+     health_check_interval: int = int(os.getenv("HEALTH_CHECK_INTERVAL", "30"))
+ 
+     # ── Daily restart ──────────────────────────────────────────────
+     restart_hour: int = int(os.getenv("RESTART_HOUR", "3"))
+     restart_minute: int = int(os.getenv("RESTART_MINUTE", "0"))
+ 
++    # ── Wallet / Dual-WS ──────────────────────────────────────────
++    wallet_primary_timeout: int = int(os.getenv("WALLET_PRIMARY_TIMEOUT", "60"))
++    wallet_secondary_timeout: int = int(os.getenv("WALLET_SECONDARY_TIMEOUT", "120"))
++    wallet_verify_interval: float = float(os.getenv("WALLET_VERIFY_INTERVAL", "1.0"))
++    wallet_switch_on_divergence: float = float(os.getenv("WALLET_SWITCH_ON_DIVERGENCE", "50.0"))
++
++    # ── Chain verify ──────────────────────────────────────────────
++    chain_verify_enabled: bool = os.getenv("CHAIN_VERIFY_ENABLED", "false").lower() in ("1", "true", "yes")
++
+     # ── Derived helpers ────────────────────────────────────────────
+     @property
+     def data_path(self) -> Path:
+         return Path(self.data_dir)
+ 
+     def interval_seconds(self, interval: str) -> int:
+         """Convert interval string ('5m' / '15m') to seconds."""
+         mapping = {"5m": 5 * 60, "15m": 15 * 60, "1h": 60 * 60}
+         return mapping[interval]
+ 
+diff --git a/polymarket_l2_collector/ws_wallet/__init__.py b/polymarket_l2_collector/ws_wallet/__init__.py
+new file mode 100644
+index 0000000..8158262
+--- /dev/null
++++ b/polymarket_l2_collector/ws_wallet/__init__.py
+@@ -0,0 +1,4 @@
++"""Dual-WebSocket wallet module — primary/backup WS with data verification."""
++from __future__ import annotations
++from .wallet import WalletService
++__all__ = ["WalletService"]
+diff --git a/tests/test_ws_wallet/__init__.py b/tests/test_ws_wallet/__init__.py
+new file mode 100644
+index 0000000..e69de29
+diff --git a/tests/test_ws_wallet/test_wallet.py b/tests/test_ws_wallet/test_wallet.py
+new file mode 100644
+index 0000000..07901b2
+--- /dev/null
++++ b/tests/test_ws_wallet/test_wallet.py
+@@ -0,0 +1,12 @@
++"""Tests for WalletService config defaults."""
++from __future__ import annotations
++from polymarket_l2_collector.config import load_settings
++
++
++def test_wallet_config_defaults():
++    settings = load_settings()
++    assert settings.wallet_primary_timeout == 60
++    assert settings.wallet_secondary_timeout == 120
++    assert settings.wallet_verify_interval == 1.0
++    assert settings.wallet_switch_on_divergence == 50.0
++    assert settings.chain_verify_enabled is False
