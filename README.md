@@ -4,20 +4,21 @@
 
 ## 当前能力
 
-- ✅ **BTC/ETH** — 订单簿 (orderbook) + 成交 (trade) 实时数据
+- ✅ **BTC/ETH + SOL/XRP** — 订单簿 (orderbook) + 成交 (trade) 实时数据
 - ✅ **5m / 15m** — 两种时间窗口并行采集
-- ✅ **Up token 方向** — 仅订阅 Up 方向资产（完整盘口需同时采 Up/Down）
+- ✅ **Up/Down token 方向** — 可配 DIRECTIONS=up,down 采集完整盘口
 - ✅ **WebSocket 实时订阅** — Polymarket CLOB WS channel
+- ✅ **REST 快照补采** — `uv run polymarket-backfill` 自动检测数据断档并补采
 - ✅ **Parquet 输出** — 按 `data/{interval}/{coin}/{orderbooks|trades}/{timestamp}{direction}.parquet` 结构
-- ✅ **币安价格同步** — 辅助记录 midprice，供回测对齐
+- ✅ **币安价格同步** — BTC/ETH/SOL/XRP midprice，供回测对齐
 - ✅ **健康监控 + 自动重启** — 内存阈值守卫、WS 断线检测、每日定时重启
 - ✅ **原子 Parquet 写入** — 临时文件 + os.replace，避免写坏文件
 - ✅ **窗口元数据追踪** — 每个 Parquet 窗口附带 .meta.json（消息数、时间范围、状态）
-- ✅ **数据质量检查 CLI** — `uv run polymarket-check-quality`
+- ✅ **数据质量检查 CLI** — `uv run polymarket-check-quality`（含窗口断档检测）
 - ✅ **Docker 部署** — Dockerfile + docker-compose.yml
 - ✅ **CI** — GitHub Actions：ruff + pytest + 导入检查（Python 3.10-3.12）
 - ✅ **结构化日志** — 支持 JSON 格式（LOG_FORMAT=json）
-- ✅ **56 个单元测试** — 覆盖窗口计算、slug 生成、资产解析、消息格式化、Parquet 管道、元数据
+- ✅ **87 个测试** — 覆盖窗口计算、slug 生成、资产解析、消息格式化、Parquet 管道、元数据、断档检测、REST 补采
 - ✅ **Deprecation warnings** — poly_ws_5min.py / poly_ws_15min.py 指向新 Collector
 
 ## 快速开始
@@ -74,13 +75,10 @@ polymarket-l2-collector/
 └── .github/workflows/ci.yml
 ```
 
-## 未实现 / 未来计划
+## 未来计划
 
-> 以下标记为 ❌ 的内容尚未实现，PR 欢迎
+> 以下暂无实现计划，PR 欢迎
 
-- ❌ SOL / XRP 支持（当前仅 BTC/ETH）
-- ❌ Down token 方向（当前仅 Up）
-- ❌ REST 快照补采
 - ❌ 分析报表工具
 
 ## 数据输出
