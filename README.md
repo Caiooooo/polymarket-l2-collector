@@ -10,7 +10,15 @@
 - ✅ **WebSocket 实时订阅** — Polymarket CLOB WS channel
 - ✅ **Parquet 输出** — 按 `data/{interval}/{coin}/{orderbooks|trades}/{timestamp}{direction}.parquet` 结构
 - ✅ **币安价格同步** — 辅助记录 midprice，供回测对齐
-- ✅ **健康监控 + 自动重启** — 每日 03:00 自动重启，检测卡死/OOM
+- ✅ **健康监控 + 自动重启** — 内存阈值守卫、WS 断线检测、每日定时重启
+- ✅ **原子 Parquet 写入** — 临时文件 + os.replace，避免写坏文件
+- ✅ **窗口元数据追踪** — 每个 Parquet 窗口附带 .meta.json（消息数、时间范围、状态）
+- ✅ **数据质量检查 CLI** — `uv run polymarket-check-quality`
+- ✅ **Docker 部署** — Dockerfile + docker-compose.yml
+- ✅ **CI** — GitHub Actions：ruff + pytest + 导入检查（Python 3.10-3.12）
+- ✅ **结构化日志** — 支持 JSON 格式（LOG_FORMAT=json）
+- ✅ **56 个单元测试** — 覆盖窗口计算、slug 生成、资产解析、消息格式化、Parquet 管道、元数据
+- ✅ **Deprecation warnings** — poly_ws_5min.py / poly_ws_15min.py 指向新 Collector
 
 ## 快速开始
 
@@ -27,8 +35,8 @@ cp .env.example .env
 # 4. 运行采集
 uv run polymarket-l2-collector
 
-# 或后台启动（守护进程模式）
-uv run start_bg.sh
+# 5. （可选）Docker 部署
+docker compose up -d
 ```
 
 ## 项目结构
@@ -40,25 +48,30 @@ polymarket-l2-collector/
 ├── .env.example                # 配置模板
 ├── README.md
 ├── polymarket_l2_collector/    # 主 Python 包
-│   ├── __init__.py
+│   ├── __init__.py / __main__.py
+│   ├── main.py                 # 入口编排（健康监控 + 内存守卫 + 每日重启）
 │   ├── config.py               # 配置加载（.env + 默认值）
-│   ├── collector.py            # 参数化采集核心（替代 poly_ws_5m.py / poly_ws_15m.py）
+│   ├── collector.py            # 参数化采集核心
 │   ├── market_discovery.py     # Gamma API 市场发现
 │   ├── ws_client.py            # WebSocket 连接、订阅、消息接收
 │   ├── data_formatter.py       # 消息格式化（orderbook / trade）
-│   ├── file_cache.py           # Parquet 写入缓存（逐层刷新 + 原子写入）
+│   ├── file_cache.py           # Parquet 写入缓存（原子写入 + 追加刷新）
 │   ├── binance_price.py        # 币安 bookTicker 中间价
-│   ├── asset_utils.py          # Gamma API 资产 ID 查询
-│   ├── get_asset_id.py         # Gamma API HTTP 客户端
-│   ├── logger_config.py        # 日志配置
-│   └── main.py                 # 入口编排
-├── tests/                      # 测试
-│   └── test_collector.py
+│   ├── get_asset_id.py         # Gamma API HTTP 客户端（async + sync）
+│   ├── window_metadata.py      # 窗口质量元数据 + 数据质量扫描
+│   ├── check_quality.py        # 数据质量检查 CLI
+│   └── logger_config.py        # 日志配置（plain / JSON）
+├── tests/                      # 56 个测试
+│   ├── test_collector.py
+│   ├── test_file_cache.py
+│   ├── test_market_discovery.py
+│   ├── test_ws_client.py
+│   ├── test_window_metadata.py
+│   ├── test_check_quality.py
+│   └── test_smoke.py
 ├── data/                       # Parquet 输出目录（自动创建）
-├── daemon.py                   # 独立守护进程
-├── start_bg.sh                 # 后台启动脚本
-├── stop.sh                     # 停止脚本
-└── see.sh                      # 状态查看脚本
+├── Dockerfile + docker-compose.yml
+└── .github/workflows/ci.yml
 ```
 
 ## 未实现 / 未来计划
@@ -68,8 +81,6 @@ polymarket-l2-collector/
 - ❌ SOL / XRP 支持（当前仅 BTC/ETH）
 - ❌ Down token 方向（当前仅 Up）
 - ❌ REST 快照补采
-- ❌ 质量检测脚本（空文件、重复时间戳、异常价差）
-- ❌ Docker Compose / systemd 部署
 - ❌ 分析报表工具
 
 ## 数据输出

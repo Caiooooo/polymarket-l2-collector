@@ -91,7 +91,7 @@ async def _wrap_collector(interval: str, killer: GracefulKiller) -> None:
     except asyncio.CancelledError:
         raise
     except Exception as exc:
-        logger.error("[%s] Collector exited: %s", interval, exc)
+        logger.error("Collector '%s' exited: %s", interval, exc, extra={"interval": interval, "error": str(exc)[:200]})
         raise
 
 
@@ -118,7 +118,12 @@ async def _memory_supervisor(killer: GracefulKiller) -> None:
         rss = _get_rss_mb()
         if rss < settings.memory_soft_limit_mb:
             continue
-        logger.warning("RSS %.0f MB exceeds soft limit %d MB — flushing caches", rss, settings.memory_soft_limit_mb)
+        logger.warning(
+            "RSS %.0f MB above %d MB — flushing",
+            rss,
+            settings.memory_soft_limit_mb,
+            extra={"rss_mb": rss, "soft_limit_mb": settings.memory_soft_limit_mb},
+        )
         try:
             flush_all_caches()
             drop_empty_cache_windows(settings.max_cached_windows)
@@ -128,7 +133,12 @@ async def _memory_supervisor(killer: GracefulKiller) -> None:
         after = _get_rss_mb()
         logger.info("RSS after GC: %.0f MB", after)
         if after >= settings.memory_hard_limit_mb:
-            logger.error("RSS %.0f MB exceeds hard limit %d MB — restarting", after, settings.memory_hard_limit_mb)
+            logger.error(
+                "RSS %.0f MB above %d MB — restarting",
+                after,
+                settings.memory_hard_limit_mb,
+                extra={"rss_mb": after, "hard_limit_mb": settings.memory_hard_limit_mb},
+            )
             return
 
 
@@ -146,11 +156,19 @@ async def _health_supervisor(killer: GracefulKiller, tasks: list[asyncio.Task]) 
                 return
 
         if now - _last_binance_update > settings.binance_stale_seconds:
-            logger.error("Binance stale (%.0f s) — restarting", now - _last_binance_update)
+            logger.error(
+            "Binance stale (%.0f s) — restarting",
+            now - _last_binance_update,
+            extra={"event": "binance_stale", "seconds": now - _last_binance_update},
+        )
             return
 
         if now - _last_activity > settings.poly_ws_stale_seconds:
-            logger.error("System idle (%.0f s) — restarting", now - _last_activity)
+            logger.error(
+                "System idle (%.0f s) — restarting",
+                now - _last_activity,
+                extra={"event": "idle", "seconds": now - _last_activity},
+            )
             return
 
 

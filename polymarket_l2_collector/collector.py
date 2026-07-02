@@ -97,7 +97,12 @@ class Collector:
             if coin_assets:
                 assets[coin] = {self.interval: coin_assets}
             else:
-                logger.warning("[%s] Failed to resolve assets for %s @ %s", self.interval, coin, window_start)
+                logger.warning(
+                    "No assets for %s @ %s",
+                    coin,
+                    window_start,
+                    extra={"coin": coin, "interval": self.interval, "window": window_start},
+                )
         return assets
 
     def _build_asset_to_coin(self, assets: dict[str, dict[str, Any]]) -> dict[str, str]:
@@ -205,14 +210,14 @@ class Collector:
         save_start_ts = current_window_start + self.interval_seconds
         self._saving_enabled = False
         logger.info(
-            "[%s] Startup protection: saving starts at %s",
-            self.interval,
+            "Startup protection: saving starts at %s",
             save_start_ts,
+            extra={"interval": self.interval, "save_start_ts": save_start_ts},
         )
 
         while True:
             try:
-                logger.info("[%s] Connecting …", self.interval)
+                logger.info("Connecting …", extra={"interval": self.interval})
                 (
                     self._current_ws,
                     self._current_asset_to_coin,
@@ -225,10 +230,12 @@ class Collector:
                 next_switch_ts = next_window_start
 
                 logger.info(
-                    "[%s] Next window switch at %s (T-%ds)",
-                    self.interval,
-                    next_switch_ts,
-                    next_switch_ts - int(time.time()),
+                    "Next window switch",
+                    extra={
+                        "interval": self.interval,
+                        "next_window_ts": next_switch_ts,
+                        "seconds_remaining": next_switch_ts - int(time.time()),
+                    },
                 )
 
                 while True:
@@ -236,15 +243,17 @@ class Collector:
 
                     if not self._saving_enabled and now >= save_start_ts:
                         self._saving_enabled = True
-                        logger.info("[%s] Saving enabled", self.interval)
+                        logger.info("Saving enabled", extra={"interval": self.interval})
 
                     # Window boundary → transition
                     if now >= next_switch_ts:
                         if self._next_ws is None:
                             logger.info(
-                                "[%s] Connecting next window at %s",
-                                self.interval,
-                                next_window_start,
+                                "Connecting next window",
+                                extra={
+                                    "interval": self.interval,
+                                    "window_ts": next_window_start,
+                                },
                             )
                             (
                                 self._next_ws,
@@ -271,7 +280,13 @@ class Collector:
                         next_window_start = current_window_start + self.interval_seconds
                         next_switch_ts = next_window_start
                         self._retry_count = 0
-                        logger.info("[%s] Switched to window %s", self.interval, current_window_start)
+                        logger.info(
+                            "Switched window",
+                            extra={
+                                "interval": self.interval,
+                                "window_ts": current_window_start,
+                            },
+                        )
 
                     # Detect unexpected WS closure
                     if self._current_ws is not None:
@@ -283,7 +298,10 @@ class Collector:
                     await asyncio.sleep(0.5)
 
             except Exception as exc:
-                logger.error("[%s] Connection error: %s", self.interval, exc)
+                logger.error(
+                    "Connection error",
+                    extra={"interval": self.interval, "error": str(exc)[:200]},
+                )
                 # Mark current window as failed and record disconnect
                 err_msg = str(exc)[:200]
                 for coin in self.coins:
@@ -301,5 +319,12 @@ class Collector:
 
                 self._retry_count += 1
                 delay = min(5 * self._retry_count, 60)
-                logger.info("[%s] Retrying in %ds (attempt %d)", self.interval, delay, self._retry_count)
+                logger.info(
+                    "Retrying",
+                    extra={
+                        "interval": self.interval,
+                        "delay_seconds": delay,
+                        "attempt": self._retry_count,
+                    },
+                )
                 await asyncio.sleep(delay)
