@@ -3,5 +3,6 @@ from __future__ import annotations
 
 from .dual_ws import DualWsManager
 from .verifier import Bucket, Verdict, Verifier
+from .wallet import WalletService
 
-__all__ = ["Bucket", "Verdict", "Verifier", "DualWsManager"]
+__all__ = ["Bucket", "Verdict", "Verifier", "DualWsManager", "WalletService"]
