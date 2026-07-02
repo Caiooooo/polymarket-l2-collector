@@ -1,4 +1,5 @@
 """Dual-WebSocket wallet module — primary/backup WS with data verification."""
+
 from __future__ import annotations
 
 from .chain_verify import ChainVerifyWorker

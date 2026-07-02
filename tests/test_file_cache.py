@@ -2,8 +2,6 @@
 Unit tests for Parquet optimisation helpers.
 """
 
-
-
 from polymarket_l2_collector.file_cache import (
     _build_file_path,
     _parse_file_path,
@@ -24,9 +22,7 @@ class TestFileCacheKey:
         assert path == "data/15m/eth/trades/1765360800up.parquet"
 
     def test_parse_path(self):
-        interval, coin, data_type, direction, ts = _parse_file_path(
-            "data/5m/btc/orderbooks/1765359900up.parquet"
-        )
+        interval, coin, data_type, direction, ts = _parse_file_path("data/5m/btc/orderbooks/1765359900up.parquet")
         assert interval == "5m"
         assert coin == "btc"
         assert data_type == "orderbooks"
@@ -38,9 +34,7 @@ class TestFileCacheKey:
         assert path == "data/5m/btc/orderbooks/1765359900down.parquet"
 
     def test_parse_path_down_direction(self):
-        interval, coin, data_type, direction, ts = _parse_file_path(
-            "data/5m/btc/orderbooks/1765359900down.parquet"
-        )
+        interval, coin, data_type, direction, ts = _parse_file_path("data/5m/btc/orderbooks/1765359900down.parquet")
         assert interval == "5m"
         assert coin == "btc"
         assert data_type == "orderbooks"
@@ -48,9 +42,7 @@ class TestFileCacheKey:
         assert ts == 1765359900
 
     def test_parse_path_down(self):
-        interval, coin, data_type, direction, ts = _parse_file_path(
-            "data/15m/eth/trades/1765360800down.parquet"
-        )
+        interval, coin, data_type, direction, ts = _parse_file_path("data/15m/eth/trades/1765360800down.parquet")
         assert direction == "down"
         assert ts == 1765360800
 

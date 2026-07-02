@@ -1,16 +1,17 @@
 """Dual WebSocket connection lifecycle manager with health checks and failover."""
+
 from __future__ import annotations
 
 import asyncio
 import time
 from typing import TYPE_CHECKING
 
+from polymarket_l2_collector.logger_config import get_logger
 from polymarket_l2_collector.ws_client import (
     close_ws,
     connect_and_subscribe,
     send_ping_loop,
 )
-from polymarket_l2_collector.logger_config import get_logger
 
 if TYPE_CHECKING:
     import websockets
@@ -35,13 +36,9 @@ class DualWsManager:
         from polymarket_l2_collector.config import load_settings
 
         settings = load_settings()
-        self._primary_timeout = (
-            primary_timeout if primary_timeout is not None else settings.wallet_primary_timeout
-        )
+        self._primary_timeout = primary_timeout if primary_timeout is not None else settings.wallet_primary_timeout
         self._secondary_timeout = (
-            secondary_timeout
-            if secondary_timeout is not None
-            else settings.wallet_secondary_timeout
+            secondary_timeout if secondary_timeout is not None else settings.wallet_secondary_timeout
         )
 
         self._ws: dict[str, websockets.WebSocketClientProtocol | None] = {
@@ -115,20 +112,14 @@ class DualWsManager:
         now = time.time()
 
         # Check primary
-        if (
-            self._ws["primary"] is not None
-            and now - self._last_msg_time["primary"] > self._primary_timeout
-        ):
+        if self._ws["primary"] is not None and now - self._last_msg_time["primary"] > self._primary_timeout:
             logger.warning("DualWsManager: primary stale, switching to secondary")
             self.switch()
             switched_to = self._active
             await self._reconnect_one("primary", self._asset_ids)
 
         # Check secondary
-        if (
-            self._ws["secondary"] is not None
-            and now - self._last_msg_time["secondary"] > self._secondary_timeout
-        ):
+        if self._ws["secondary"] is not None and now - self._last_msg_time["secondary"] > self._secondary_timeout:
             logger.warning("DualWsManager: secondary stale, reconnecting")
             await self._reconnect_one("secondary", self._asset_ids)
 

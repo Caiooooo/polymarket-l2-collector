@@ -24,6 +24,7 @@ class TestWindowMeta:
 
     def _clear_meta(self):
         from polymarket_l2_collector import window_metadata
+
         window_metadata._metadata.clear()
 
     def setup_method(self):
@@ -88,6 +89,7 @@ class TestMetadataWrite:
 
     def _clear_meta(self):
         from polymarket_l2_collector import window_metadata
+
         window_metadata._metadata.clear()
 
     def setup_method(self):
@@ -139,6 +141,7 @@ class TestDataQualityScan:
 
     def _clear_meta(self):
         from polymarket_l2_collector import window_metadata
+
         window_metadata._metadata.clear()
 
     def setup_method(self):
@@ -155,6 +158,7 @@ class TestDataQualityScan:
         pp = self.tmpdir / "5m" / "btc" / "orderbooks"
         pp.mkdir(parents=True)
         import pandas as pd
+
         df = pd.DataFrame()
         parq_path = str(pp / "1765359900up.parquet")
         df.to_parquet(parq_path, engine="pyarrow")

@@ -123,9 +123,7 @@ async def test_fetch_snapshot_mocked():
     assert isinstance(result["timestamp"], int)
     assert result["timestamp"] > 0
 
-    mock_session.get.assert_called_once_with(
-        "https://clob.polymarket.com/orderbook?asset_id=test_asset_123"
-    )
+    mock_session.get.assert_called_once_with("https://clob.polymarket.com/orderbook?asset_id=test_asset_123")
 
 
 @pytest.mark.asyncio
@@ -165,9 +163,7 @@ class TestBackfillGapsDryRun:
     @pytest.fixture(autouse=True)
     def _setup_environment(self):
         """Patch load_settings to return a deterministic config."""
-        patcher_settings = patch(
-            "polymarket_l2_collector.rest_snapshot.load_settings"
-        )
+        patcher_settings = patch("polymarket_l2_collector.rest_snapshot.load_settings")
         mock_load = patcher_settings.start()
         mock_settings = MagicMock()
         mock_settings.interval_seconds.return_value = 300
@@ -293,9 +289,11 @@ class TestBackfillGapsDryRun:
             target_path = str(pdir / "1300up.parquet")
 
             import os as _real_os
+
             _real_exists = _real_os.path.exists
 
             with patch("polymarket_l2_collector.rest_snapshot.os.path.exists") as mock_exists:
+
                 def _exists(path_):
                     if path_ == target_path:
                         return True

@@ -14,9 +14,7 @@ class TestBinanceSymbols:
     def test_symbols_list_includes_all(self):
         """Verify SYMBOLS has all 4 coins."""
         expected = {"btcusdt", "ethusdt", "solusdt", "xrpusdt"}
-        assert set(SYMBOLS) == expected, (
-            f"SYMBOLS should be {expected}, got {set(SYMBOLS)}"
-        )
+        assert set(SYMBOLS) == expected, f"SYMBOLS should be {expected}, got {set(SYMBOLS)}"
 
 
 class TestCurrentPricesStructure:

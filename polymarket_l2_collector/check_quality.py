@@ -41,9 +41,9 @@ def main() -> None:
         print(f"\n✅ No quality issues found in {args.data_dir}")
         sys.exit(0)
 
-    print(f"\n{'='*60}")
+    print(f"\n{'=' * 60}")
     print(f"Data Quality Report — {args.data_dir}")
-    print(f"{'='*60}")
+    print(f"{'=' * 60}")
 
     if report["empty_files"]:
         print(f"\n❌ Empty Parquet files ({len(report['empty_files'])}):")
@@ -79,7 +79,7 @@ def main() -> None:
         for g in report["gap_windows"]:
             print(f"   - {g}")
 
-    print(f"\n{'='*60}")
+    print(f"\n{'=' * 60}")
     print(f"Total issues: {total_issues}")
     sys.exit(1 if total_issues > 0 else 0)
 

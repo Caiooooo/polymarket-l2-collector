@@ -34,10 +34,13 @@ def test_check_quality_healthy_file():
 
         # Create companion meta
         meta = {
-            "interval": "5m", "coin": "btc",
-            "data_type": "orderbooks", "direction": "up",
+            "interval": "5m",
+            "coin": "btc",
+            "data_type": "orderbooks",
+            "direction": "up",
             "window_ts": 1765359900,
-            "message_count": 3, "status": "complete",
+            "message_count": 3,
+            "status": "complete",
         }
         mp = pdir / "1765359900up.meta.json"
         mp.write_text(json.dumps(meta))
@@ -158,9 +161,16 @@ def test_check_quality_failed_window():
         pd.DataFrame({"a": [1]}).to_parquet(str(pp))
 
         # Meta with failed status
-        meta = {"interval": "5m", "status": "failed", "error": "WS disconnect",
-                "message_count": 5, "window_ts": 1765359900,
-                "coin": "btc", "data_type": "orderbooks", "direction": "up"}
+        meta = {
+            "interval": "5m",
+            "status": "failed",
+            "error": "WS disconnect",
+            "message_count": 5,
+            "window_ts": 1765359900,
+            "coin": "btc",
+            "data_type": "orderbooks",
+            "direction": "up",
+        }
         mp = pdir / "1765359900up.meta.json"
         mp.write_text(json.dumps(meta))
 

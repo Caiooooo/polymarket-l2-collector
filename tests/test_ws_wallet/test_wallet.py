@@ -1,4 +1,5 @@
 """Tests for WalletService facade. (Config test also in this file.)"""
+
 from __future__ import annotations
 
 import asyncio
@@ -6,11 +7,9 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from polymarket_l2_collector.ws_wallet import WalletService
-
 # ── Config defaults (from Task 1) ─────────────────────────────
-
 from polymarket_l2_collector.config import load_settings
+from polymarket_l2_collector.ws_wallet import WalletService
 
 
 def test_wallet_config_defaults():
@@ -28,10 +27,10 @@ def test_wallet_config_defaults():
 @pytest.mark.asyncio
 async def test_subscribe_calls_dual_connect():
     with (
-        patch("polymarket_l2_collector.ws_wallet.wallet.DualWsManager", autospec=True) as MockMgr,
+        patch("polymarket_l2_collector.ws_wallet.wallet.DualWsManager", autospec=True) as mock_mgr,
         patch("polymarket_l2_collector.ws_wallet.wallet.Verifier", autospec=True),
     ):
-        mgr_instance = MockMgr.return_value
+        mgr_instance = mock_mgr.return_value
         mgr_instance.connect = AsyncMock()
         mgr_instance.ws = MagicMock(return_value=AsyncMock())
 
@@ -69,10 +68,10 @@ async def test_recv_returns_from_queue():
 @pytest.mark.asyncio
 async def test_close_cleans_up():
     with (
-        patch("polymarket_l2_collector.ws_wallet.wallet.DualWsManager", autospec=True) as MockMgr,
+        patch("polymarket_l2_collector.ws_wallet.wallet.DualWsManager", autospec=True) as mock_mgr,
         patch("polymarket_l2_collector.ws_wallet.wallet.Verifier", autospec=True),
     ):
-        mgr_instance = MockMgr.return_value
+        mgr_instance = mock_mgr.return_value
         mgr_instance.close = AsyncMock()
 
         wallet = WalletService()
@@ -98,10 +97,10 @@ async def test_close_cleans_up():
 @pytest.mark.asyncio
 async def test_active_ws_tag_reflects_manager():
     with (
-        patch("polymarket_l2_collector.ws_wallet.wallet.DualWsManager", autospec=True) as MockMgr,
+        patch("polymarket_l2_collector.ws_wallet.wallet.DualWsManager", autospec=True) as mock_mgr,
         patch("polymarket_l2_collector.ws_wallet.wallet.Verifier", autospec=True),
     ):
-        mgr_instance = MockMgr.return_value
+        mgr_instance = mock_mgr.return_value
         mgr_instance.active_tag = "secondary"
 
         wallet = WalletService()

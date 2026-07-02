@@ -1,4 +1,5 @@
 """RingBuffer real-time data verification engine."""
+
 from __future__ import annotations
 
 import time
@@ -102,11 +103,7 @@ class Verifier:
     def tick(self) -> Verdict | None:
         """Check aged buckets and return the worst Verdict, or None if all are ok."""
         now_sec = int(time.time())
-        ready = sorted(
-            ts
-            for ts, b in self._buckets.items()
-            if ts < now_sec - 2 and b.primary and b.secondary
-        )
+        ready = sorted(ts for ts, b in self._buckets.items() if ts < now_sec - 2 and b.primary and b.secondary)
 
         worst: Verdict | None = None
         for ts in ready:

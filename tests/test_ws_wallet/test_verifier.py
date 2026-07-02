@@ -1,9 +1,10 @@
 """Tests for Verifier, Bucket, and Verdict."""
+
 from __future__ import annotations
 
 import time
 
-from polymarket_l2_collector.ws_wallet.verifier import Bucket, Verdict, Verifier
+from polymarket_l2_collector.ws_wallet.verifier import Bucket, Verifier
 
 
 def _book_msg(bids=None, asks=None, ts_ms=None):

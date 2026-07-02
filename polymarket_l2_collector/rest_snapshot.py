@@ -142,9 +142,7 @@ async def _backfill_single_window(
     """
     assets = await resolve_assets(coin, interval, target_timestamp=window_ts, session=session)
     if not assets or direction not in assets:
-        raise ValueError(
-            f"No asset ID found for {coin}/{interval}/{direction} @ {window_ts}"
-        )
+        raise ValueError(f"No asset ID found for {coin}/{interval}/{direction} @ {window_ts}")
 
     asset_id = assets[direction]
     snapshot = await fetch_snapshot(asset_id, session=session)
@@ -217,9 +215,7 @@ async def backfill_gaps(
     completion_buffer = 2 * interval_seconds
 
     for gap in matched_gaps:
-        missing = _missing_timestamps(
-            gap["start_ts"], gap["end_ts"], gap["expected_seconds"]
-        )
+        missing = _missing_timestamps(gap["start_ts"], gap["end_ts"], gap["expected_seconds"])
 
         for window_ts in missing:
             window_end = window_ts + interval_seconds
@@ -285,12 +281,8 @@ async def backfill_gaps(
                 continue
 
             try:
-                async with aiohttp.ClientSession(
-                    timeout=aiohttp.ClientTimeout(total=15)
-                ) as session:
-                    await _backfill_single_window(
-                        data_dir, interval, coin, direction, window_ts, session
-                    )
+                async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=15)) as session:
+                    await _backfill_single_window(data_dir, interval, coin, direction, window_ts, session)
                 result = {
                     "interval": interval,
                     "coin": coin,
@@ -353,9 +345,7 @@ async def backfill_all_gaps(
         for coin in settings.coins:
             for direction in settings.directions:
                 key = f"{interval}/{coin}/{direction}"
-                gaps = await backfill_gaps(
-                    data_dir, interval, coin, direction, dry_run=dry_run
-                )
+                gaps = await backfill_gaps(data_dir, interval, coin, direction, dry_run=dry_run)
                 if gaps:
                     all_results[key] = gaps
 
@@ -367,9 +357,7 @@ async def backfill_all_gaps(
 
 def main() -> None:
     """CLI entry point (``polymarket-backfill`` command)."""
-    parser = argparse.ArgumentParser(
-        description="Backfill Polymarket L2 data gaps from REST API"
-    )
+    parser = argparse.ArgumentParser(description="Backfill Polymarket L2 data gaps from REST API")
     parser.add_argument(
         "--data-dir",
         default="data",

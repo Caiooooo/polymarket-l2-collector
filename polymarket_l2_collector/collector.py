@@ -86,9 +86,7 @@ class Collector:
 
     # ── Asset resolution ───────────────────────────────────────────
 
-    async def _resolve_assets_for_window(
-        self, window_start: int
-    ) -> dict[str, dict[str, Any]]:
+    async def _resolve_assets_for_window(self, window_start: int) -> dict[str, dict[str, Any]]:
         """Fetch asset IDs for every configured coin at *window_start*.
 
         Returns the nested dict expected by ``build_asset_id_list``.
@@ -181,9 +179,7 @@ class Collector:
         except asyncio.CancelledError:
             pass
 
-    async def _start_ws(
-        self, window_open_ts: int
-    ) -> tuple:
+    async def _start_ws(self, window_open_ts: int) -> tuple:
         """Connect and subscribe for *window_open_ts*.
 
         Returns ``(websocket, asset_to_coin, [recv_task, ping_task])``.

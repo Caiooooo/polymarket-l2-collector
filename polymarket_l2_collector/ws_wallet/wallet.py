@@ -3,6 +3,7 @@
 WalletService owns DualWsManager (connections) + Verifier (comparison)
 and runs background reader/verify loops.
 """
+
 from __future__ import annotations
 
 import asyncio

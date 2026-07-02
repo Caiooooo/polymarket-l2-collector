@@ -22,9 +22,18 @@ logger = get_logger("market_discovery")
 
 # Month name lookup (lowercase) for 1h URL generation
 _MONTH_NAMES = {
-    1: "january", 2: "february", 3: "march", 4: "april",
-    5: "may", 6: "june", 7: "july", 8: "august",
-    9: "september", 10: "october", 11: "november", 12: "december",
+    1: "january",
+    2: "february",
+    3: "march",
+    4: "april",
+    5: "may",
+    6: "june",
+    7: "july",
+    8: "august",
+    9: "september",
+    10: "october",
+    11: "november",
+    12: "december",
 }
 _COIN_NAMES = {"btc": "bitcoin", "eth": "ethereum", "sol": "solana", "xrp": "xrp"}
 

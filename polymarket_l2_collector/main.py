@@ -158,10 +158,10 @@ async def _health_supervisor(killer: GracefulKiller, tasks: list[asyncio.Task]) 
 
         if now - _last_binance_update > settings.binance_stale_seconds:
             logger.error(
-            "Binance stale (%.0f s) — restarting",
-            now - _last_binance_update,
-            extra={"event": "binance_stale", "seconds": now - _last_binance_update},
-        )
+                "Binance stale (%.0f s) — restarting",
+                now - _last_binance_update,
+                extra={"event": "binance_stale", "seconds": now - _last_binance_update},
+            )
             return
 
         if now - _last_activity > settings.poly_ws_stale_seconds:
@@ -215,12 +215,7 @@ async def _run_session(killer: GracefulKiller) -> None:
         asyncio.create_task(_wrap_binance(killer), name="binance"),
     ]
     for interval in settings.intervals:
-        tasks.append(
-            asyncio.create_task(
-                _wrap_collector(interval, killer, wallet=wallet),
-                name=f"poly_{interval}"
-            )
-        )
+        tasks.append(asyncio.create_task(_wrap_collector(interval, killer, wallet=wallet), name=f"poly_{interval}"))
 
     supervisors = [
         asyncio.create_task(_health_supervisor(killer, tasks), name="supervisor"),

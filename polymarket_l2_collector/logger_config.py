@@ -67,9 +67,7 @@ def get_logger(name: str, level: int = logging.INFO) -> logging.Logger:
     handler.setLevel(level)
 
     if _LOG_FORMAT == "json":
-        handler.setFormatter(
-            _JsonFormatter("%(asctime)s | %(name)s | %(levelname)s | %(message)s")
-        )
+        handler.setFormatter(_JsonFormatter("%(asctime)s | %(name)s | %(levelname)s | %(message)s"))
     else:
         handler.setFormatter(
             logging.Formatter(
