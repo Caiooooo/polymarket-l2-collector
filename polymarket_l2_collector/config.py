@@ -53,6 +53,15 @@ class Settings:
     restart_hour: int = int(os.getenv("RESTART_HOUR", "3"))
     restart_minute: int = int(os.getenv("RESTART_MINUTE", "0"))
 
+    # ── Wallet / Dual-WS ──────────────────────────────────────────
+    wallet_primary_timeout: int = int(os.getenv("WALLET_PRIMARY_TIMEOUT", "60"))
+    wallet_secondary_timeout: int = int(os.getenv("WALLET_SECONDARY_TIMEOUT", "120"))
+    wallet_verify_interval: float = float(os.getenv("WALLET_VERIFY_INTERVAL", "1.0"))
+    wallet_switch_on_divergence: float = float(os.getenv("WALLET_SWITCH_ON_DIVERGENCE", "50.0"))
+
+    # ── Chain verify ──────────────────────────────────────────────
+    chain_verify_enabled: bool = os.getenv("CHAIN_VERIFY_ENABLED", "false").lower() in ("1", "true", "yes")
+
     # ── Derived helpers ────────────────────────────────────────────
     @property
     def data_path(self) -> Path:
