@@ -74,6 +74,11 @@ def main() -> None:
         for f in report["duplicate_ts"][:10]:
             print(f"   - {f}")
 
+    if report["gap_windows"]:
+        print(f"\n⚠️  Window sequence gaps ({len(report['gap_windows'])}):")
+        for g in report["gap_windows"]:
+            print(f"   - {g}")
+
     print(f"\n{'='*60}")
     print(f"Total issues: {total_issues}")
     sys.exit(1 if total_issues > 0 else 0)

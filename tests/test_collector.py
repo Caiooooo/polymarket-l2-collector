@@ -1,9 +1,22 @@
 """
-Unit tests for time-window computation logic.
+Unit tests for time-window computation logic, shutdown flush behavior,
+and Collector parameterised initialisation.
 """
 
+import tempfile
+from pathlib import Path
 
+import pandas as pd
+
+from polymarket_l2_collector.collector import Collector
 from polymarket_l2_collector.config import load_settings
+from polymarket_l2_collector.data_formatter import format_orderbook, format_trade
+from polymarket_l2_collector.file_cache import (
+    _build_file_path,
+    flush_all_caches,
+    save_book,
+    save_trades,
+)
 
 
 class TestWindowCalculation:
@@ -69,3 +82,99 @@ class TestTimestampNormalisation:
         """Timestamp < 1e12 is already seconds."""
         sec_ts = 1765359900
         assert sec_ts < 1_000_000_000_000
+
+
+class TestCollectorShutdown:
+    """Verify that cached data is flushed to disk on shutdown (via file_cache)."""
+
+    def setup_method(self):
+        self.tmpdir = tempfile.mkdtemp()
+        self.asset_to_coin = {"111": "BTC_up_5m"}
+
+    def _book_path(self, interval, coin, window_ts, direction="up"):
+        return _build_file_path(self.tmpdir, interval, coin, "orderbooks", window_ts, direction)
+
+    def _trade_path(self, interval, coin, window_ts, direction="up"):
+        return _build_file_path(self.tmpdir, interval, coin, "trades", window_ts, direction)
+
+    def test_flush_on_cancel(self):
+        """Save rows, flush caches, verify parquet file exists with correct row count.
+
+        This simulates what happens when a Collector is cancelled and
+        ``flush_all_caches()`` is called in the shutdown path of
+        ``_run_session()`` / ``GracefulKiller``.
+        """
+        window_ts = 1765359900
+
+        # -- Save a few orderbook rows --
+        raw_books = [
+            {
+                "asset_id": "111",
+                "event_type": "book",
+                "bids": [{"price": "0.48", "size": "30.0"}],
+                "asks": [{"price": "0.52", "size": "25.0"}],
+                "timestamp": "1765359900123",
+            },
+            {
+                "asset_id": "111",
+                "event_type": "book",
+                "bids": [{"price": "0.49", "size": "20.0"}],
+                "asks": [{"price": "0.53", "size": "15.0"}],
+                "timestamp": "1765359901123",
+            },
+        ]
+        book_rows = format_orderbook(raw_books, self.asset_to_coin, window_open_ts=window_ts)
+        assert len(book_rows) == 2
+
+        book_fp = self._book_path("5m", "btc", window_ts)
+        save_book(book_rows, book_fp)
+
+        # -- Save a trade row --
+        raw_trades = [
+            {
+                "asset_id": "111",
+                "event_type": "last_trade_price",
+                "price": "0.50",
+                "size": "100.0",
+                "side": "BUY",
+                "timestamp": "1765359902123",
+            }
+        ]
+        trade_rows = format_trade(raw_trades, self.asset_to_coin, window_open_ts=window_ts)
+        assert len(trade_rows) == 1
+
+        trade_fp = self._trade_path("5m", "btc", window_ts)
+        save_trades(trade_rows, trade_fp)
+
+        # -- Simulate shutdown flush --
+        flushed = flush_all_caches()
+        assert flushed >= 2  # at least the 2 book + 1 trade rows
+
+        # -- Verify book parquet --
+        assert Path(book_fp).exists(), f"Book parquet not found: {book_fp}"
+        book_df = pd.read_parquet(book_fp)
+        assert len(book_df) == 2, f"Expected 2 book rows, got {len(book_df)}"
+
+        # -- Verify trade parquet --
+        assert Path(trade_fp).exists(), f"Trade parquet not found: {trade_fp}"
+        trade_df = pd.read_parquet(trade_fp)
+        assert len(trade_df) == 1, f"Expected 1 trade row, got {len(trade_df)}"
+
+
+class TestCollectorConfigDriven:
+    """Collector accepts per-instance configuration parameters."""
+
+    def test_collector_init_with_directions(self):
+        """Collector accepts a single-element directions list."""
+        c = Collector(interval="5m", coins=["btc"], directions=["up"])
+        assert c.interval == "5m"
+        assert c.coins == ["btc"]
+        assert c.directions == ["up"]
+
+    def test_collector_init_with_multiple_directions(self):
+        """Collector can be initialised with ["up", "down"]."""
+        c = Collector(interval="15m", coins=["btc", "eth"], directions=["up", "down"])
+        assert c.interval == "15m"
+        assert c.coins == ["btc", "eth"]
+        assert c.directions == ["up", "down"]
+        assert len(c.directions) == 2

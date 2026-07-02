@@ -28,6 +28,7 @@ class TestOrderbookPipeline:
         self.asset_to_coin = {
             "111": "BTC_up_5m",
             "222": "ETH_up_5m",
+            "333": "BTC_down_5m",
         }
 
     def _path(self, interval, coin, window_ts, direction="up"):
@@ -59,6 +60,31 @@ class TestOrderbookPipeline:
         restored = restore_from_parquet(df.to_dict("records"))
         assert restored[0]["bids"][0]["price"] == 0.48
 
+    def test_format_and_save_book_down(self):
+        """Down-direction book pipeline: save + flush + read-back."""
+        raw = [
+            {
+                "asset_id": "333",
+                "event_type": "book",
+                "bids": [{"price": "0.45", "size": "10.0"}],
+                "asks": [{"price": "0.55", "size": "20.0"}],
+                "timestamp": "1765359900123",
+            }
+        ]
+        rows = format_orderbook(raw, self.asset_to_coin, window_open_ts=1765359900)
+        assert len(rows) == 1
+
+        fp = self._path("5m", "btc", 1765359900, direction="down")
+        save_book(rows, fp)
+        flush_all_caches()
+
+        assert Path(fp).exists()
+        df = pd.read_parquet(fp)
+        assert len(df) == 1
+        restored = restore_from_parquet(df.to_dict("records"))
+        assert restored[0]["bids"][0]["price"] == 0.45
+        assert restored[0]["bids"][0]["size"] == 10.0
+
 
 class TestTradePipeline:
     """Format → save → flush → read-back pipeline for trade data."""
@@ -67,6 +93,7 @@ class TestTradePipeline:
         self.tmpdir = tempfile.mkdtemp()
         self.asset_to_coin = {
             "111": "BTC_up_5m",
+            "333": "BTC_down_5m",
         }
 
     def _path(self, interval, coin, window_ts, direction="up"):
@@ -98,6 +125,34 @@ class TestTradePipeline:
         assert restored[0]["price"] == 0.50
         assert restored[0]["size"] == 100.0
         assert restored[0]["side"] == "buy"
+
+    def test_format_and_save_trade_down(self):
+        """Down-direction trade pipeline: save + flush + read-back."""
+        raw = [
+            {
+                "asset_id": "333",
+                "event_type": "last_trade_price",
+                "price": "0.55",
+                "size": "50.0",
+                "side": "SELL",
+                "timestamp": "1765359901123",
+            }
+        ]
+        rows = format_trade(raw, self.asset_to_coin, window_open_ts=1765359900)
+        assert len(rows) == 1
+        assert rows[0]["side"] == "sell"
+
+        fp = self._path("5m", "btc", 1765359900, direction="down")
+        save_trades(rows, fp)
+        flush_all_caches()
+
+        assert Path(fp).exists()
+        df = pd.read_parquet(fp)
+        assert len(df) == 1
+        restored = restore_from_parquet(df.to_dict("records"))
+        assert restored[0]["price"] == 0.55
+        assert restored[0]["size"] == 50.0
+        assert restored[0]["side"] == "sell"
 
 
 class TestAppendPipeline:

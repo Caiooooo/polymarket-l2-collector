@@ -76,6 +76,73 @@ def test_check_quality_missing_meta():
         assert any("1765359900up.parquet" in f for f in report["missing_meta"])
 
 
+def test_check_quality_gap_detected():
+    """Three consecutive windows with one missing should flag a gap."""
+    import json
+
+    import pandas as pd
+
+    with tempfile.TemporaryDirectory() as td:
+        pdir = Path(td) / "5m" / "btc" / "orderbooks"
+        pdir.mkdir(parents=True)
+
+        # Create windows at ts=1000, ts=1600, ts=1900
+        # Expected step = 300s (5m); tolerance = 60s
+        # 1600 - 1000 = 600 > 360 -> flags gap (1 missing window)
+        # 1900 - 1600 = 300 <= 360 -> no gap
+        timestamps = [1000, 1600, 1900]
+        for ts in timestamps:
+            pp = pdir / f"{ts}up.parquet"
+            pd.DataFrame({"a": [1]}).to_parquet(str(pp))
+            meta = {
+                "interval": "5m",
+                "coin": "btc",
+                "data_type": "orderbooks",
+                "direction": "up",
+                "window_ts": ts,
+                "message_count": 1,
+                "status": "complete",
+            }
+            mp = pdir / f"{ts}up.meta.json"
+            mp.write_text(json.dumps(meta))
+
+        report = scan_data_quality(td)
+        assert len(report["gap_windows"]) == 1
+        gap_msg = report["gap_windows"][0]
+        assert "1000" in gap_msg
+        assert "1600" in gap_msg
+
+
+def test_check_quality_no_gap():
+    """Two consecutive windows with no gap should not flag."""
+    import json
+
+    import pandas as pd
+
+    with tempfile.TemporaryDirectory() as td:
+        pdir = Path(td) / "5m" / "btc" / "orderbooks"
+        pdir.mkdir(parents=True)
+
+        timestamps = [1000, 1300]
+        for ts in timestamps:
+            pp = pdir / f"{ts}up.parquet"
+            pd.DataFrame({"a": [1]}).to_parquet(str(pp))
+            meta = {
+                "interval": "5m",
+                "coin": "btc",
+                "data_type": "orderbooks",
+                "direction": "up",
+                "window_ts": ts,
+                "message_count": 1,
+                "status": "complete",
+            }
+            mp = pdir / f"{ts}up.meta.json"
+            mp.write_text(json.dumps(meta))
+
+        report = scan_data_quality(td)
+        assert report["gap_windows"] == []
+
+
 def test_check_quality_failed_window():
     """A .meta.json with status 'failed' should be flagged."""
     import json

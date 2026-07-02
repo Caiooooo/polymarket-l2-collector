@@ -215,6 +215,7 @@ def scan_data_quality(data_dir: str = "data") -> dict[str, Any]:
         "zero_message_meta": [],
         "failed_windows": [],
         "duplicate_ts": [],
+        "gap_windows": [],
     }
 
     parquet_files = glob.glob(f"{data_dir}/**/*.parquet", recursive=True)
@@ -256,5 +257,54 @@ def scan_data_quality(data_dir: str = "data") -> dict[str, Any]:
             if key in seen_ts:
                 report["duplicate_ts"].append(pf)
             seen_ts[key] = seen_ts.get(key, []) + [pf]
+
+    # ── Gap detection ──────────────────────────────────────────────
+    interval_seconds_map = {"5m": 300, "15m": 900, "1h": 3600}
+    tolerance = 60  # seconds
+    gap_windows: list[str] = []
+
+    # Collect file info: (interval, coin, data_type, direction, window_ts)
+    file_info: list[tuple[str, str, str, str, int]] = []
+    for pf in parquet_files:
+        parts = pf.replace(".parquet", "").split("/")
+        if len(parts) < 4:
+            continue
+        interval_g = parts[-4]
+        coin_g = parts[-3]
+        data_type_g = parts[-2]
+        fname = parts[-1]
+        direction_g = "up" if "up" in fname else "down"
+        ts_str_g = fname.replace("up", "").replace("down", "")
+        if not ts_str_g.isdigit():
+            continue
+        file_info.append((interval_g, coin_g, data_type_g, direction_g, int(ts_str_g)))
+
+    # Group by (interval, coin, data_type, direction)
+    from collections import defaultdict
+
+    groups: dict[tuple[str, str, str, str], list[int]] = defaultdict(list)
+    for interval_g, coin_g, data_type_g, direction_g, ts_g in file_info:
+        groups[(interval_g, coin_g, data_type_g, direction_g)].append(ts_g)
+
+    # Detect gaps in each group
+    for (interval_g, coin_g, data_type_g, direction_g), timestamps in groups.items():
+        expected_interval = interval_seconds_map.get(interval_g)
+        if expected_interval is None:
+            continue
+        timestamps.sort()
+        for i in range(len(timestamps) - 1):
+            delta = timestamps[i + 1] - timestamps[i]
+            if delta > expected_interval + tolerance:
+                missed_windows = (delta // expected_interval) - 1
+                gap_desc = (
+                    f"interval={interval_g} coin={coin_g} type={data_type_g} "
+                    f"direction={direction_g}: gap between {timestamps[i]} "
+                    f"and {timestamps[i + 1]} "
+                    f"(delta={delta}s, expected≈{expected_interval}s, "
+                    f"tolerance={tolerance}s, ~{missed_windows} window(s) missing)"
+                )
+                gap_windows.append(gap_desc)
+
+    report["gap_windows"] = gap_windows
 
     return report

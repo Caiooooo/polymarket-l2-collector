@@ -53,6 +53,18 @@ class TestAssetParsing:
         result = parse_assets_from_markets(markets)
         assert result == {"up": "111"}
 
+    def test_parse_both_up_down(self):
+        """Verify both 'up' and 'down' directions are extracted correctly."""
+        markets = [
+            {
+                "question": "BTC > $50k?",
+                "clobTokenIds": ["aaa", "bbb"],
+                "outcomes": ["Up", "Down"],
+            }
+        ]
+        result = parse_assets_from_markets(markets)
+        assert result == {"up": "aaa", "down": "bbb"}
+
     def test_parse_empty_response(self):
         assert parse_assets_from_markets([]) == {}
 

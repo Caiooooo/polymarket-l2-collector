@@ -33,6 +33,20 @@ class TestFileCacheKey:
         assert direction == "up"
         assert ts == 1765359900
 
+    def test_build_path_down_direction(self):
+        path = _build_file_path("data", "5m", "btc", "orderbooks", 1765359900, "down")
+        assert path == "data/5m/btc/orderbooks/1765359900down.parquet"
+
+    def test_parse_path_down_direction(self):
+        interval, coin, data_type, direction, ts = _parse_file_path(
+            "data/5m/btc/orderbooks/1765359900down.parquet"
+        )
+        assert interval == "5m"
+        assert coin == "btc"
+        assert data_type == "orderbooks"
+        assert direction == "down"
+        assert ts == 1765359900
+
     def test_parse_path_down(self):
         interval, coin, data_type, direction, ts = _parse_file_path(
             "data/15m/eth/trades/1765360800down.parquet"
