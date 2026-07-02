@@ -29,6 +29,7 @@ dev = [
 [project.scripts]
 polymarket-l2-collector = "polymarket_l2_collector.main:main"
 polymarket-check-quality = "polymarket_l2_collector.check_quality:main"
+polymarket-backfill = "polymarket_l2_collector.rest_snapshot:main"
 
 [build-system]
 requires = ["hatchling"]
@@ -59,3 +60,8 @@ pythonVersion = "3.10"
 strict = ["polymarket_l2_collector"]
 reportMissingImports = "warning"
 reportMissingTypeStubs = "none"
+
+[dependency-groups]
+dev = [
+    "pytest-asyncio>=0.24.0",
+]

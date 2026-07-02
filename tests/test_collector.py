@@ -178,3 +178,20 @@ class TestCollectorConfigDriven:
         assert c.coins == ["btc", "eth"]
         assert c.directions == ["up", "down"]
         assert len(c.directions) == 2
+
+    def test_collector_sol_eth_coins(self):
+        """Collector init with coins=["sol", "xrp"]."""
+        c = Collector(interval="5m", coins=["sol", "xrp"])
+        assert c.coins == ["sol", "xrp"]
+        assert c.interval == "5m"
+
+    def test_collector_all_directions_and_coins(self):
+        """Collector with multiple coins and both directions."""
+        c = Collector(
+            interval="15m",
+            coins=["btc", "eth", "sol", "xrp"],
+            directions=["up", "down"],
+        )
+        assert c.coins == ["btc", "eth", "sol", "xrp"]
+        assert c.directions == ["up", "down"]
+        assert c.interval == "15m"

@@ -1,5 +1,5 @@
 """
-Binance bookTicker WebSocket — midprice for BTC/ETH.
+Binance bookTicker WebSocket — midprice for BTC/ETH/SOL/XRP.
 
 Provides ``current_prices`` dict (symbol → {bid, ask, mid, spread, time})
 and the ``subscribe_book_ticker()`` coroutine.
@@ -20,7 +20,7 @@ from .logger_config import get_logger
 logger = get_logger("binance")
 
 BINANCE_WS_URL = "wss://stream.binance.com:9443/stream"
-SYMBOLS = ["btcusdt", "ethusdt"]
+SYMBOLS = ["btcusdt", "ethusdt", "solusdt", "xrpusdt"]
 PING_INTERVAL = 20
 PING_TIMEOUT = 10
 MAX_SIZE = 2**19  # 512 KB
