@@ -61,6 +61,7 @@ class Collector:
         directions: list[str] | None = None,
         data_dir: str | None = None,
         touch_activity: Callable[[], None] | None = None,
+        wallet: Any | None = None,
     ) -> None:
         settings = load_settings()
         self.interval = interval
@@ -69,6 +70,7 @@ class Collector:
         self.directions = directions or settings.directions
         self.data_dir = data_dir or settings.data_dir
         self._touch_activity = touch_activity
+        self._wallet = wallet
 
         # WS lifecycle state
         self._current_ws: Any = None
@@ -172,21 +174,44 @@ class Collector:
 
     # ── Connection lifecycle ───────────────────────────────────────
 
+    async def _wallet_noop_ping(self) -> None:
+        """No-op ping loop for wallet mode (ping handled by WalletService)."""
+        try:
+            await asyncio.Event().wait()
+        except asyncio.CancelledError:
+            pass
+
     async def _start_ws(
         self, window_open_ts: int
     ) -> tuple:
         """Connect and subscribe for *window_open_ts*.
 
         Returns ``(websocket, asset_to_coin, [recv_task, ping_task])``.
+        When *wallet* is set, *websocket* is ``None`` (wallet manages
+        connections internally).
         """
         assets = await self._resolve_assets_for_window(window_open_ts)
         asset_to_coin = self._build_asset_to_coin(assets)
         asset_ids = build_asset_id_list(assets, self.directions)
 
-        ws = await connect_and_subscribe(asset_ids)
-
         on_book = self._make_save_book(asset_to_coin, window_open_ts)
         on_trade = self._make_save_trade(asset_to_coin, window_open_ts)
+
+        if self._wallet is not None:
+            await self._wallet.subscribe(asset_ids)
+            recv_task = asyncio.create_task(
+                receive_loop(
+                    recv_fn=self._wallet.recv,
+                    on_book=on_book,
+                    on_trade=on_trade,
+                    should_save=self._should_save,
+                    touch_activity=self._touch_activity,
+                )
+            )
+            ping_task = asyncio.create_task(self._wallet_noop_ping())
+            return None, asset_to_coin, [recv_task, ping_task]
+
+        ws = await connect_and_subscribe(asset_ids)
 
         recv_task = asyncio.create_task(
             receive_loop(

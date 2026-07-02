@@ -20,6 +20,7 @@ from .collector import Collector
 from .config import load_settings
 from .file_cache import drop_empty_cache_windows, flush_all_caches
 from .logger_config import get_logger
+from .ws_wallet import WalletService
 
 logger = get_logger("main")
 
@@ -83,9 +84,9 @@ async def _wrap_binance(killer: GracefulKiller) -> None:
             pass
 
 
-async def _wrap_collector(interval: str, killer: GracefulKiller) -> None:
+async def _wrap_collector(interval: str, killer: GracefulKiller, wallet: WalletService | None = None) -> None:
     """Run one Collector for *interval*."""
-    collector = Collector(interval=interval, touch_activity=touch_activity)
+    collector = Collector(interval=interval, touch_activity=touch_activity, wallet=wallet)
     try:
         await collector.run()
     except asyncio.CancelledError:
@@ -208,12 +209,17 @@ async def _run_session(killer: GracefulKiller) -> None:
 
     settings = load_settings()
 
+    wallet = WalletService()
+
     tasks = [
         asyncio.create_task(_wrap_binance(killer), name="binance"),
     ]
     for interval in settings.intervals:
         tasks.append(
-            asyncio.create_task(_wrap_collector(interval, killer), name=f"poly_{interval}")
+            asyncio.create_task(
+                _wrap_collector(interval, killer, wallet=wallet),
+                name=f"poly_{interval}"
+            )
         )
 
     supervisors = [
@@ -230,6 +236,11 @@ async def _run_session(killer: GracefulKiller) -> None:
     for t in pending:
         t.cancel()
     await asyncio.gather(*pending, return_exceptions=True)
+
+    try:
+        await wallet.close()
+    except Exception as exc:
+        logger.error("Wallet close error: %s", exc)
 
     try:
         flush_all_caches()
