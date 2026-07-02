@@ -14,7 +14,7 @@ from datetime import datetime
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
-MAIN_FILE = BASE_DIR / "main.py"
+MAIN_MODULE = "polymarket_l2_collector.main"
 PID_FILE = BASE_DIR / "collector_daemon.pid"
 CHILD_PID_FILE = BASE_DIR / "collector_child.pid"
 LOG_FILE = BASE_DIR / f"poly_{datetime.now().strftime('%Y%m%d')}.log"
@@ -96,7 +96,7 @@ def _start_child():
     env.setdefault("PYTHONUNBUFFERED", "1")
     log_handle = open(LOG_FILE, "a", buffering=1, encoding="utf-8")
     child = subprocess.Popen(
-        [sys.executable, str(MAIN_FILE)],
+        [sys.executable, "-m", MAIN_MODULE],
         cwd=str(BASE_DIR),
         stdout=log_handle,
         stderr=subprocess.STDOUT,

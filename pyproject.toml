@@ -1,0 +1,61 @@
+[project]
+name = "polymarket-l2-collector"
+version = "0.2.0"
+description = "Polymarket L2 orderbook data collector — BTC/ETH, 5m/15m windows, real-time WebSocket ingestion to Parquet"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Caiooooo", email = "" },
+]
+
+dependencies = [
+    "pandas>=2.0.0",
+    "pyarrow>=14.0.0",
+    "websockets>=12.0",
+    "aiohttp>=3.9.0",
+    "python-dotenv>=1.0.0",
+    "pytz>=2023.3",
+    "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "ruff>=0.1.0",
+    "pyright>=1.1.300",
+]
+
+[project.scripts]
+polymarket-l2-collector = "polymarket_l2_collector.main:main"
+polymarket-check-quality = "polymarket_l2_collector.check_quality:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["polymarket_l2_collector"]
+
+[tool.hatch.build.targets.sdist]
+exclude = ["tests/", "data/", "logs/"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP"]
+
+[tool.pyright]
+include = ["polymarket_l2_collector"]
+exclude = ["**/__pycache__", "**/node_modules"]
+pythonVersion = "3.10"
+strict = ["polymarket_l2_collector"]
+reportMissingImports = "warning"
+reportMissingTypeStubs = "none"

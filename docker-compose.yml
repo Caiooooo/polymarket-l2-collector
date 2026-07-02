@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  collector:
+    build: .
+    container_name: polymarket-l2-collector
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - DATA_DIR=/data
+    volumes:
+      - ./data:/data
+      - ./logs:/app/logs
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
