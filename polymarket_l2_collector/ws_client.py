@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import asyncio
 import json
-from collections.abc import Callable
+from collections.abc import Awaitable, Callable
 from typing import Any
 
 import websockets
@@ -71,33 +71,43 @@ async def send_ping_loop(websocket: websockets.WebSocketClientProtocol, interval
 
 
 async def receive_loop(
-    websocket: websockets.WebSocketClientProtocol,
-    on_book: Callable[[dict[str, Any]], None],
-    on_trade: Callable[[dict[str, Any]], None],
-    should_save: Callable[[], bool],
+    websocket: websockets.WebSocketClientProtocol | None = None,
+    on_book: Callable[[dict[str, Any]], None] | None = None,
+    on_trade: Callable[[dict[str, Any]], None] | None = None,
+    should_save: Callable[[], bool] | None = None,
     touch_activity: Callable[[], None] | None = None,
     recv_timeout: float = 1.0,
+    recv_fn: Callable[[float], Awaitable[dict | None]] | None = None,
 ) -> None:
     """Receive WS messages and dispatch to *on_book* / *on_trade*.
 
     Loops until the connection is closed.  *should_save* is checked
     before every dispatch — if it returns ``False`` the message is
     received but dropped.
+
+    When *recv_fn* is provided it is used instead of *websocket.recv()*;
+    it should return a parsed dict (or None on timeout).
     """
     while True:
         try:
-            raw = await asyncio.wait_for(websocket.recv(), timeout=recv_timeout)
+            if recv_fn is not None:
+                raw_or_dict = await recv_fn(recv_timeout)
+                if raw_or_dict is None:
+                    continue
+                data = raw_or_dict  # recv_fn returns parsed dicts
+            else:
+                raw = await asyncio.wait_for(websocket.recv(), timeout=recv_timeout)
+                if raw == "PONG":
+                    continue
+                try:
+                    data = json.loads(raw)
+                except json.JSONDecodeError:
+                    logger.debug("Ignoring non-JSON message: %s", raw[:120])
+                    continue
         except asyncio.TimeoutError:
             continue
-
-        if raw == "PONG":
-            continue
-
-        try:
-            data = json.loads(raw)
-        except json.JSONDecodeError:
-            logger.debug("Ignoring non-JSON message: %s", raw[:120])
-            continue
+        except websockets.exceptions.ConnectionClosed:
+            break
 
         if not isinstance(data, (list, dict)):
             logger.debug("Ignoring unexpected type %s", type(data).__name__)
